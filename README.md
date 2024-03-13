@@ -1,4 +1,8 @@
-# User Stories
+# Group1 UberEats Clone
+
+## Database Schema
+![alt text](<Untitled (5).png>)
+## User Stories
 
 ## Users
 
