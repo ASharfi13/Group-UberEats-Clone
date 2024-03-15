@@ -14,10 +14,17 @@ users= [
 
 restaurants= [
     {
-        "name": "blah",
-        "location": "blah",
-        "type": "blah",
-        "owner_id": number,
+        "name": "Pizza Hut",
+        "location": "50 Italiano Dr",
+        "type": "Italian",
+        "owner_id": 2,
+        "imageUrl": "blah"
+    },
+    {
+        "name": "Panda Express",
+        "location": "20 Bamboo Way",
+        "type": "Chinese",
+        "owner_id": 3,
         "imageUrl": "blah"
     }
 ]
