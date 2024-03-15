@@ -33,24 +33,24 @@ menu_items=[
     {
         "name": "blah",
         "type": "blah",
-        "price": number,
-        "restaurant_id": number,
+        "price": "number",
+        "restaurant_id": "number",
         "imageUrl": "blah",
     }
 ]
 
 reviews=[
     {
-        "stars": number,
+        "stars": "number",
         "description": "long review goes here",
-        "restaurant_id": number,
+        "restaurant_id": "number",
     }
 ]
 
 shopping_carts=[
     {
-        "user_id":number,
-        "menu_item_id":number,
-        "order_id":number,
+        "user_id":"number",
+        "menu_item_id":"number",
+        "order_id":"number",
     }
 ]

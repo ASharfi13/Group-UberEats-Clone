@@ -1,8 +1,7 @@
 from .db import db, SCHEMA, environment, add_prefix_for_prod
 from sqlalchemy.orm import validates
 from sqlalchemy import CheckConstraint
-from .seed_data import users
-from .seed_data import menu_items
+import re
 import datetime as dt
 
 class MenuItem(db.Model):
@@ -20,6 +19,13 @@ class MenuItem(db.Model):
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
 
     restaurant = db.relationship("Restaurant", back_populates="menu_items")
+
+    # @validates("name")
+    # def validate_name(self):
+    #     specialChars = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
+    #     if (specialChars.search(self.name) != None):
+    #         raise ValueError("Name must only have alpha-numeric characters")
+    #     return self.name
 
     @validates("price")
     def validate_price(self):
