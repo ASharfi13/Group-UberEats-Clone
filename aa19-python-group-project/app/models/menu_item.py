@@ -27,17 +27,17 @@ class MenuItem(db.Model):
     #         raise ValueError("Name must only have alpha-numeric characters")
     #     return self.name
 
-    @validates("price")
-    def validate_price(self):
-        if self.price < 0:
-            raise ValueError("Price must be a positive number")
-        return self.price
+    # @validates("price")
+    # def validate_price(self):
+    #     if self.price < 0:
+    #         raise ValueError("Price must be a positive number")
+    #     return self.price
 
-    @validates("type")
-    def validate_type(self):
-        if self.type not in []:
-            raise ValueError("Invalid Type")
-        return self.price
+    # @validates("type")
+    # def validate_type(self):
+    #     if self.type not in []:
+    #         raise ValueError("Invalid Type")
+    #     return self.price
 
     def to_dict(self):
         return {

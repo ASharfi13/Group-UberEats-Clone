@@ -28,11 +28,11 @@ class Restaurant(db.Model):
     #         raise ValueError("Name must only have alpha-numeric characters")
     #     return self.name
 
-    @validates("type")
-    def validate_type(self):
-        if self.type not in []:
-            raise ValueError("Invalid Type")
-        return self.price
+    # @validates("type")
+    # def validate_type(self):
+    #     if self.type not in []:
+    #         raise ValueError("Invalid Type")
+    #     return self.price
 
     def to_dict(self):
         return {
