@@ -1,6 +1,7 @@
 from .db import db, SCHEMA, environment, add_prefix_for_prod
 from sqlalchemy.orm import validates
 from sqlalchemy import CheckConstraint
+from .seed_data import shopping_carts
 import datetime as dt
 
 class ShoppingCart(db.Model):

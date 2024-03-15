@@ -1,6 +1,8 @@
 from .db import db, SCHEMA, environment, add_prefix_for_prod
 from sqlalchemy.orm import validates
 from sqlalchemy import CheckConstraint
+from .seed_data import users
+from .seed_data import menu_items
 import datetime as dt
 
 class MenuItem(db.Model):
