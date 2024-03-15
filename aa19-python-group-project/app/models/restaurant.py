@@ -20,3 +20,12 @@ class Restaurant(db.Model):
 
     reviews = db.relationship("Review", back_populates="restaurant", cascade='all, delete-orphan')
     menu_items = db.relationship("MenuItem", back_populates="restaurant", cascade='all, delete-orphan')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'owner_id': self.owner_id,
+            'location': self.location,
+            'type': self.type,
+            'imageUrl': self.imageUrl
+        }

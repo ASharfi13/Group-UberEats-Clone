@@ -20,3 +20,25 @@ class MenuItem(db.Model):
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
 
     restaurant = db.relationship("Restaurant", back_populates="menu_items")
+
+    @validates("price")
+    def validate_price(self):
+        if self.price < 0:
+            raise ValueError("Price must be a positive number")
+        return self.price
+
+    @validates("type")
+    def validate_type(self):
+        if self.type not in []:
+            raise ValueError("Invalid Type")
+        return self.price
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'price': self.price,
+            'type': self.type,
+            'imageUrl': self.imageUrl,
+            'restaurant_id': self.restaurant_id,
+        }

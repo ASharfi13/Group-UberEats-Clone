@@ -17,3 +17,12 @@ class Review(db.Model):
     createdAt = db.Column(db.Date, default=dt.datetime.now())
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
     restaurant = db.relationship("Restaurant", back_populates = "reviews")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'stars': self.stars,
+            'description': self.description,
+            'restaurant': self.restaurant
+        }

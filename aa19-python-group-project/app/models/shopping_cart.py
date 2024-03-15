@@ -16,3 +16,11 @@ class ShoppingCart(db.Model):
     order_id=db.Column(db.Integer, default=1)
     createdAt = db.Column(db.Date, default=dt.datetime.now())
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'menu_item_id': self.menu_item_id,
+            'order_id': self.order_id
+        }
