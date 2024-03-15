@@ -1,13 +1,12 @@
-from .db import db, SCHEMA
+from .db import db, SCHEMA, environment, add_prefix_for_prod
 from sqlalchemy.orm import validates
 from sqlalchemy import CheckConstraint
 import datetime as dt
 
 class ShoppingCart(db.Model):
     __tablename__ = "shopping_carts"
-    __table_args__ = (
-        {'schema': SCHEMA}
-    )
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id= db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))

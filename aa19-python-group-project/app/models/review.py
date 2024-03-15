@@ -1,13 +1,12 @@
-from .db import db, SCHEMA
+from .db import db, SCHEMA, environment, add_prefix_for_prod
 from sqlalchemy.orm import validates
 from sqlalchemy import CheckConstraint
 import datetime as dt
 
 class Review(db.Model):
     __tablename__ = "reviews"
-    __table_args__ = (
-        {'schema': SCHEMA}
-    )
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id=db.Column(db.Integer, primary_key=True)
     stars=db.Column(db.Integer, nullable=False)
@@ -16,3 +15,4 @@ class Review(db.Model):
     restaurant_id=db.Column(db.Integer, db.ForeignKey("restaurants.id", ondelete="CASCADE"))
     createdAt = db.Column(db.Date, default=dt.datetime.now())
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
+    restaurant = db.relationship("Restaurant", back_populates = "reviews")
