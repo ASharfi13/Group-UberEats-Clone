@@ -13,6 +13,9 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    location = db.Column(db.String, nullable=False)
+    wallet = db.Column(db.Float)
+    order_id = db.Column(db.Integer, default=1)
 
     @property
     def password(self):
