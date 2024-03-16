@@ -391,9 +391,118 @@ menu_items=[
 
 reviews=[
     {
-        "stars": number,
-        "description": "long review goes here",
-        "restaurant_id": number,
+        "stars": 2,
+        "description": "I think the food was okay. It could have been better.",
+        "restaurant_id": 3,
+        "user_id": 1
+    },
+    {
+        "stars": 5,
+        "description": "I love their food and they were very kind to me.",
+        "restaurant_id": 4,
+        "user_id": 2
+    },
+    {
+        "stars": 3,
+        "description": "They put too much ketchup on my burger, but it was still good.",
+        "restaurant_id": 5,
+        "user_id": 3
+    },
+    {
+        "stars": 5,
+        "description": "I love the broth and their noodles. It never disappoints.",
+        "restaurant_id": 6,
+        "user_id": 4
+    },
+    {
+        "stars": 4,
+        "description": "The food was spicy, but it was really good.",
+        "restaurant_id": 7,
+        "user_id": 5
+    },
+    {
+        "stars": 3,
+        "description": "I love their sauces that come with the tacos",
+        "restaurant_id": 8,
+        "user_id": 6
+    },
+    {
+        "stars": 4,
+        "description": "Their food was delicious. I would order here again.",
+        "restaurant_id": 9,
+        "user_id": 7
+    },
+    {
+        "stars": 3,
+        "description": "Food could have been better. Not what I was expecting.",
+        "restaurant_id": 10,
+        "user_id": 9
+    },
+    {
+        "stars": 3,
+        "description": "Their pizza had too much cheese on it.",
+        "restaurant_id": 1,
+        "user_id": 10
+    },
+    {
+        "stars": 4,
+        "description": "Their orange chicken is great. I would order it again.",
+        "restaurant_id": 2,
+        "user_id": 11
+    },
+    {
+        "stars": 1,
+        "description": "I hate this place. I do not recommend.",
+        "restaurant_id": 3,
+        "user_id": 12
+    },
+    {
+        "stars": 3,
+        "description": "The food was okay. I did not expect it to be that hot.",
+        "restaurant_id": 4,
+        "user_id": 13
+    },
+    {
+        "stars": 3,
+        "description": "I would order again since the food came really quick.",
+        "restaurant_id": 5,
+        "user_id": 14
+    },
+    {
+        "stars": 4,
+        "description": "I love this place and I would order it again.",
+        "restaurant_id": 6,
+        "user_id": 15
+    },
+    {
+        "stars": 2,
+        "description": "The food was way too spicy for my liking.",
+        "restaurant_id": 7,
+        "user_id": 16
+    },
+    {
+        "stars": 5,
+        "description": "Their food was great. This is my new go to spot.",
+        "restaurant_id": 8,
+        "user_id": 17
+    },
+    {
+        "stars": 5,
+        "description": "I love this place and have always ordered food from here when I was little.",
+        "restaurant_id": 9,
+        "user_id": 18
+    },
+    {
+        "stars": 5,
+        "description": "The food was great and the meat was tender.",
+        "restaurant_id": 10,
+        "user_id": 19
+    },
+    {
+        "stars": 3,
+        "description": "Not a big fan of pizza.",
+        "restaurant_id": 1,
+        "user_id": 20
     }
 ]
 
