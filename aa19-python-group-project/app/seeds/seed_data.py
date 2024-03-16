@@ -109,70 +109,70 @@ restaurants= [
         "location": "50 Italiano Dr",
         "type": "Italian",
         "owner_id": 2,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/0yPzSVxx/pizza-hut.jpg"
     },
     {
         "name": "Panda Express",
         "location": "20 Bamboo Way",
         "type": "Chinese",
         "owner_id": 3,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/L6THc2KK/panda-express.png"
     },
     {
         "name": "Burger King",
         "location": "46 Queen Ave",
         "type": "American",
         "owner_id": 4,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/xjGYmndJ/burger-king.webp"
     },
     {
         "name": "Manila Express",
         "location": "22 Bataan St",
         "type": "Filipino",
         "owner_id": 5,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/GpD61x88/Manila-Express.jpg"
     },
     {
         "name": "Mcdonalds ",
         "location": "62 Double Dr",
         "type": "American",
         "owner_id": 6,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/66Mjgmjb/mcdonalds.png"
     },
     {
         "name": "Kevins Noodle House",
         "location": "12 Sunset Blvd",
         "type": "Vietnamese",
         "owner_id": 7,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/T119TT77/kevins-noodle-house.jpg"
     },
     {
         "name": "Naan Curry",
         "location": "89 Fandango Way",
         "type": "Indian",
         "owner_id": 8,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/QCFpR0Cv/Naan-curry.jpg"
     },
     {
         "name": "Maggie's Tacos",
         "location": "346 Cancun Ave",
         "type": "Mexican",
         "owner_id": 9,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/wMRmWMbp/maggies-tacos.jpg"
     },
     {
         "name": "White Elephant",
         "location": "67 Lady St",
         "type": "Thai",
         "owner_id": 10,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/kgqy5NpR/white-elephant.png"
     },
     {
         "name": "Pocha House",
         "location": "71 Main Blvd",
         "type": "Korean",
         "owner_id": 1,
-        "imageUrl": "blah"
+        "imageUrl": "https://i.postimg.cc/ZKZNPbF1/pocha-house.jpg"
     }
 ]
 
