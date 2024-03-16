@@ -529,7 +529,7 @@ Deletes an existing restaurant.
     }
     ```
 
-## MENU_ITEMS EDIT OVER HERE EHREBHFBE
+## MENU_ITEMS
 
 ### Get details of a menu_item from an id
 
@@ -539,7 +539,7 @@ Returns the details of a menu_item specified by its id.
 - Request
 
   - Method: GET
-  - URL: /api/menu_items/:itemId
+  - URL: /api/menu-items/:itemId
   - Body: none
 
 - Successful Response
@@ -582,7 +582,7 @@ Creates and returns a new item.
 - Request
 
   - Method: POST
-  - URL: /api/restaurants/:restaurantId/menu_items
+  - URL: /api/restaurants/:restaurantId/menu-items
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -644,7 +644,7 @@ Updates and returns an existing menu item.
 - Request
 
   - Method: PUT
-  - URL: /api/menu_items/:itemId
+  - URL: /api/menu-items/:itemId
   - Headers:
     - Content-Type: application/json
   - Body:
