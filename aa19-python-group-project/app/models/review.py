@@ -1,7 +1,6 @@
 from .db import db, SCHEMA, environment, add_prefix_for_prod
 from sqlalchemy.orm import validates
 from sqlalchemy import CheckConstraint
-from .seed_data import reviews
 import datetime as dt
 
 class Review(db.Model):
@@ -17,3 +16,12 @@ class Review(db.Model):
     createdAt = db.Column(db.Date, default=dt.datetime.now())
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
     restaurant = db.relationship("Restaurant", back_populates = "reviews")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'stars': self.stars,
+            'description': self.description,
+            'restaurant': self.restaurant
+        }

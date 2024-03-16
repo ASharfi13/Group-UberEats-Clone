@@ -1,7 +1,6 @@
 from .db import db, SCHEMA, environment, add_prefix_for_prod
 from sqlalchemy.orm import validates
 from sqlalchemy import CheckConstraint
-from .seed_data import shopping_carts
 import datetime as dt
 
 class ShoppingCart(db.Model):
@@ -16,3 +15,11 @@ class ShoppingCart(db.Model):
     order_id=db.Column(db.Integer, default=1)
     createdAt = db.Column(db.Date, default=dt.datetime.now())
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'menu_item_id': self.menu_item_id,
+            'order_id': self.order_id
+        }

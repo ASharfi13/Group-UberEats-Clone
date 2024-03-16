@@ -1,7 +1,7 @@
 from .db import db, SCHEMA, add_prefix_for_prod, environment
 from sqlalchemy.orm import validates
 from sqlalchemy import CheckConstraint
-from .seed_data import restaurants
+import re
 import datetime as dt
 
 class Restaurant(db.Model):
@@ -20,3 +20,25 @@ class Restaurant(db.Model):
 
     reviews = db.relationship("Review", back_populates="restaurant", cascade='all, delete-orphan')
     menu_items = db.relationship("MenuItem", back_populates="restaurant", cascade='all, delete-orphan')
+
+    # @validates("name")
+    # def validate_name(self):
+    #     specialChars = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
+    #     if (specialChars.search(self.name) != None):
+    #         raise ValueError("Name must only have alpha-numeric characters")
+    #     return self.name
+
+    # @validates("type")
+    # def validate_type(self):
+    #     if self.type not in []:
+    #         raise ValueError("Invalid Type")
+    #     return self.price
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'owner_id': self.owner_id,
+            'location': self.location,
+            'type': self.type,
+            'imageUrl': self.imageUrl
+        }
