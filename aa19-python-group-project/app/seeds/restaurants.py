@@ -3,11 +3,9 @@ from sqlalchemy.sql import text
 from .seed_data import restaurants
 
 def seed_restaurants():
-    restaurant1 = Restaurant(
-        name="Burger King", location="123 Ave", type="Fast Food", owner_id="1", imageUrl="https://cdn.freebiesupply.com/images/large/2x/burger-king-logo-png-transparent.png"
-    )
-
-    db.session.add(restaurant1)
+    for restaurant in restaurants:
+        newRes = Restaurant(**restaurant)
+        db.session.add(newRes)
     db.session.commit()
 
 
@@ -18,3 +16,4 @@ def undo_restaurants():
         db.session.execute(text("DELETE FROM restaurants"))
 
     db.session.commit()
+

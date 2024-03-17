@@ -411,7 +411,8 @@ Creates and returns a new restaurant.
         "name": "Name is required",
         "location": "Location is required",
         "type": "Type is required",
-        "ownerId": "OwnerId is required"
+        "ownerId": "OwnerId is required",
+        "imageUrl": "Image Url is required"
       }
     }
     ```
