@@ -3,7 +3,7 @@ from flask import Blueprint, Flask, request
 from app.models import db, MenuItem
 import json
 
-menu_item_routes = Blueprint("menu-items", __name__)
+menu_item_routes = Blueprint("menu_items", __name__)
 
 
 # get details of a menu_item from an id
@@ -40,7 +40,7 @@ def updateMenuItem(id):
 
 # delete a menu item
 # /<int:itemId>
-@app.route("/<int:id>", methods=["DELETE"])
+@menu_item_routes.route("/<int:id>", methods=["DELETE"])
 def deleteMenuItem(id):
     item = MenuItem.query.get(id)
     db.session.delete(item)

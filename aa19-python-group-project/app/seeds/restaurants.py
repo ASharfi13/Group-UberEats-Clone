@@ -1,5 +1,6 @@
 from app.models import db, Restaurant, SCHEMA, environment
 from sqlalchemy.sql import text
+from .seed_data import restaurants
 
 def seed_restaurants():
     restaurant1 = Restaurant(

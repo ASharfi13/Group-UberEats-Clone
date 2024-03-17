@@ -5,9 +5,9 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from .models import db, User, Restaurant, Review, MenuItem, ShoppingCart
-from .api.user_routes import user_routes
-from .api.auth_routes import auth_routes
-from .api.menu_item_routes import menu_item_routes
+from .routes import user_routes
+from .routes import auth_routes
+from .routes import menu_item_routes
 from .seeds import seed_commands
 from .config import Config
 
