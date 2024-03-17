@@ -40,7 +40,7 @@ def updateMenuItem(id):
 
 # delete a menu item
 # /<int:itemId>
-@app.route("/<int:id>", methods=["DELETE"])
+@menu_item_routes.route("/<int:id>", methods=["DELETE"])
 def deleteMenuItem(id):
     item = MenuItem.query.get(id)
     db.session.delete(item)
