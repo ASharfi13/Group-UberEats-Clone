@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf";
-
 //action type creator
 const LOAD_RESTAURANT = "restaurant/loadRestaurant";
 const LOAD_ALL_RESTAURANTS = "restaurant/loadAllRestaurants";
@@ -122,31 +120,30 @@ const restaurantReducer = (state = {}, action) => {
     case LOAD_RESTAURANT:
       return { ...state, [action.restaurant.id]: action.restaurant };
     case LOAD_ALL_RESTAURANTS: {
-      const menuItemState = {};
-      action.menu_item.Menu_Item.forEach((menu_item) => {
-        menuItemState[menu_item.id] = menu_item;
+      const restaurantState = {};
+      action.restaurants.restaurants.forEach((restaurant) => {
+        restaurantState[restaurant.id] = restaurant;
       });
-      return menuItemState;
+      return restaurantState;
     }
     case LOAD_OWNER_RESTAURANTS: {
-      const menuItemState = {};
-      action.menu_item.Menu_Item.forEach((menu_item) => {
-        menuItemState[menu_item.id] = menu_item;
+      const restaurantState = {};
+      action.restaurants.restaurants.forEach((restaurant) => {
+        restaurantState[restaurant.id] = restaurant;
       });
-      return menuItemState;
+      return restaurantState;
     }
     case ADD_RESTAURANT:
-      return { ...state, [action.menu_item.id]: action.menu_item };
+      return { ...state, [action.restaurant.id]: action.restaurant };
     // case ADD_SPOTIMAGE:
     //   return { ...state, [action.image.id]: action.image };
     case REMOVE_RESTAURANT: {
       const newState = { ...state };
-      delete newState[action.menu_itemId];
+      delete newState[action.restaurant.id];
       return newState;
     }
     case UPDATE_RESTAURANT:
-      return { ...state, [action.menu_item.id]: action.menu_item };
-
+      return { ...state, [action.restaurant.id]: action.restaurant };
     default:
       return state;
   }
