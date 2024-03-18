@@ -15,14 +15,14 @@ def getAllDetails(itemId):
 
 # create a menu item
 #/restaurants/<int:restaurantId>/menu-items
-# this might have to go IN THE RESTAURANTS ROUTES
-@menu_item_routes.route("/restaurant/<int:itemId>/menu-items", methods=["POST"])
-def createMenuItem(itemId):
-    data = request.json
-    newItem = MenuItem(**data, restaurant_id=itemId)
-    db.session.add(newItem)
-    db.session.commit()
-    return json.dumps(newItem.to_dict())
+# # this might have to go IN THE RESTAURANTS ROUTES
+# @menu_item_routes.route("/restaurant/<int:itemId>/menu-items", methods=["POST"])
+# def createMenuItem(itemId):
+#     data = request.json
+#     newItem = MenuItem(**data, restaurant_id=itemId)
+#     db.session.add(newItem)
+#     db.session.commit()
+#     return json.dumps(newItem.to_dict())
 
 
 # edit a menu item
@@ -46,5 +46,6 @@ def deleteMenuItem(itemId):
     db.session.delete(item)
     db.session.commit()
     return json.dumps({
+        "message": "Successfully Deleted",
         "id": itemId
     })

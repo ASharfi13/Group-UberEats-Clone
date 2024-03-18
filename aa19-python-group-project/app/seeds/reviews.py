@@ -1,12 +1,13 @@
 from app.models import db, Review, environment, SCHEMA
 from sqlalchemy.sql import text
+from .seed_data import reviews
 
 def seed_reviews():
-    review1 = Review(
-        stars=3, description="It wasn't all that", user_id=1, restaurant_id=1
-    )
-    db.session.add(review1)
+    for review in reviews:
+        newRes = Review(**review)
+        db.session.add(newRes)
     db.session.commit()
+
 
 
 def undo_reviews():

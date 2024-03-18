@@ -5,16 +5,9 @@ from .seed_data import users
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        name='Demo', email='demo@aa.io', password='password', )
-    marnie = User(
-        name='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        name='bobbie', email='bobbie@aa.io', password='password')
-
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    for user in users:
+        newRes = User(**user)
+        db.session.add(newRes)
     db.session.commit()
 
 

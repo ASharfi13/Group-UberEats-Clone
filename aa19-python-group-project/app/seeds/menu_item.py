@@ -1,11 +1,11 @@
 from app.models import db, MenuItem, SCHEMA, environment
 from sqlalchemy.sql import text
+from .seed_data import menu_items
 
 def seed_menu_items():
-    menu_item1 = MenuItem(
-        name="Hamburger", type="Burger", price=10.99, restaurant_id=1, imageUrl="https://cdn.freebiesupply.com/images/large/2x/burger-king-logo-png-transparent.png"
-    )
-    db.session.add(menu_item1)
+    for menu_item in menu_items:
+        newRes = MenuItem(**menu_item)
+        db.session.add(newRes)
     db.session.commit()
 
 def undo_menu_items():

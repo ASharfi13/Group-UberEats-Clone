@@ -146,9 +146,7 @@ def deleteRestaurant(id):
 @restaurant_routes.route("/<int:restaurantId>/menu-items", methods=["POST"])
 def createMenuItem(restaurantId):
     data = request.json
-    badReq = {
-        "message": "Bad Request"
-    }
+
     newItem = MenuItem(**data, restaurant_id=restaurantId)
     db.session.add(newItem)
     db.session.commit()

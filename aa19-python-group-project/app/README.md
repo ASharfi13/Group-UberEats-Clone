@@ -248,7 +248,7 @@ Returns all the restaurants
       "restaurants": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "location": "123 Disney Lane",
           "name": "App Academy",
           "type": "Place where web developers are created",
@@ -282,7 +282,7 @@ Returns all the restaurants owned (created) by the current user.
       "restaurants": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "location": "123 Disney Lane",
           "name": "App Academy",
           "type": "Place where web developers are created",
@@ -314,7 +314,7 @@ Returns the details of a restaurant specified by its id.
     ```json
     {
       "id": 1,
-      "ownerId": 1,
+      "owner_id": 1,
       "location": "123 Disney Lane",
       "name": "App Academy",
       "type": "Place where web developers are created",
@@ -370,7 +370,7 @@ Creates and returns a new restaurant.
     ```json
     {
       "id": 1,
-      "ownerId": 1,
+      "owner_id": 1,
       "location": "123 Disney Lane",
       "name": "Burger King",
       "type": "Place where food creators are created",
@@ -388,7 +388,7 @@ Creates and returns a new restaurant.
     ```json
     {
       "id": 1,
-      "ownerId": 1,
+      "owner_id": 1,
       "location": "123 Disney Lane",
       "name": "Burger King",
       "type": "Place where food creators are created",
@@ -411,7 +411,7 @@ Creates and returns a new restaurant.
         "name": "Name is required",
         "location": "Location is required",
         "type": "Type is required",
-        "ownerId": "OwnerId is required",
+        "owner_id": "Owner_id is required",
         "imageUrl": "Image Url is required"
       }
     }
@@ -450,7 +450,7 @@ Updates and returns an existing restaurant.
     ```json
     {
       "id": 1,
-      "ownerId": 1,
+      "owner_id": 1,
       "location": "123 Disney Lane",
       "name": "Burger King",
       "type": "Place where food creators are created",
@@ -591,7 +591,6 @@ Creates and returns a new item.
     ```json
     {
       "price": 7.99,
-      "restaurantId": 2,
       "name": "Cheese Pizza",
       "type": "Pizza",
       "imageUrl": "image url"
