@@ -1,5 +1,6 @@
 from app.models import db, Review, environment, SCHEMA
 from sqlalchemy.sql import text
+from .seed_data import reviews
 
 def seed_reviews():
     review1 = Review(
