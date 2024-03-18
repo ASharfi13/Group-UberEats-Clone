@@ -9,9 +9,9 @@ class Restaurant(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    location = db.Column(db.String, nullable=False, unique=True )
+    location = db.Column(db.String, nullable=False)
     type = db.Column(db.String, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     imageUrl = db.Column(db.String)

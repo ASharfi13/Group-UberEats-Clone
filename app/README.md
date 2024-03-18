@@ -369,8 +369,6 @@ Creates and returns a new restaurant.
 
     ```json
     {
-      "id": 1,
-      "owner_id": 1,
       "location": "123 Disney Lane",
       "name": "Burger King",
       "type": "Place where food creators are created",
@@ -411,7 +409,6 @@ Creates and returns a new restaurant.
         "name": "Name is required",
         "location": "Location is required",
         "type": "Type is required",
-        "owner_id": "Owner_id is required",
         "imageUrl": "Image Url is required"
       }
     }
@@ -608,7 +605,7 @@ Creates and returns a new item.
     {
       "id": 2,
       "price": 7.99,
-      "restaurantId": 2,
+      "restaurant_id": 2,
       "name": "Cheese Pizza",
       "type": "Pizza",
       "imageUrl": "image url",
@@ -628,7 +625,7 @@ Creates and returns a new item.
       "message": "Bad Request",
       "errors": {
         "name": "Name is required",
-        "restaurantId": "RestaurantId is required",
+        "restaurant_id": "Restaurant Id is required",
         "type": "Type is required",
         "price": "Price must be greater than 0"
       }
@@ -652,7 +649,6 @@ Updates and returns an existing menu item.
     ```json
     {
       "price": 7.99,
-      "restaurantId": 2,
       "name": "Cheese Pizza",
       "type": "Pizza",
       "imageUrl": "image url"
@@ -691,7 +687,7 @@ Updates and returns an existing menu item.
       "message": "Bad Request",
       "errors": {
         "name": "Name is required",
-        "restaurantId": "RestaurantId is required",
+        "restaurant_id": "Restaurant Id is required",
         "type": "Type is required",
         "price": "Price must be greater than 0"
       }
@@ -767,9 +763,7 @@ Create and return a new review for a restaurant specified by id.
     ```json
     {
       "description": "This was an awesome restaurant!",
-      "stars": 5,
-      "user_id": 1,
-      "restaurant_id": 2
+      "stars": 5
     }
     ```
 
@@ -902,8 +896,8 @@ Returns the current shopping cart by the current user
                   "name": "Cheeseburger",
                   "price": 7.99,
                   "imageUrl": "fakeImage.png"
-              }
-              ,...
+              },
+              ...
           ],
           "totalPrice": 20.99,
           "balance": 200.00
@@ -941,8 +935,8 @@ Returns the past orders by the current user
                   "name": "Cheeseburger",
                   "price": 7.99,
                   "imageUrl": "fakeImage.png"
-              }
-              ,...
+              },
+              ...
           ],
 
           "totalPrice": 20.99,

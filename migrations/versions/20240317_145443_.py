@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: adc19c13d024
-Revises: 
+Revises:
 Create Date: 2024-03-17 14:54:43.042176
 
 """
