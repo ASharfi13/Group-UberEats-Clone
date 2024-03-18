@@ -28,8 +28,8 @@ export const deleteReview = (reviewId) => {
 };
 
 //thunk action creators
-export const fetchAllReviews = (spotId) => async (dispatch) => {
-  const response = await fetch(`/api/spots/${spotId}/reviews`);
+export const fetchAllReviews = (restuarantId) => async (dispatch) => {
+  const response = await fetch(`/api/restaurants/${restuarantId}/reviews`);
   const reviews = await response.json();
   // console.log(response, "review response");
   // console.log(reviews, "here is the reviews");
@@ -37,7 +37,7 @@ export const fetchAllReviews = (spotId) => async (dispatch) => {
 };
 
 export const createReview = (payload, spotId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+  const response = await csrfFetch(`/api/restaurants/${restuarantId}/reviews`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -56,10 +56,13 @@ export const createReview = (payload, spotId) => async (dispatch) => {
 };
 
 export const removeReview = (reviewId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-    method: "DELETE",
-  });
-  console.log(response, "here is the response wojweonfwohfwoihf");
+  const response = await csrfFetch(
+    `/api/restaurants/${restuarantId}/reviews/${reviewId}`,
+    {
+      method: "DELETE",
+    }
+  );
+  console.log(response, "here is the response");
   if (response.ok) {
     const review = await response.json();
     console.log(review, "here is the review");
