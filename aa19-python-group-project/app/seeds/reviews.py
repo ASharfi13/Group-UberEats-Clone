@@ -4,8 +4,13 @@ from .seed_data import reviews
 
 def seed_reviews():
     for review in reviews:
+<<<<<<< HEAD
         newRes = Review(**review)
         db.session.add(newRes)
+=======
+        newReview = Review(**review)
+        db.session.add(newReview)
+>>>>>>> 5d4fbf9f0bf0baaf27ebd5d3a064b9170ef54ccb
     db.session.commit()
 
 
