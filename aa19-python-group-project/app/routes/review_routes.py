@@ -1,11 +1,11 @@
-from flask import Blueprint, Flask, request, Response
+from flask import Blueprint, Flask, request
 from app.models import db, Review
 import json
 
 review_routes = Blueprint("reviews", __name__)
 
 # CREATE A REVIEW FOR A RESTAURANT BASED ON ID/Still need error handling
-@review_routes.route('restaurants/<int:restaurantId>/reviews', methods=["POST"])
+@review_routes.route('/restaurants/<int:restaurantId>/reviews', methods=["POST"])
 def createReview(restaurantId):
     data = request.json
     newReview = Review(**data, restaurant_id=restaurantId)
@@ -17,20 +17,23 @@ def createReview(restaurantId):
         "restaurantId": newReview.restaurant_id,
         "description": newReview.description,
         "stars": newReview.stars,
-        "createdAt": newReview.createdAt
+        "createdAt": str(newReview.createdAt)
     }
-    return Response(json.dumps(responseObj), status=201)
+    return json.dumps(responseObj), 201
 
-@review_routes.route('restaurants/<int:restaurantId>/reviews', methods=["GET"])
-def getReviews(restaurant_id):
-    reviews = Review.query.get(id=reviewId).all()
-    reviewResponse = [review.to_dict for review in reviews]
+
+# GET REVIEWS
+@review_routes.route('/restaurants/<int:restaurantId>/reviews', methods=["GET"])
+def getReviews(restaurantId):
+    reviews = Review.query.filter_by(restaurant_id=restaurantId).all()
+    reviewResponse = [review.to_dict() for review in reviews]
+
     return json.dumps(reviewResponse)
 
-
-@review_routes.route('reviews/<int:reviewId>', methods=["DELETE"])
+# DELETE A REVIEW
+@review_routes.route('/reviews/<int:reviewId>', methods=["DELETE"])
 def deleteReview(reviewId):
-    review = Review.query.get(id=reviewId)
+    review = Review.query.get(reviewId)
     db.session.delete(review)
     db.session.commit()
     return json.dumps({
