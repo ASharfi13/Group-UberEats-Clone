@@ -1,12 +1,12 @@
 import { csrfFetch } from "./csrf";
 
 //action type creator
-const LOAD_RESTAURANT = "spot/loadRestaurant";
-const LOAD_ALL_RESTAURANTS = "spot/loadAllRestaurants";
-const LOAD_OWNER_RESTAURANTS = "spot/ownerRestaurants";
-const ADD_RESTAURANT = "spot/addRestaurant";
-const REMOVE_RESTAURANT = "spot/removeRestaurant";
-const UPDATE_RESTAURANT = "spot/updateRestaurant";
+const LOAD_RESTAURANT = "restaurant/loadRestaurant";
+const LOAD_ALL_RESTAURANTS = "restaurant/loadAllRestaurants";
+const LOAD_OWNER_RESTAURANTS = "restaurant/ownerRestaurants";
+const ADD_RESTAURANT = "restaurant/addRestaurant";
+const REMOVE_RESTAURANT = "restaurant/removeRestaurant";
+const UPDATE_RESTAURANT = "restaurant/updateRestaurant";
 
 //action creator
 export const loadRestaurant = (restaurant) => {
@@ -119,32 +119,32 @@ export const editRestaurant = (restaurantId, payload) => async (dispatch) => {
 //reducer
 const restaurantReducer = (state = {}, action) => {
   switch (action.type) {
-    case LOAD_MENU_ITEM:
-      return { ...state, [action.menu_item.id]: action.menu_item };
-    case LOAD_ALLMENU_ITEMS: {
+    case LOAD_RESTAURANT:
+      return { ...state, [action.restaurant.id]: action.restaurant };
+    case LOAD_ALL_RESTAURANTS: {
       const menuItemState = {};
       action.menu_item.Menu_Item.forEach((menu_item) => {
         menuItemState[menu_item.id] = menu_item;
       });
       return menuItemState;
     }
-    case LOAD_OWNWER_MENU_ITEMS: {
+    case LOAD_OWNER_RESTAURANTS: {
       const menuItemState = {};
       action.menu_item.Menu_Item.forEach((menu_item) => {
         menuItemState[menu_item.id] = menu_item;
       });
       return menuItemState;
     }
-    case ADD_MENU_ITEM:
+    case ADD_RESTAURANT:
       return { ...state, [action.menu_item.id]: action.menu_item };
     // case ADD_SPOTIMAGE:
     //   return { ...state, [action.image.id]: action.image };
-    case REMOVE_MENU_ITEM: {
+    case REMOVE_RESTAURANT: {
       const newState = { ...state };
       delete newState[action.menu_itemId];
       return newState;
     }
-    case UPDATE_MENU_ITEM:
+    case UPDATE_RESTAURANT:
       return { ...state, [action.menu_item.id]: action.menu_item };
 
     default:
