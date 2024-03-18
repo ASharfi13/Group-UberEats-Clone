@@ -1,4 +1,4 @@
-from app.models import db, Restaurant, MenuItem
+from app.models import db, Restaurant, MenuItem, User
 from flask import Blueprint, request
 import json
 
@@ -66,9 +66,8 @@ def getRestaurantById(id):
     reviews = [review.to_dict() for review in restaurant.reviews]
     totalStarRating = 0
     for review in reviews:
-        del review["restaurant"]
         totalStarRating += review["stars"]
-
+        review["name"]= User.query.filter_by(id = review['user_id'] ).first().name
     if len(reviews) != 0:
         avgRating = totalStarRating / len(reviews)
     else:
