@@ -1,6 +1,7 @@
-from app.models import db, Restaurant
+from app.models import db, Restaurant, MenuItem
 from flask import Blueprint, request
 import json
+
 
 
 restaurant_routes = Blueprint("restaurants", __name__)
@@ -29,8 +30,8 @@ def newRestaurant():
     if len(str(data["type"])) == 0:
         badReq["errors"]["type"] = "Type is required"
         errCount += 1
-    if data["ownerId"] == None:
-        badReq["errors"]["ownerId"] = "Owner Id is required"
+    if data["owner_id"] == None:
+        badReq["errors"]["owner_id"] = "Owner Id is required"
         errCount += 1
     if len(data["imageUrl"]) == 0:
         badReq["errors"]["imageUrl"] = "Image Url is required"
@@ -138,3 +139,17 @@ def deleteRestaurant(id):
     return json.dumps({
         "message": "Successfully deleted"
     })
+
+# create a menu item
+#/restaurants/<int:restaurantId>/menu-items
+# this might have to go IN THE RESTAURANTS ROUTES
+@restaurant_routes.route("/<int:restaurantId>/menu-items", methods=["POST"])
+def createMenuItem(restaurantId):
+    data = request.json
+    badReq = {
+        "message": "Bad Request"
+    }
+    newItem = MenuItem(**data, restaurant_id=restaurantId)
+    db.session.add(newItem)
+    db.session.commit()
+    return json.dumps(newItem.to_dict())
