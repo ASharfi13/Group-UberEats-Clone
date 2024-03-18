@@ -12,7 +12,7 @@ class Review(db.Model):
     stars=db.Column(db.Integer, nullable=False)
     description=db.Column(db.Text, nullable=False)
     user_id=db.Column(db.Integer, db.ForeignKey("users.id"))
-    restaurant_id=db.Column(db.Integer, db.ForeignKey("restaurants.id", ondelete="CASCADE"))
+    restaurant_id=db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id"), ondelete="CASCADE"))
     createdAt = db.Column(db.Date, default=dt.datetime.now())
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
     restaurant = db.relationship("Restaurant", back_populates = "reviews")

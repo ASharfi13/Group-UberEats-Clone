@@ -13,7 +13,7 @@ class Restaurant(db.Model):
     name = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False, unique=True )
     type = db.Column(db.String, nullable=False)
-    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     imageUrl = db.Column(db.String)
     createdAt = db.Column(db.Date, default=dt.datetime.now())
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
