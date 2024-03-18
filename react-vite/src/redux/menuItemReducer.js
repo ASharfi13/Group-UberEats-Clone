@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf";
-
 //action type creator
 const LOAD_MENU_ITEM = "menu-item/loadMenuItem";
 const LOAD_ALLMENU_ITEMS = "menu-item/loadAllMenuItems";
