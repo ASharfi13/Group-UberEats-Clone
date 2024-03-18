@@ -5,7 +5,6 @@ import json
 
 menu_item_routes = Blueprint("menu-items", __name__)
 
-
 # get details of a menu_item from an id
 # /<int:itemId>
 @menu_item_routes.route('/<int:itemId>')
@@ -31,8 +30,31 @@ def getAllDetails(itemId):
 def updateMenuItem(itemId):
     item = MenuItem.query.get(itemId)
     newData = request.json
+
+    badReq = {
+        "message": "Bad Request",
+        "errors":{}
+    }
+    errCount = 0
+    if len(newData["name"]) == 0:
+        badReq["errors"]["name"] = "Name is required"
+        errCount += 1
+    if len(newData["price"]) == 0:
+        badReq["errors"]["price"] = "Price is required"
+        errCount += 1
+    if len(str(newData["type"])) == 0:
+        badReq["errors"]["type"] = "Type is required"
+        errCount += 1
+    if len(newData["imageUrl"]) == 0:
+        badReq["errors"]["imageUrl"] = "Image Url is required"
+        errCount += 1
+
+    if errCount > 0:
+        return json.dumps(badReq), 400
+
     for keys in newData:
         setattr(item, keys, newData.get(keys))
+
     db.session.commit()
     return json.dumps(item.to_dict())
 
@@ -43,6 +65,12 @@ def updateMenuItem(itemId):
 @menu_item_routes.route("/<int:itemId>", methods=["DELETE"])
 def deleteMenuItem(itemId):
     item = MenuItem.query.get(itemId)
+
+    if item == None:
+        return json.dumps({
+            "message": "Menu Item couldn't be found"
+        })
+
     db.session.delete(item)
     db.session.commit()
     return json.dumps({

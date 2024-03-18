@@ -147,7 +147,31 @@ def deleteRestaurant(id):
 def createMenuItem(restaurantId):
     data = request.json
 
+    badReq = {
+        "message": "Bad Request",
+        "errors":{}
+    }
+    errCount = 0
+    if len(data["name"]) == 0:
+        badReq["errors"]["name"] = "Name is required"
+        errCount += 1
+    if len(data["price"]) == 0:
+        badReq["errors"]["price"] = "Price is required"
+        errCount += 1
+    if len(str(data["type"])) == 0:
+        badReq["errors"]["type"] = "Type is required"
+        errCount += 1
+    if data["owner_id"] == None:
+        badReq["errors"]["restaurant_id"] = "Restaurant Id is required"
+        errCount += 1
+    if len(data["imageUrl"]) == 0:
+        badReq["errors"]["imageUrl"] = "Image Url is required"
+        errCount += 1
+
+    if errCount > 0:
+        return json.dumps(badReq), 400
+
     newItem = MenuItem(**data, restaurant_id=restaurantId)
     db.session.add(newItem)
     db.session.commit()
-    return json.dumps(newItem.to_dict())
+    return json.dumps(newItem.to_dict()), 201
