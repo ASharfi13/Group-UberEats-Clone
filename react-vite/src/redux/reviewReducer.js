@@ -36,7 +36,7 @@ export const fetchAllReviews = (restuarantId) => async (dispatch) => {
   dispatch(loadReviews(reviews));
 };
 
-export const createReview = (payload, spotId) => async (dispatch) => {
+export const createReview = (payload, restuarantId) => async (dispatch) => {
   const response = await csrfFetch(`/api/restaurants/${restuarantId}/reviews`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ export const createReview = (payload, spotId) => async (dispatch) => {
   }
 };
 
-export const removeReview = (reviewId) => async (dispatch) => {
+export const removeReview = (restuarantId, reviewId) => async (dispatch) => {
   const response = await csrfFetch(
     `/api/restaurants/${restuarantId}/reviews/${reviewId}`,
     {
