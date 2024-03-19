@@ -3,7 +3,9 @@ import LoginFormPage from "../components/LoginFormPage";
 import SignupFormPage from "../components/SignupFormPage";
 import Layout from "./Layout";
 import LandingPage from "../../src/components/LandingPage/LandingPage";
-import SingleRestaurant from "../components/SingleRestaurant/SingleRestaurant";
+import SingleRestaurant from "../components/Restaurant/SingleRestaurant";
+import CreateRestaurantForm from "../../src/components/Restaurant/CreateRestaurantForm"
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -24,6 +26,10 @@ export const router = createBrowserRouter([
         path: "restaurants/:restaurantId",
         element: <SingleRestaurant />,
       },
+      {
+        path: "restaurants/new", 
+        element: <CreateRestaurantForm/>
+      }
     ],
   },
 ]);
