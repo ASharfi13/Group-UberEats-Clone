@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRestaurant } from "../../redux/restaurantReducer";
 import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
-import { loadAllMenuItems } from "../../redux/menuItemReducer";
+import "./SingleRestaurant.css";
+// import { loadAllMenuItems } from "../../redux/menuItemReducer";
 
 function SingleRestaurant() {
   const { restaurantId } = useParams();
@@ -38,30 +39,34 @@ function SingleRestaurant() {
 
   return (
     <div>
-      <h1>This is the Single Restaurant Page</h1>
+      <h1>What customers are saying </h1>
       <div className="restaurantDetails">
-        <div clasName="reviewsContainer">
+        <div className="reviews-Container">
           {reviewsArr?.map((review) => (
             <div
-              className="reviewCard"
-              style={{ border: "2px solid black" }}
+              className="review-Card"
+              // style={{ border: "2px solid black" }}
               key={review.id}
             >
-              <p>{review.description}</p>
-              <p>{review.stars}</p>
-              <p>{review.name}</p>
+              <p className="name-review">{review.name}</p>
+              <div className="rating">
+                <p>{review.stars}</p>
+                <img
+                  className="star"
+                  src="https://i.postimg.cc/QxSC3byV/stars-removebg-preview.png"
+                  alt="star"
+                />
+              </div>
+              <p className="description-review">{review.description}</p>
             </div>
           ))}
         </div>
+        <h1>Featured Items</h1>
         <div className="menuItemsContainer">
           {menuItemsArr?.map((item) => (
-            <div
-              className="menuItemCard"
-              style={{ border: "2px solid red" }}
-              key={item.id}
-            >
-              <p>{item.name}</p>
-              <p>{item.price}</p>
+            <div className="menuItemCard" key={item.id}>
+              <p className="name-item">{item.name}</p>
+              <p>${item.price}</p>
               <img className="itemImage" src={item.imageUrl} />
             </div>
           ))}
