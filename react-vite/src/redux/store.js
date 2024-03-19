@@ -7,10 +7,12 @@ import {
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import restaurantReducer from "./restaurantReducer";
+import menuItemReducer from "./menuItemReducer";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  restaurantState: restaurantReducer
+  restaurantState: restaurantReducer,
+  menuItemState: menuItemReducer,
 });
 
 let enhancer;

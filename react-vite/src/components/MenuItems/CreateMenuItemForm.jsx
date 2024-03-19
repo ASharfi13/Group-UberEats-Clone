@@ -1,31 +1,33 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { writeRestaurant } from "../../redux/restaurantReducer";
+import { writeMenuItem } from "../../redux/menuItemReducer";
 import { useNavigate } from "react-router-dom";
-// import Layout from "../../router/Layout"
 
-function RestaurantForm() {
+function MenuItemForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
-  const restaurants = useSelector((state) => state.restaurantState);
-
-  console.log(user);
+  const menuItems = useSelector((state) => state.menuItemState);
 
   const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
   const [type, setType] = useState("");
+  const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [errors, setErrors] = useState({});
 
-  const restaurantTypes = [
-    "American",
-    "Chinese",
-    "Indian",
-    "Mexican",
-    "Korean",
-    "Thai",
-    "Filipino",
+  const menuItemTypes = [
+    "Burger",
+    "Pizza",
+    "Soup",
+    "Chicken",
+    "Taco",
+    "Noodle",
+    "Beef",
+    "Rice",
+    "Burrito",
+    "Pork",
+    "Shrimp",
+    "Potato",
     "Other",
   ];
 
@@ -34,12 +36,12 @@ function RestaurantForm() {
   useEffect(() => {
     const errObj = {};
 
-    if (name.length < 3) {
-      errObj["nameLength"] = "Name must be at least 3 Characters";
+    if (name.length < 2) {
+      errObj["nameLength"] = "Name must be at least 2 Characters";
     }
 
-    if (location.length == 0) {
-      errObj["locationMissing"] = "Location is required";
+    if (price.length < 0) {
+      errObj["invalidPrice"] = "Price must be greater than 0";
     }
 
     if (image.length == 0) {
@@ -47,40 +49,32 @@ function RestaurantForm() {
     }
 
     setErrors(errObj);
-  }, [name, location, image]);
+  }, [name, price, image]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
       name,
-      location,
       type,
+      price,
       imageUrl: image,
     };
 
     if (Object.values(errors).length === 0) {
-      dispatch(writeRestaurant(payload));
+      dispatch(writeMenuItem(payload));
     } else {
       alert("Did not work");
     }
-
-    // try{
-    //     const newRestaurant = await dispatch(writeRestaurant(payload))
-    // } catch(e) {
-    //     const results = await e.json()
-    //     setErrors(results.errors)
-    // }
   };
-
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <h1>Create A New Restaurant</h1>
+        <h1>Create A New Menu Item</h1>
         <div>
           <input
             type="text"
-            placeholder="Enter A Name"
+            placeholder="Enter the name of the item"
             value={name}
             onChange={(e) => setName(e.target.value)}
             // required
@@ -91,20 +85,20 @@ function RestaurantForm() {
         <div>
           <input
             type="text"
-            placeholder="Enter A Location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Enter the price of the item"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             // required
           ></input>
-          <p className="errors">{errors.location ? errors.location : null}</p>
+          <p className="errors">{errors.price ? errors.price : null}</p>
         </div>
         <div>
           <select value={type} onChange={(e) => setType(e.target.value)}>
             <option value={""} disabled selected>
               Select Type
             </option>
-            {restaurantTypes.map((restaurant, idx) => (
-              <option key={idx}>{restaurant}</option>
+            {menuItemTypes.map((menuItem, idx) => (
+              <option key={idx}>{menuItem}</option>
             ))}
           </select>
           <p className="errors">{errors.type ? errors.type : null}</p>
@@ -123,5 +117,3 @@ function RestaurantForm() {
     </div>
   );
 }
-
-export default RestaurantForm;
