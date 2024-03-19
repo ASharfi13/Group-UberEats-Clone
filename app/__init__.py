@@ -8,9 +8,10 @@ from .models import db, User, Restaurant, Review, MenuItem, ShoppingCart
 from .routes import user_routes, auth_routes, menu_item_routes, restaurant_routes, review_routes
 from .seeds import seed_commands
 from .config import Config
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
-
+# CORS(app)
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'

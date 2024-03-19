@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf"
+
 //action type creator
 const LOAD_RESTAURANT = "restaurant/loadRestaurant";
 const LOAD_ALL_RESTAURANTS = "restaurant/loadAllRestaurants";
@@ -64,13 +66,13 @@ export const fetchAllRestaurants = () => async (dispatch) => {
 };
 
 export const fetchOwnerRestaurants = () => async (dispatch) => {
-  const response = await csrfFetch(`/api/restaurants/current`);
+  const response = await fetch(`/api/restaurants/current`);
   const restaurants = await response.json();
   dispatch(loadOwnerRestaurants(restaurants));
 };
 
 export const writeRestaurant = (payload) => async (dispatch) => {
-  const response = await csrfFetch("/api/restaurants", {
+  const response = await fetch("/api/restaurants/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -80,6 +82,11 @@ export const writeRestaurant = (payload) => async (dispatch) => {
   if (response.status !== 201) {
     return restaurant;
   }
+  // if(response.status == 500) {
+  //   return {
+  //     "error": " backend constraint failed"
+  //   }
+  // }
   if (response.ok) {
     dispatch(addRestaurant(restaurant));
     return restaurant;
@@ -87,7 +94,7 @@ export const writeRestaurant = (payload) => async (dispatch) => {
 };
 
 export const deleteRestaurant = (restaurantId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/restaurants/${restaurantId}`, {
+  const response = await fetch(`/api/restaurants/${restaurantId}`, {
     method: "DELETE",
   });
   if (response.ok) {
@@ -100,7 +107,7 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
 };
 
 export const editRestaurant = (restaurantId, payload) => async (dispatch) => {
-  const response = await csrfFetch(`/api/restaurant/${restaurantId}`, {
+  const response = await fetch(`/api/restaurants/${restaurantId}`, {
     method: "PUT",
     header: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -139,7 +146,7 @@ const restaurantReducer = (state = {}, action) => {
     //   return { ...state, [action.image.id]: action.image };
     case REMOVE_RESTAURANT: {
       const newState = { ...state };
-      delete newState[action.restaurant.id];
+      delete newState[action.restaurants.id];
       return newState;
     }
     case UPDATE_RESTAURANT:
