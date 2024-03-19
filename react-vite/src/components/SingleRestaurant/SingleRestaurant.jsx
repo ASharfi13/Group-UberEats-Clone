@@ -68,6 +68,7 @@ function SingleRestaurant() {
               <p className="name-item">{item.name}</p>
               <p>${item.price}</p>
               <img className="itemImage" src={item.imageUrl} />
+              <button className="add-to-cart">Add to Cart</button>
             </div>
           ))}
         </div>
