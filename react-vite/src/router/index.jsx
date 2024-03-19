@@ -3,7 +3,7 @@ import LoginFormPage from "../components/LoginFormPage";
 import SignupFormPage from "../components/SignupFormPage";
 import Layout from "./Layout";
 import LandingPage from "../../src/components/LandingPage/LandingPage";
-import SingleRestaurant from "../components/SingleRestaurant/singleRestaurant";
+import SingleRestaurant from "../components/SingleRestaurant/SingleRestaurant";
 export const router = createBrowserRouter([
   {
     element: <Layout />,
