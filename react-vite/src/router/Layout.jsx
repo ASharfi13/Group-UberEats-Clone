@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
+import { ShoppingCartProvider } from "../context/CartContext"
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
 
@@ -15,9 +16,11 @@ export default function Layout() {
   return (
     <>
       <ModalProvider>
-        <Navigation />
-        {isLoaded && <Outlet />}
-        <Modal />
+        <ShoppingCartProvider>
+          <Navigation />
+          {isLoaded && <Outlet />}
+          <Modal />
+        </ShoppingCartProvider>
       </ModalProvider>
     </>
   );

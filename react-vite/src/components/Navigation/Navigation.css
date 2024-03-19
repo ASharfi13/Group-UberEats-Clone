@@ -1,3 +1,18 @@
 .profile-dropdown {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+ul {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 150px;
+}
+
+.cart-dropdown {
+  right:100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

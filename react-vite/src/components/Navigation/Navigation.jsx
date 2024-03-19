@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
+import CartButton from "./CartButton";
 import "./Navigation.css";
 
 function Navigation() {
@@ -11,6 +12,10 @@ function Navigation() {
 
       <li>
         <ProfileButton />
+      </li>
+
+      <li>
+        <CartButton />
       </li>
     </ul>
   );

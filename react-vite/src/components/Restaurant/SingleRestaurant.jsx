@@ -4,6 +4,7 @@ import { fetchRestaurant } from "../../redux/restaurantReducer";
 import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
 import "./SingleRestaurant.css";
 import DeleteRestaurantButton from "./DeleteRestaurantButton"
+import { useShoppingCart } from "../../context/CartContext";
 // import { loadAllMenuItems } from "../../redux/menuItemReducer";
 
 function SingleRestaurant() {
@@ -13,6 +14,7 @@ function SingleRestaurant() {
   const restaurant = useSelector((state) => state.restaurantState);
   console.log("THIS IS THE RESTAURANT", restaurant)
   const restaurantArr = Object.values(restaurant);
+  const {cartItems, setCartItems} = useShoppingCart()
 
   const reviewsArr = restaurant[restaurantId]?.Reviews;
   const menuItemsArr = restaurant[restaurantId]?.MenuItems;
@@ -20,7 +22,7 @@ function SingleRestaurant() {
   const user = useSelector((state) => state.session.user)
 
 
-  console.log(menuItemsArr, "over here");
+  console.log(cartItems, "over here");
 
   //   console.log(restaurant[restaurantId]?.Reviews[0]?.description, "over here");
   // put this in the route!!!
@@ -41,6 +43,10 @@ function SingleRestaurant() {
   useEffect(() => {
     dispatch(fetchRestaurant(restaurantId));
   }, [dispatch, restaurantId]);
+
+  function addToCart(e, menuItem){
+    setCartItems([...cartItems, JSON.stringify(menuItem)])
+  }
 
   return (
     <div>
@@ -73,7 +79,7 @@ function SingleRestaurant() {
               <p className="name-item">{item.name}</p>
               <p>${item.price}</p>
               <img className="itemImage" src={item.imageUrl} />
-              <button className="add-to-cart">Add to Cart</button>
+              <button className="add-to-cart" onClick={(e) => addToCart(e, item)}>Add to Cart</button>
             </div>
           ))}
         </div>
