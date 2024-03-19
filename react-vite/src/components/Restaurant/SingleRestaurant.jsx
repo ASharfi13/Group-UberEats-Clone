@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchRestaurant } from "../../redux/restaurantReducer";
 import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
 import "./SingleRestaurant.css";
+import DeleteRestaurantButton from "./DeleteRestaurantButton"
 // import { loadAllMenuItems } from "../../redux/menuItemReducer";
 
 function SingleRestaurant() {
@@ -10,10 +11,14 @@ function SingleRestaurant() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const restaurant = useSelector((state) => state.restaurantState);
+  console.log("THIS IS THE RESTAURANT", restaurant)
   const restaurantArr = Object.values(restaurant);
 
   const reviewsArr = restaurant[restaurantId]?.Reviews;
   const menuItemsArr = restaurant[restaurantId]?.MenuItems;
+
+  const user = useSelector((state) => state.session.user)
+
 
   console.log(menuItemsArr, "over here");
 
@@ -71,6 +76,9 @@ function SingleRestaurant() {
               <button className="add-to-cart">Add to Cart</button>
             </div>
           ))}
+        </div>
+        <div className="ManageRestaurant">
+          {restaurant[restaurantId].owner_id === user.id && <DeleteRestaurantButton id={restaurantId}/>}
         </div>
       </div>
     </div>
