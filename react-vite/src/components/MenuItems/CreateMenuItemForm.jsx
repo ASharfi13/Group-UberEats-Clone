@@ -12,7 +12,7 @@ export default function MenuItemForm() {
 
   const [name, setName] = useState("");
   const [type, setType] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
   const [errors, setErrors] = useState({});
 
@@ -56,7 +56,7 @@ export default function MenuItemForm() {
 
         <div>
           <input
-            type="text"
+            type="number"
             placeholder="Enter the price of the item"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
