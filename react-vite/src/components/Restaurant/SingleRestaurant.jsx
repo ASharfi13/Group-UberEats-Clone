@@ -106,7 +106,6 @@ function SingleRestaurant() {
                         restaurantId={restaurantId}
                       />
                     </>
-                    )}
                   </div>
                 </div>
               ))}
