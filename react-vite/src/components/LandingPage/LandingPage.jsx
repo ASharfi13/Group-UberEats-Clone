@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllRestaurants } from "../../redux/restaurantReducer";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { loadAllMenuItems } from "../../redux/menuItemReducer";
+import "./LandingPage.css";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -36,18 +37,26 @@ function LandingPage() {
 
   return (
     <div>
-      <h1>This is the Landing Page</h1>
+      <h1 className="featured-on">Featured on Uber Eats</h1>
+      <hr />
       <div className="restaurantDivs">
         {restaurantArr?.map((restaurant) => (
           <div
             className="restaurantCard"
-            style={{ border: "2px solid black" }}
             key={restaurant.id}
             onClick={() => navigate(`restaurants/${restaurant.id}`)}
           >
-            <p>{restaurant.name}</p>
+            <p className="name">{restaurant.name}</p>
+
+            <div className="rating">
+              <p>{avgRating[restaurant.id]}</p>
+              <img
+                className="star"
+                src="https://i.postimg.cc/QxSC3byV/stars-removebg-preview.png"
+                alt="star"
+              />
+            </div>
             <img className="resCardImage" src={restaurant.imageUrl} />
-            <p>{avgRating[restaurant.id]}</p>
           </div>
         ))}
       </div>
