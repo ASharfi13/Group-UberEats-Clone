@@ -154,15 +154,15 @@ def createReview(restaurantId):
         newReview = Review(
             description=form.data['description'],
             stars=form.data['stars'],
-            userId=get_current_user(),
+            user_id=get_current_user(),
             restaurant_id=restaurantId
         )
         db.session.add(newReview)
         db.session.commit()
         responseObj = {
             "id": newReview.id,
-            "userId": newReview.user_id,
-            "restaurantId": newReview.restaurant_id,
+            "user_id": newReview.user_id,
+            "restaurant_id": newReview.restaurant_id,
             "description": newReview.description,
             "stars": newReview.stars,
             "createdAt": str(newReview.createdAt)

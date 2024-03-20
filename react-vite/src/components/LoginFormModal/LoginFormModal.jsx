@@ -33,8 +33,8 @@ function LoginFormModal() {
     e.preventDefault();
     setErrors({});
     const demoUser = {};
-    demoUser.email = "oldcar@gmail.com";
-    demoUser.password = "iloveracing947";
+    demoUser.email = "jwhite@gmail.com";
+    demoUser.password = "jwpassword12";
     return dispatch(sessionActions.thunkLogin(demoUser))
       .then(closeModal)
       .catch(async (res) => {
