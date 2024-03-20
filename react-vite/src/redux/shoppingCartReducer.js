@@ -33,7 +33,7 @@ export const addOrder = (order) => {
 }
 
 export const checkOutCart = (user_id, cart_items) => async (dispatch) => {
-    const response = await fetch("/api/shopping-cart/check-out", {
+    const response = await fetch("/api/shopping-carts/check-out", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -49,7 +49,7 @@ export const checkOutCart = (user_id, cart_items) => async (dispatch) => {
 }
 
 export const getOrders = (user_id) => async (dispatch) => {
-    const response = await fetch(`/api/shopping-cart/${user_id}`)
+    const response = await fetch(`/api/shopping-carts/${user_id}`)
     if (response.ok) {
         const orders = await response.json()
         dispatch(loadOrders(orders))
@@ -62,11 +62,12 @@ export const shoppingCartReducer = (state = {}, action) => {
         case LOAD_ORDERS:
             const ordersState = {};
             action.orders.orders.forEach((order) => {
-                ordersState[order.order_id] = order.items;
+                ordersState[order.order_id] = order;
             });
             return ordersState;
         case ADD_ORDER:
             return { ...state, [action.order.order_id]: action.order };
-
+        default:
+            return state;
     }
 }

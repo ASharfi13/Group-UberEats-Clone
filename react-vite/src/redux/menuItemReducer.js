@@ -75,7 +75,7 @@ export const writeMenuItem = (payload) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  console.log(response);
+  // console.log(response);
   const menu_item = await response.json();
   if (response.status !== 201) {
     return menu_item;

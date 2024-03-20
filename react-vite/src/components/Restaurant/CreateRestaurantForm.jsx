@@ -10,7 +10,7 @@ function RestaurantForm() {
   const user = useSelector((state) => state.session.user);
   const restaurants = useSelector((state) => state.restaurantState);
 
-  console.log(user);
+    // console.log(user)
 
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");

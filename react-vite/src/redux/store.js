@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import restaurantReducer from "./restaurantReducer";
 import menuItemReducer from "./menuItemReducer";
+import { shoppingCartReducer } from "./shoppingCartReducer";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   restaurantState: restaurantReducer,
   menuItemState: menuItemReducer,
+  orderState: shoppingCartReducer
 });
 
 let enhancer;
