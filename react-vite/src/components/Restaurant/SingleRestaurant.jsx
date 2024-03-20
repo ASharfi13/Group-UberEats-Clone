@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRestaurant, getRestaurantTypes } from "../../redux/restaurantReducer";
+import {
+  fetchRestaurant,
+  getRestaurantTypes,
+} from "../../redux/restaurantReducer";
 import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
 import "./SingleRestaurant.css";
 import DeleteRestaurantButton from "./DeleteRestaurantButton";
@@ -13,7 +16,7 @@ function SingleRestaurant() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const restaurant = useSelector((state) => state.restaurantState);
-  const menu_items = useSelector((state) => state.menuItemState)
+  const menu_items = useSelector((state) => state.menuItemState);
   const { cartItems, setCartItems } = useShoppingCart();
 
   const reviewsArr = restaurant[restaurantId]?.Reviews;
@@ -51,65 +54,80 @@ function SingleRestaurant() {
 
   return (
     <>
-    {restaurant &&
-    <div>
-      <h1>What customers are saying </h1>
-      <div className="restaurantDetails">
-        <div className="reviews-Container">
-          {reviewsArr?.map((review) => (
-            <div
-              className="review-Card"
-              // style={{ border: "2px solid black" }}
-              key={review.id}
-            >
-              <p className="name-review">{review.name}</p>
-              <div className="rating">
-                <p>{review.stars}</p>
-                <img
-                  className="star"
-                  src="https://i.postimg.cc/QxSC3byV/stars-removebg-preview.png"
-                  alt="star"
-                />
-              </div>
-              <p className="description-review">{review.description}</p>
+      {restaurant && (
+        <div>
+          <h1>What customers are saying </h1>
+          <div className="restaurantDetails">
+            <div className="reviews-Container">
+              {reviewsArr?.map((review) => (
+                <div
+                  className="review-Card"
+                  // style={{ border: "2px solid black" }}
+                  key={review.id}
+                >
+                  <p className="name-review">{review.name}</p>
+                  <div className="rating">
+                    <p>{review.stars}</p>
+                    <img
+                      className="star"
+                      src="https://i.postimg.cc/QxSC3byV/stars-removebg-preview.png"
+                      alt="star"
+                    />
+                  </div>
+                  <p className="description-review">{review.description}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <h1>Featured Items</h1>
-        <div className="menuItemsContainer">
-          {menuItemsArr?.map((item) => (
-            <div className="menuItemCard" key={item.id}>
-              <p className="name-item">{item.name}</p>
-              <p>${item.price}</p>
-              <img className="itemImage" src={item.imageUrl} />
-              <button
-                className="add-to-cart"
-                onClick={(e) => addToCart(e, item)}
-              >
-                Add to Cart
-              </button>
-              <div className="ManageMenuItem">
-                {restaurant[restaurantId]?.owner_id === user.id && (
-                  <>
-                  <button onClick={() => navigate(`/menu-items/${item.id}/update`)}>Edit</button>
-                  <DeleteMenuItemButton id={item.id} restaurantId={restaurantId} />
-                  </>
-                )}
-              </div>
+            <h1>Featured Items</h1>
+            <div className="menuItemsContainer">
+              {menuItemsArr?.map((item) => (
+                <div className="menuItemCard" key={item.id}>
+                  <p className="name-item">{item.name}</p>
+                  <p>${item.price}</p>
+                  <img className="itemImage" src={item.imageUrl} />
+                  <button
+                    className="add-to-cart"
+                    onClick={(e) => addToCart(e, item)}
+                  >
+                    Add to Cart
+                  </button>
+                  <div className="ManageMenuItem">
+                    {/* {restaurant[restaurantId]?.owner_id === user.id && ( */}
+                    <>
+                      <button
+                        onClick={() =>
+                          navigate(`/menu-items/${item.id}/update`)
+                        }
+                      >
+                        Edit
+                      </button>
+                      <DeleteMenuItemButton
+                        id={item.id}
+                        restaurantId={restaurantId}
+                      />
+                    </>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+            <div className="ManageRestaurant">
+              {restaurant[restaurantId]?.owner_id === user?.id && (
+                <>
+                  <DeleteRestaurantButton id={restaurantId} />
+                  <button
+                    onClick={() =>
+                      navigate(`/restaurants/${restaurantId}/add-item`)
+                    }
+                  >
+                    Add Menu Item
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
         </div>
-        <div className="ManageRestaurant">
-          {restaurant[restaurantId]?.owner_id === user.id && (
-            <>
-            <DeleteRestaurantButton id={restaurantId} />
-            <button onClick={() => navigate(`/restaurants/${restaurantId}/add-item`)}>Add Menu Item</button>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-}
+      )}
     </>
   );
 }
