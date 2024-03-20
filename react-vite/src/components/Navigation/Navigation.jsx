@@ -6,17 +6,18 @@ import "./Navigation.css";
 function Navigation() {
   return (
     <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
+      <NavLink to="/">
+        <img
+          className="landing-logo"
+          src="https://i.postimg.cc/zBFrwRpH/logo-landing-page-removebg-preview.png"
+          alt="logi"
+        />
+      </NavLink>
 
-      <li>
+      <div className="right-side-nav-bar">
         <ProfileButton />
-      </li>
-
-      <li>
         <CartButton />
-      </li>
+      </div>
     </ul>
   );
 }
