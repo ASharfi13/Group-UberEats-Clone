@@ -79,6 +79,7 @@ function SingleRestaurant() {
               ))}
             </div>
             <h1>Featured Items</h1>
+            <hr />
             <div className="menuItemsContainer">
               {menuItemsArr?.map((item) => (
                 <div className="menuItemCard" key={item.id}>
