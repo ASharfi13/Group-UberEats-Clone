@@ -2,6 +2,8 @@
 const LOAD_REVIEWS = "review/loadReviews";
 const ADD_REVIEW = "review/addReview";
 const DELETE_REVIEW = "review/deleteReview";
+const LOAD_OWNER_REVIEWS = "review/loadOwnerReviews"
+const CLEAR_REVIEWS = "review/clearReviews"
 
 //action creator
 export const loadReviews = (reviews) => {
@@ -24,6 +26,19 @@ export const deleteReview = (reviewId) => {
     reviewId,
   };
 };
+
+export const loadOwnerReviews = (reviews) => {
+  return {
+    type: LOAD_OWNER_REVIEWS,
+    reviews
+  }
+}
+
+export const clearReviews = () => {
+  return {
+    type: CLEAR_REVIEWS
+  }
+}
 
 //thunk action creators
 export const fetchAllReviews = (restuarantId) => async (dispatch) => {
@@ -53,9 +68,9 @@ export const createReview = (payload, restuarantId) => async (dispatch) => {
   }
 };
 
-export const removeReview = (restuarantId, reviewId) => async (dispatch) => {
+export const removeReview = (reviewId) => async (dispatch) => {
   const response = await fetch(
-    `/api/restaurants/${restuarantId}/reviews/${reviewId}`,
+    `/api/reviews/${reviewId}`,
     {
       method: "DELETE",
     }
@@ -69,11 +84,23 @@ export const removeReview = (restuarantId, reviewId) => async (dispatch) => {
   }
 };
 
+export const fetchOwnerReviews = () => async (dispatch) => {
+  const response = await fetch(
+    "/api/reviews/current"
+  )
+
+  if (response.ok) {
+    const reviews = await response.json();
+    dispatch(loadOwnerReviews(reviews))
+    return reviews;
+  }
+}
+
 //reducer
 const reviewReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_REVIEWS: {
-      const reviewState = {};
+      const reviewState = { ...state };
       action.reviews.Reviews.forEach((review) => {
         reviewState[review.id] = review;
       });
@@ -86,6 +113,16 @@ const reviewReducer = (state = {}, action) => {
       const newState = { ...state };
       delete newState[action.reviewId];
       return newState;
+    }
+    case LOAD_OWNER_REVIEWS: {
+      const reviewState = { ...state };
+      action.reviews.forEach((review) => {
+        reviewState[review.id] = review;
+      });
+      return reviewState;
+    }
+    case CLEAR_REVIEWS: {
+      return {}
     }
     default:
       return state;

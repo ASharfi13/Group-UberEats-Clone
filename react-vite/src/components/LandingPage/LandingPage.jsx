@@ -10,6 +10,7 @@ function LandingPage() {
   const navigate = useNavigate();
   const restaurants = useSelector((state) => state.restaurantState);
   const restaurantArr = Object.values(restaurants);
+  const user = useSelector((state) => state.session.user)
 
   const avgRating = {};
 
@@ -43,7 +44,8 @@ function LandingPage() {
         {restaurantArr?.map((restaurant, idx) => (
           <div
             className="restaurantCard"
-            key={restaurant.id}
+            style={{ backgroundColor: `${user?.id == restaurant?.owner_id ? "#64B41C" : null}` }}
+            key={idx}
             onClick={() => navigate(`restaurants/${restaurant.id}`)}
           >
             <p className="name">{restaurant.name}</p>

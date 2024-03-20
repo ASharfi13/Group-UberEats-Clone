@@ -38,9 +38,9 @@ def is_review_owner(f):
     def review_authorization(reviewId):
         userId = get_current_user()
         review = Review.query.get(reviewId)
-        if userId != review.owner_id:
+        if userId != review.user_id:
             return json.dumps({"message": "Forbidden"}), 403
-        return f(id)
+        return f(reviewId)
     return review_authorization
 
 # Cart must belong to current user

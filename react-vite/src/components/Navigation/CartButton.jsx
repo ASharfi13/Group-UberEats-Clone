@@ -11,7 +11,7 @@ function CartButton() {
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
-  const { cartItems, setCartItems } = useShoppingCart();
+  const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
   //   console.log("THIS IS THE CART", cartItems)
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -22,6 +22,7 @@ function CartButton() {
     e.preventDefault()
     const newOrder = await dispatch(checkOutCart(user.id, cartItems))
     setCartItems([])
+    setCartRestaurant(0)
     navigate("/orders")
   }
 
@@ -31,8 +32,7 @@ function CartButton() {
     navigate("/login")
   }
 
-
-
+  const restaurantName = cartItems?.length > 0 ? JSON.parse(cartItems[0]).restaurant : ""
 
   useEffect(() => {
     if (!showMenu) return;
@@ -50,6 +50,8 @@ function CartButton() {
 
   const closeMenu = () => setShowMenu(false);
 
+  let total = 0
+
 
   return (
     <>
@@ -58,17 +60,26 @@ function CartButton() {
       </button>
       {showMenu && (
         <ul className={"cart-dropdown profile-dropdown"} ref={ulRef}>
-          <li>IN THE CART</li>
-
+          <li>Cart For {restaurantName}</li>
           {cartItems?.map((item, index) => {
             item = JSON.parse(item)
+            total += item.price
             return <li key={index}>
-              {item.name}
+              {item.name} | {item.price}
             </li>
           })}
+          {cartItems?.length > 0 ? (<li>Total Price : {total.toFixed(2)}</li>) : null}
           <li>
             <button disabled={cartItems.length === 0} onClick={(e) => user ? checkOutLoggedIn(e) : checkOutLoggedOut(e)}>
               Check Out
+            </button>
+          </li>
+          <li>
+            <button onClick={() => {
+              setCartItems([])
+              setCartRestaurant(0)
+            }}>
+              Clear Cart
             </button>
           </li>
         </ul>

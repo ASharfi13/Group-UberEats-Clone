@@ -63,6 +63,16 @@ function ProfileButton() {
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>
+              <li>
+                <button onClick={() => navigate("/restaurants/new")}>
+                  Add Restaurant
+                </button>
+              </li>
+              <li>
+                <button onClick={() => navigate("/orders/reviews")}>
+                  My Reviews
+                </button>
+              </li>
             </>
           ) : (
             <>

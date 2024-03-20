@@ -23,5 +23,7 @@ class Review(db.Model):
             'user_id': self.user_id,
             'stars': self.stars,
             'description': self.description,
+            'restaurant_id': self.restaurant_id,
+            'createdAt': str(self.createdAt)
             # 'restaurant': self.restaurant.to_dict()
         }

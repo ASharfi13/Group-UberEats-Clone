@@ -26,6 +26,10 @@
   text-align: center;
 }
 
+.Owned {
+  background-color: lightblue;
+}
+
 .restaurantCard:hover {
   cursor: pointer;
 }

@@ -9,6 +9,7 @@ import MenuItemForm from "../components/MenuItems/CreateMenuItemForm";
 import UpdateMenuItem from "../components/MenuItems/UpdateMenuItemForm";
 import ReviewsPage from "../components/Reviews/ReviewsPage";
 import LoginFormPage from "../components/LoginFormPage/LoginFormPage";
+import OwnerReviews from "../components/Reviews/OwnerReviewsPage";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <LoginFormPage />
+      },
+      {
+        path: "/orders/reviews",
+        element: <OwnerReviews/>
       }
     ],
   },
