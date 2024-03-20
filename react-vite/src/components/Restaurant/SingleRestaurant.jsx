@@ -13,6 +13,7 @@ function SingleRestaurant() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const restaurant = useSelector((state) => state.restaurantState);
+  const menuItem = useSelector((state) => state.menuItemState);
   console.log("THIS IS THE RESTAURANT", restaurant);
   const restaurantArr = Object.values(restaurant);
   const { cartItems, setCartItems } = useShoppingCart();
@@ -86,7 +87,7 @@ function SingleRestaurant() {
                 Add to Cart
               </button>
               <div className="ManageMenuItem">
-                {menuItem[item.id].owner_id === user.id && (
+                {menuItem[item?.id]?.owner_id === user?.id && (
                   <DeleteMenuItemButton id={item.id} />
                 )}
               </div>
@@ -94,7 +95,7 @@ function SingleRestaurant() {
           ))}
         </div>
         <div className="ManageRestaurant">
-          {restaurant[restaurantId].owner_id === user.id && (
+          {restaurant[restaurantId]?.owner_id === user?.id && (
             <DeleteRestaurantButton id={restaurantId} />
           )}
         </div>
