@@ -6,6 +6,7 @@ import LandingPage from "../../src/components/LandingPage/LandingPage";
 import SingleRestaurant from "../components/Restaurant/SingleRestaurant";
 import CreateRestaurantForm from "../../src/components/Restaurant/CreateRestaurantForm"
 import UpdateRestaurant from "../components/Restaurant/UpdateRestaurantForm";
+import OrdersPage from "../components/OrdersPage/OrdersPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "restaurants/:restaurantId/update",
         element: <UpdateRestaurant/>
+      },
+      {
+        path: "orders",
+        element: <OrdersPage/>
       }
     ],
   },

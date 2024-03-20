@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaShoppingCart } from 'react-icons/fa';
 import { useShoppingCart } from "../../context/CartContext";
 import { checkOutCart } from "../../redux/shoppingCartReducer";
+import { useNavigate } from "react-router-dom";
 
 function CartButton() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
@@ -16,11 +18,11 @@ function CartButton() {
     setShowMenu(!showMenu);
   };
 
-  const checkout = async(e) => {
+  const checkOut = async (e) => {
     e.preventDefault()
     const newOrder = await dispatch(checkOutCart(user.id, cartItems))
-    window.alert("CHECKOUT OUT, add redirect later")
     setCartItems([])
+    navigate("/orders")
   }
 
 

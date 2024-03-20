@@ -60,7 +60,7 @@ export const fetchRestaurant = (restaurantId) => async (dispatch) => {
 };
 
 export const fetchAllRestaurants = () => async (dispatch) => {
-  const response = await fetch("/api/restaurants");
+  const response = await fetch("/api/restaurants/");
   const restaurants = await response.json();
   dispatch(loadAllRestaurants(restaurants));
 };
