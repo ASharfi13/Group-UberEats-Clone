@@ -86,7 +86,7 @@ function SingleRestaurant() {
                 Add to Cart
               </button>
               <div className="ManageMenuItem">
-                {menuItem[item.id].owner_id === user.id && (
+                {restaurant[restaurantId].owner_id === user.id && (
                   <DeleteMenuItemButton id={item.id} />
                 )}
               </div>
