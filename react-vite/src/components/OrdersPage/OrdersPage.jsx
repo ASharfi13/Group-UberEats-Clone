@@ -10,12 +10,12 @@ function OrdersPage() {
 
     useEffect(() => {
         dispatch(getOrders(user.id));
-    }, [dispatch]);
+    }, [dispatch, user.id]);
 
     return (
         <div>
             <h1>This is the Orders Page</h1>
-            {Object.values(orders).map((order) => <p>hello</p> )}
+            {Object.values(orders).map((order, idx) => <p key={idx}>hello</p> )}
         </div>
     )
 }

@@ -24,6 +24,7 @@ export default function UpdateMenuItem() {
     setType(menuItem?.type);
     setImage(menuItem?.imageUrl);
   }, [
+    dispatch,
     menuItemId,
     menuItem?.name,
     menuItem?.price,

@@ -59,12 +59,12 @@ export const getOrders = (user_id) => async (dispatch) => {
 
 const shoppingCartReducer = (state = {}, action) => {
     switch(action.type) {
-        case LOAD_ORDERS:
-            const ordersState = {};
+        case LOAD_ORDERS: {
+            const ordersState = {...state};
             action.orders.orders.forEach((order) => {
                 ordersState[order.order_id] = order;
             });
-            return ordersState;
+            return ordersState;}
         case ADD_ORDER:
             return { ...state, [action.order.order_id]: action.order };
         default:
