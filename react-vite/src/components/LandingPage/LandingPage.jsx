@@ -40,7 +40,7 @@ function LandingPage() {
       <h1 className="featured-on">Featured on Uber Eats</h1>
       <hr />
       <div className="restaurantDivs">
-        {restaurantArr?.map((restaurant) => (
+        {restaurantArr?.map((restaurant, idx) => (
           <div
             className="restaurantCard"
             key={restaurant.id}

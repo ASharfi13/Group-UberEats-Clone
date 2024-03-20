@@ -1,8 +1,27 @@
 from .db import db, SCHEMA, environment, add_prefix_for_prod
-from sqlalchemy.orm import validates
-from sqlalchemy import CheckConstraint
-import re
 import datetime as dt
+
+menuItemTypes = [
+    "Appetizer",
+    "Entree",
+    "Dessert",
+    "Drink",
+    "Salad",
+    "Soup",
+    "Burger",
+    "Pizza",
+    "Chicken",
+    "Taco",
+    "Beef",
+    "Rice",
+    "Pork",
+    "Shrimp",
+    "Burrito",
+    "Noodle",
+    "Ice Cream",
+    "Cake",
+    "Pie"
+]
 
 class MenuItem(db.Model):
     __tablename__ = "menu_items"
@@ -19,25 +38,6 @@ class MenuItem(db.Model):
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
 
     restaurant = db.relationship("Restaurant", back_populates="menu_items")
-
-    # @validates("name")
-    # def validate_name(self):
-    #     specialChars = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
-    #     if (specialChars.search(self.name) != None):
-    #         raise ValueError("Name must only have alpha-numeric characters")
-    #     return self.name
-
-    # @validates("price")
-    # def validate_price(self):
-    #     if self.price < 0:
-    #         raise ValueError("Price must be a positive number")
-    #     return self.price
-
-    # @validates("type")
-    # def validate_type(self):
-    #     if self.type not in []:
-    #         raise ValueError("Invalid Type")
-    #     return self.price
 
     def to_dict(self):
         return {

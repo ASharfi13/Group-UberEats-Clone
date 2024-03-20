@@ -1,11 +1,11 @@
 from app.models import db, Restaurant, MenuItem, Review, User
+from app.models.restaurant import restaurantTypes
 from app.forms import RestaurantForm, MenuItemForm, ReviewForm
 from flask import Blueprint, request
 from flask_login import login_required
 from app.utils import is_restaurant_owner, get_current_user
 import json
-
-
+from types import SimpleNamespace
 
 restaurant_routes = Blueprint("restaurants", __name__)
 
@@ -14,6 +14,11 @@ restaurant_routes = Blueprint("restaurants", __name__)
 def allRestaurants():
     restaurants = Restaurant.query.all()
     return json.dumps({"restaurants":[restaurant.to_dict() for restaurant in restaurants]})
+
+#GET ALL RESTAURANT TYPES at ["/api/restaurants/types"]
+@restaurant_routes.route("/types")
+def allRestaurantTypes():
+    return json.dumps(restaurantTypes)
 
 #CREATE A NEW RESTAURANT at ["/api/restaurants"]
 @restaurant_routes.route("/", methods=["POST"])
@@ -32,7 +37,7 @@ def newRestaurant():
         db.session.add(newRestaurant)
         db.session.commit()
         return json.dumps(newRestaurant.to_dict()), 201
-    return {'message': 'Bad Request', 'errors': form.errors}, 401
+    return {'message': 'Bad Request', 'errors': form.errors}, 400
 
 #GET ALL RESTAURANTS BY CURRENT USER at ["/api/restaurants/current"]
 @restaurant_routes.route("/current")
@@ -70,38 +75,38 @@ def getRestaurantById(id):
         "avgRating": avgRating,
         "numReviews": len(reviews),
         "Reviews": reviews,
-        "MenuItems": [menu_item.to_dict() for menu_item in restaurant.menu_items], 
+        "MenuItems": [menu_item.to_dict() for menu_item in restaurant.menu_items],
         "imageUrl": restaurant.imageUrl
     }
     return json.dumps(restaurant_formatted)
 
 #EDIT/UPDATE A RESTAURANT at ["/api/restaurant/:id"]
-@restaurant_routes.route("/<int:id>", methods=["PUT"])
+@restaurant_routes.route("/<int:restaurantId>", methods=["PUT"])
 @login_required
 @is_restaurant_owner
-def updateRestaurant(id):
-    restaurant = Restaurant.query.get(id)
+def updateRestaurant(restaurantId):
+    restaurant = Restaurant.query.get(restaurantId)
 
     if not restaurant:
         return json.dumps({
             "message": "Restaurant couldn't be found"
         }), 404
-
-    form = RestaurantForm(obj=restaurant)
+    data = json.loads(request.data, object_hook=lambda d: SimpleNamespace(**d)) # convert JSON to Object so form can key in using .
+    form = RestaurantForm(obj=data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         form.populate_obj(restaurant)
         db.session.add(restaurant)
         db.session.commit()
         return json.dumps(restaurant.to_dict())
-    return {'message': 'Bad Request', 'errors': form.errors}, 401
+    return {'message': 'Bad Request', 'errors': form.errors}, 400
 
 #DELETE A RESTAURANT at ["/api/restaurants/id"]
-@restaurant_routes.route("/<int:id>", methods=["DELETE"])
+@restaurant_routes.route("/<int:restaurantId>", methods=["DELETE"])
 @login_required
 @is_restaurant_owner
-def deleteRestaurant(id):
-    restaurant = Restaurant.query.get(id)
+def deleteRestaurant(restaurantId):
+    restaurant = Restaurant.query.get(restaurantId)
     if not restaurant:
         return json.dumps({
             "message": "Restaurant couldn't be found"
@@ -112,6 +117,12 @@ def deleteRestaurant(id):
     return json.dumps({
         "message": "Successfully deleted"
     })
+
+# GET ALL MENU ITEMS of RESTAURANT at ["/api/restaurants/id/menu-items"]
+@restaurant_routes.route("/<int:restaurantId>/menu-items")
+def getMenuItems(restaurantId):
+    menuItems = MenuItem.query.filter_by(restaurant_id=restaurantId).all()
+    return json.dumps({"items":[item.to_dict() for item in menuItems]})
 
 # CREATE A MENU ITEM at ["/api/restaurants/id/menu-items"]
 @restaurant_routes.route("/<int:restaurantId>/menu-items", methods=["POST"])
@@ -131,7 +142,7 @@ def createMenuItem(restaurantId):
         db.session.add(newItem)
         db.session.commit()
         return json.dumps(newItem.to_dict()), 201
-    return {'message': 'Bad Request', 'errors': form.errors}, 401
+    return {'message': 'Bad Request', 'errors': form.errors}, 400
 
 # CREATE A REVIEW FOR A RESTAURANT BASED ON ID
 @restaurant_routes.route('/<int:restaurantId>/reviews', methods=["POST"])
@@ -143,7 +154,8 @@ def createReview(restaurantId):
         newReview = Review(
             description=form.data['description'],
             stars=form.data['stars'],
-            userId=get_current_user()
+            userId=get_current_user(),
+            restaurant_id=restaurantId
         )
         db.session.add(newReview)
         db.session.commit()
@@ -156,7 +168,7 @@ def createReview(restaurantId):
             "createdAt": str(newReview.createdAt)
         }
         return json.dumps(responseObj), 201
-    return {'message': 'Bad Request', 'errors': form.errors}, 401
+    return {'message': 'Bad Request', 'errors': form.errors}, 400
 
 # GET REVIEWS
 @restaurant_routes.route('/<int:restaurantId>/reviews', methods=["GET"])

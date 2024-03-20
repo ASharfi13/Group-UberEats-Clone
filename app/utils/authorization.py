@@ -12,12 +12,12 @@ def get_current_user():
 # Restaurant must belong to current user
 def is_restaurant_owner(f):
     @wraps(f)
-    def restaurant_authorization(id):
+    def restaurant_authorization(restaurantId):
         userId = get_current_user()
-        restaurant = Restaurant.query.get(id)
+        restaurant = Restaurant.query.get(restaurantId)
         if userId != restaurant.owner_id:
             return json.dumps({"message": "Forbidden"}), 403
-        return f(id)
+        return f(restaurantId)
     return restaurant_authorization
 
 # Menu Item must belong to current user

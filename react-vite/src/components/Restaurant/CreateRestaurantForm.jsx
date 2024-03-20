@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { writeRestaurant } from "../../redux/restaurantReducer";
 import { useNavigate } from "react-router-dom";
+import { getRestaurantTypes } from "../../redux/restaurantReducer";
 // import Layout from "../../router/Layout"
 
 function RestaurantForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.session.user);
-  const restaurants = useSelector((state) => state.restaurantState);
-
-    // console.log(user)
+  const restaurantTypes = useSelector((state) => state.restaurantState.types)
 
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -18,36 +16,9 @@ function RestaurantForm() {
   const [image, setImage] = useState("");
   const [errors, setErrors] = useState({});
 
-  const restaurantTypes = [
-    "American",
-    "Chinese",
-    "Indian",
-    "Mexican",
-    "Korean",
-    "Thai",
-    "Filipino",
-    "Other",
-  ];
-
-  //   const errObj = {};
-
   useEffect(() => {
-    const errObj = {};
-
-    if (name.length < 3) {
-      errObj["nameLength"] = "Name must be at least 3 Characters";
-    }
-
-    if (location.length == 0) {
-      errObj["locationMissing"] = "Location is required";
-    }
-
-    if (image.length == 0) {
-      errObj["imageMissing"] = "Image is required";
-    }
-
-    setErrors(errObj);
-  }, [name, location, image]);
+    dispatch(getRestaurantTypes());
+  }, [dispatch])
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -59,21 +30,14 @@ function RestaurantForm() {
       imageUrl: image,
     };
 
-    if (Object.values(errors).length === 0) {
-      dispatch(writeRestaurant(payload));
-    } else {
-      alert("Did not work");
-    }
-
-    // try{
-    //     const newRestaurant = await dispatch(writeRestaurant(payload))
-    // } catch(e) {
-    //     const results = await e.json()
-    //     setErrors(results.errors)
-    // }
+    const newRestaurant = await dispatch(writeRestaurant(payload));
+    if (newRestaurant.errors) setErrors(newRestaurant.errors)
+    else navigate(`/restaurants/${newRestaurant.id}`)
   };
 
   return (
+    <>
+    {restaurantTypes &&
     <div>
       <form onSubmit={onSubmit}>
         <h1>Create A New Restaurant</h1>
@@ -85,7 +49,7 @@ function RestaurantForm() {
             onChange={(e) => setName(e.target.value)}
             // required
           ></input>
-          <p className="errors">{errors.name ? errors.name : null}</p>
+          <p className="errors">{errors ? errors.name : null}</p>
         </div>
 
         <div>
@@ -96,7 +60,7 @@ function RestaurantForm() {
             onChange={(e) => setLocation(e.target.value)}
             // required
           ></input>
-          <p className="errors">{errors.location ? errors.location : null}</p>
+          <p className="errors">{errors ? errors.location : null}</p>
         </div>
         <div>
           <select value={type} onChange={(e) => setType(e.target.value)}>
@@ -107,7 +71,7 @@ function RestaurantForm() {
               <option key={idx}>{restaurant}</option>
             ))}
           </select>
-          <p className="errors">{errors.type ? errors.type : null}</p>
+          <p className="errors">{errors ? errors.type : null}</p>
         </div>
         <div>
           <input
@@ -116,11 +80,13 @@ function RestaurantForm() {
             value={image}
             onChange={(e) => setImage(e.target.value)}
           ></input>
-          <p className="errors">{errors.imageUrl ? errors.imageUrl : null}</p>
+          <p className="errors">{errors ? errors.imageUrl : null}</p>
         </div>
         <button type="submit">Submit</button>
       </form>
     </div>
+    }
+    </>
   );
 }
 

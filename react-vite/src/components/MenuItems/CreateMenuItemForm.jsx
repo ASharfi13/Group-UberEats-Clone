@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { writeMenuItem } from "../../redux/menuItemReducer";
-import { useNavigate } from "react-router-dom";
+import { writeMenuItem, getMenuItemTypes } from "../../redux/menuItemReducer";
+import { useNavigate, useParams } from "react-router-dom";
 
-function MenuItemForm() {
+export default function MenuItemForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
   const menuItems = useSelector((state) => state.menuItemState);
+  const { restaurantId } = useParams()
 
   const [name, setName] = useState("");
   const [type, setType] = useState("");
@@ -15,41 +16,11 @@ function MenuItemForm() {
   const [image, setImage] = useState("");
   const [errors, setErrors] = useState({});
 
-  const menuItemTypes = [
-    "Burger",
-    "Pizza",
-    "Soup",
-    "Chicken",
-    "Taco",
-    "Noodle",
-    "Beef",
-    "Rice",
-    "Burrito",
-    "Pork",
-    "Shrimp",
-    "Potato",
-    "Other",
-  ];
-
-  //   const errObj = {};
+  const menuItemTypes = useSelector((state) => state.menuItemState.types)
 
   useEffect(() => {
-    const errObj = {};
-
-    if (name.length < 2) {
-      errObj["nameLength"] = "Name must be at least 2 Characters";
-    }
-
-    if (price.length < 0) {
-      errObj["invalidPrice"] = "Price must be greater than 0";
-    }
-
-    if (image.length == 0) {
-      errObj["imageMissing"] = "Image is required";
-    }
-
-    setErrors(errObj);
-  }, [name, price, image]);
+    dispatch(getMenuItemTypes())
+  }, [dispatch]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -61,13 +32,14 @@ function MenuItemForm() {
       imageUrl: image,
     };
 
-    if (Object.values(errors).length === 0) {
-      dispatch(writeMenuItem(payload));
-    } else {
-      alert("Did not work");
-    }
+    const newItem = await dispatch(writeMenuItem(restaurantId, payload));
+    if (newItem.errors) setErrors(newItem.errors)
+    else navigate(`/restaurants/${restaurantId}`)
   };
+
   return (
+    <>
+    {menuItemTypes &&
     <div>
       <form onSubmit={onSubmit}>
         <h1>Create A New Menu Item</h1>
@@ -115,5 +87,7 @@ function MenuItemForm() {
         <button type="submit">Submit</button>
       </form>
     </div>
+    }
+    </>
   );
 }

@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import Layout from "../../router/Layout";
-import { fetchMenuItem, editMenuItem } from "../../redux/menuItemReducer";
+import { fetchMenuItem, editMenuItem, getMenuItemTypes } from "../../redux/menuItemReducer";
 
-function UpdateMenuItem() {
+export default function UpdateMenuItem() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { menuItemId } = useParams();
   const menuItem = useSelector((state) => state.menuItemState[menuItemId]);
-
-  const prevName = menuItem?.name;
-  const prevPrice = menuItem?.price;
-  const prevType = menuItem?.type;
-  const prevImage = menuItem?.imageUrl;
 
   const [name, setName] = useState(menuItem?.name);
   const [price, setPrice] = useState(menuItem?.price);
@@ -21,24 +15,10 @@ function UpdateMenuItem() {
   const [image, setImage] = useState(menuItem?.imageUrl);
   const [errors, setErrors] = useState({});
 
-  const menuItemTypes = [
-    "Burger",
-    "Pizza",
-    "Soup",
-    "Chicken",
-    "Taco",
-    "Noodle",
-    "Beef",
-    "Rice",
-    "Burrito",
-    "Pork",
-    "Shrimp",
-    "Potato",
-    "Other",
-  ];
+  const menuItemTypes = useSelector((state) => state.menuItemState.types)
 
   useEffect(() => {
-    dispatch(fetchMenuItem(menuItemId));
+    dispatch(fetchMenuItem(menuItemId)).then(dispatch(getMenuItemTypes()));
     setName(menuItem?.name);
     setPrice(menuItem?.price);
     setType(menuItem?.type);
@@ -60,15 +40,14 @@ function UpdateMenuItem() {
       type,
       imageUrl: image,
     };
-    if (Object.values(errors).length === 0) {
-      dispatch(editMenuItem(menuItemId, payload));
-    } else {
-      alert("Did not work");
-    }
+
+    const newItem = await dispatch(editMenuItem(menuItemId, payload));
+    if (newItem.errors) setErrors(newItem.errors)
+    else navigate(`/restaurants/${newItem.restaurant_id}`)
   };
   return (
     <div>
-      {menuItem && (
+      {menuItem && menuItemTypes && (
         <div>
           <form onSubmit={onSubmit}>
             <h1>Update Your Menu Item</h1>

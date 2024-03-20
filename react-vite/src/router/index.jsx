@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import LoginFormPage from "../components/LoginFormPage";
-import SignupFormPage from "../components/SignupFormPage";
 import Layout from "./Layout";
-import LandingPage from "../../src/components/LandingPage/LandingPage";
+import LandingPage from "../../src/components/LandingPage";
 import SingleRestaurant from "../components/Restaurant/SingleRestaurant";
 import CreateRestaurantForm from "../../src/components/Restaurant/CreateRestaurantForm"
 import UpdateRestaurant from "../components/Restaurant/UpdateRestaurantForm";
-import OrdersPage from "../components/OrdersPage/OrdersPage";
+import OrdersPage from "../components/OrdersPage";
+import MenuItemForm from "../components/MenuItems/CreateMenuItemForm";
+import UpdateMenuItem from "../components/MenuItems/UpdateMenuItemForm";
 
 export const router = createBrowserRouter([
   {
@@ -15,14 +15,6 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
-      },
-      {
-        path: "login",
-        element: <LoginFormPage />,
-      },
-      {
-        path: "signup",
-        element: <SignupFormPage />,
       },
       {
         path: "restaurants/:restaurantId",
@@ -35,6 +27,14 @@ export const router = createBrowserRouter([
       {
         path: "restaurants/:restaurantId/update",
         element: <UpdateRestaurant/>
+      },
+      {
+        path: "restaurants/:restaurantId/add-item",
+        element: <MenuItemForm/>
+      },
+      {
+        path: "menu-items/:menuItemId/update",
+        element: <UpdateMenuItem/>
       },
       {
         path: "orders",

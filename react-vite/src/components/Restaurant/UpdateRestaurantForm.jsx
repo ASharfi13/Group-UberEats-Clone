@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
-import { fetchRestaurant } from "../../redux/restaurantReducer"
-import { editRestaurant } from "../../redux/restaurantReducer"
+import { fetchRestaurant, editRestaurant, getRestaurantTypes } from "../../redux/restaurantReducer"
 
 function UpdateRestaurant() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { restaurantId } = useParams()
     const restaurant = useSelector((state) => state.restaurantState[restaurantId])
-
-    // console.log(restaurant)
+    const restaurantTypes = useSelector((state) => state.restaurantState.types)
 
     const [name, setName] = useState(restaurant?.name)
     const [location, setLocation] = useState(restaurant?.location)
@@ -18,10 +16,9 @@ function UpdateRestaurant() {
     const [image, setImage] = useState(restaurant?.imageUrl)
     const [errors, setErrors] = useState({})
 
-    const restaurantTypes = ["American", "Chinese", "Indian", "Mexican", "Korean", "Thai", "Other"]
 
     useEffect(() => {
-        dispatch(fetchRestaurant(restaurantId))
+        dispatch(fetchRestaurant(restaurantId)).then(dispatch(getRestaurantTypes()))
         setName(restaurant?.name)
         setLocation(restaurant?.location)
         setType(restaurant?.type)
@@ -38,16 +35,14 @@ function UpdateRestaurant() {
             "imageUrl": image
         }
 
-        if (Object.values(errors).length === 0) {
-            dispatch(editRestaurant(restaurantId, payload))
-        } else {
-            alert("Did not work")
-        }
+        const response = await dispatch(editRestaurant(payload));
+        if (response.errors) setErrors(response.errors)
+        else navigate(`/restaurants/${response.id}`)
     }
 
     return (
         <div>
-            {restaurant && <div>
+            {restaurant && restaurantTypes && <div>
                 <form onSubmit={onSubmit}>
                     <h1>Update Your Restaurant</h1>
                     <div>
