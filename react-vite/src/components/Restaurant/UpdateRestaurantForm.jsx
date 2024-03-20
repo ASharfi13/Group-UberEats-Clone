@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { writeRestaurant } from "../../redux/restaurantReducer"
 import { useNavigate, useParams } from "react-router-dom"
-import Layout from "../../router/Layout"
 import { fetchRestaurant } from "../../redux/restaurantReducer"
 import { editRestaurant } from "../../redux/restaurantReducer"
 
@@ -12,12 +10,7 @@ function UpdateRestaurant() {
     const { restaurantId } = useParams()
     const restaurant = useSelector((state) => state.restaurantState[restaurantId])
 
-    console.log(restaurant)
-
-    const prevName = restaurant?.name
-    const prevLocation = restaurant?.location
-    const prevType = restaurant?.type
-    const prevImage = restaurant?.imageUrl
+    // console.log(restaurant)
 
     const [name, setName] = useState(restaurant?.name)
     const [location, setLocation] = useState(restaurant?.location)
@@ -33,7 +26,7 @@ function UpdateRestaurant() {
         setLocation(restaurant?.location)
         setType(restaurant?.type)
         setImage(restaurant?.imageUrl)
-    }, [restaurantId, restaurant?.name, restaurant?.location, restaurant?.type, restaurant?.imageUrl])
+    }, [dispatch, restaurantId, restaurant?.name, restaurant?.location, restaurant?.type, restaurant?.imageUrl])
 
     const onSubmit = async (e) => {
         e.preventDefault()

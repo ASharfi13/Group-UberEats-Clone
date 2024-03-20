@@ -24,9 +24,9 @@ function LandingPage() {
     }
   });
 
-  console.log(avgRating);
+  // console.log(avgRating);
 
-  console.log(restaurantArr);
+  // console.log(restaurantArr);
   useEffect(() => {
     dispatch(fetchAllRestaurants());
   }, [dispatch]);

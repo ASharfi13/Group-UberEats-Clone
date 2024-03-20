@@ -42,15 +42,15 @@ export const createReview = (payload, restuarantId) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  console.log(response, "here is the response");
+  // console.log(response, "here is the response");
   const review = await response.json();
   if (response.status !== 201) {
-    console.log(review);
+    // console.log(review);
     return review;
   }
   if (response.ok) {
     dispatch(addReview(review));
-    console.log(review);
+    // console.log(review);
     return review;
   }
 };
@@ -62,10 +62,10 @@ export const removeReview = (restuarantId, reviewId) => async (dispatch) => {
       method: "DELETE",
     }
   );
-  console.log(response, "here is the response");
+  // console.log(response, "here is the response");
   if (response.ok) {
     const review = await response.json();
-    console.log(review, "here is the review");
+    // console.log(review, "here is the review");
     dispatch(deleteReview(reviewId));
     return review;
   }

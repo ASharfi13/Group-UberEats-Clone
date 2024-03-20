@@ -23,7 +23,7 @@ function SingleRestaurant() {
 
   const user = useSelector((state) => state.session.user);
 
-  console.log(cartItems, "over here");
+  // console.log(cartItems, "over here");
 
   //   console.log(restaurant[restaurantId]?.Reviews[0]?.description, "over here");
   // put this in the route!!!

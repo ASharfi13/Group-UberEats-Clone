@@ -2,13 +2,13 @@ import { useDispatch } from "react-redux";
 import { deleteMenuItem } from "../../redux/menuItemReducer";
 import { useNavigate } from "react-router-dom";
 
-function DeleteMenuItemButton({ id }) {
+function DeleteMenuItemButton({ id, restaurantId }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const removeMenuItem = async (e) => {
     e.preventDefault();
-    dispatch(deleteMenuItem(id)).then(navigate("/"));
+    dispatch(deleteMenuItem(id)).then(navigate(`/restaurants/${restaurantId}`));
   };
   return (
     <button

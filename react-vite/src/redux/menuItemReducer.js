@@ -64,18 +64,18 @@ export const fetchAllMenuItems = () => async (dispatch) => {
 };
 
 export const fetchOwnerMenuItems = () => async (dispatch) => {
-  const response = await csrfFetch(`/api/menu-items/current`);
+  const response = await fetch(`/api/menu-items/current`);
   const menu_items = await response.json();
   dispatch(loadOwnerMenuItems(menu_items));
 };
 
 export const writeMenuItem = (payload) => async (dispatch) => {
-  const response = await csrfFetch("/api/menu-items", {
+  const response = await fetch("/api/menu-items", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  console.log(response);
+  // console.log(response);
   const menu_item = await response.json();
   if (response.status !== 201) {
     return menu_item;
@@ -87,7 +87,7 @@ export const writeMenuItem = (payload) => async (dispatch) => {
 };
 
 export const deleteMenuItem = (menu_itemId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/menu-items/${menu_itemId}`, {
+  const response = await fetch(`/api/menu-items/${menu_itemId}`, {
     method: "DELETE",
   });
   if (response.ok) {
@@ -100,7 +100,7 @@ export const deleteMenuItem = (menu_itemId) => async (dispatch) => {
 };
 
 export const editMenuItem = (menu_itemId, payload) => async (dispatch) => {
-  const response = await csrfFetch(`/api/menu-item/${menu_itemId}`, {
+  const response = await fetch(`/api/menu-item/${menu_itemId}`, {
     method: "PUT",
     header: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
