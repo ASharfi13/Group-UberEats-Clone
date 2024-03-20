@@ -93,7 +93,7 @@ function SingleRestaurant() {
                     Add to Cart
                   </button>
                   <div className="ManageMenuItem">
-                    {/* {restaurant[restaurantId]?.owner_id === user.id && ( */}
+                    {restaurant[restaurantId]?.owner_id === user?.id && (
                     <>
                       <button
                         onClick={() =>
@@ -107,6 +107,7 @@ function SingleRestaurant() {
                         restaurantId={restaurantId}
                       />
                     </>
+                    )}
                   </div>
                 </div>
               ))}
