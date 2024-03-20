@@ -48,6 +48,8 @@ def checkoutCart():
         "createdAt": str(newCartItem.createdAt)
     }
     user.order_id += 1
+    db.session.add(user)
+    db.session.commit()
     return json.dumps(response), 201
 
 

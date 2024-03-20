@@ -49,6 +49,8 @@ function SingleRestaurant() {
   }
 
   return (
+    <>
+    {restaurant &&
     <div>
       <h1>What customers are saying </h1>
       <div className="restaurantDetails">
@@ -86,20 +88,22 @@ function SingleRestaurant() {
                 Add to Cart
               </button>
               <div className="ManageMenuItem">
-                {restaurant[restaurantId].owner_id === user.id && (
-                  <DeleteMenuItemButton id={item.id} />
+                {restaurant[restaurantId]?.owner_id === user.id && (
+                  <DeleteMenuItemButton id={item.id} restaurantId={restaurantId} />
                 )}
               </div>
             </div>
           ))}
         </div>
         <div className="ManageRestaurant">
-          {restaurant[restaurantId].owner_id === user.id && (
+          {restaurant[restaurantId]?.owner_id === user.id && (
             <DeleteRestaurantButton id={restaurantId} />
           )}
         </div>
       </div>
     </div>
+}
+    </>
   );
 }
 
