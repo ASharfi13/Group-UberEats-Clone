@@ -24,6 +24,8 @@ function SingleRestaurant() {
 
   const user = useSelector((state) => state.session.user);
 
+  let getName = Object.values(restaurant);
+  // console.log(getName[0].name);
   // console.log(cartItems, "over here");
 
   //   console.log(restaurant[restaurantId]?.Reviews[0]?.description, "over here");
@@ -56,6 +58,7 @@ function SingleRestaurant() {
     <>
       {restaurant && (
         <div>
+          <h1 className="restaurant-name">{getName[0]?.name}</h1>
           <h1>What customers are saying </h1>
           <div className="restaurantDetails">
             <div className="reviews-Container">
@@ -94,19 +97,19 @@ function SingleRestaurant() {
                   </button>
                   <div className="ManageMenuItem">
                     {restaurant[restaurantId]?.owner_id === user?.id && (
-                    <>
-                      <button
-                        onClick={() =>
-                          navigate(`/menu-items/${item.id}/update`)
-                        }
-                      >
-                        Edit
-                      </button>
-                      <DeleteMenuItemButton
-                        id={item.id}
-                        restaurantId={restaurantId}
-                      />
-                    </>
+                      <>
+                        <button
+                          onClick={() =>
+                            navigate(`/menu-items/${item.id}/update`)
+                          }
+                        >
+                          Edit
+                        </button>
+                        <DeleteMenuItemButton
+                          id={item.id}
+                          restaurantId={restaurantId}
+                        />
+                      </>
                     )}
                   </div>
                 </div>

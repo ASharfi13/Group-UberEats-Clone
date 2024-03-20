@@ -11,8 +11,19 @@ ul {
 }
 
 .cart-dropdown {
-  right:100px;
+  right: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.landing-logo {
+  width: 225px;
+  height: 85px;
+}
+
+.right-side-nav-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
