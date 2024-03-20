@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  clearRestaurant,
   fetchRestaurant,
   getRestaurantTypes,
 } from "../../redux/restaurantReducer";
@@ -24,10 +25,6 @@ function SingleRestaurant() {
 
   const user = useSelector((state) => state.session.user);
 
-  let getName = Object.values(restaurant);
-  // console.log(getName[0].name);
-  // console.log(cartItems, "over here");
-
   //   console.log(restaurant[restaurantId]?.Reviews[0]?.description, "over here");
   // put this in the route!!!
   //   const avgRating = {};
@@ -48,6 +45,9 @@ function SingleRestaurant() {
     dispatch(fetchRestaurant(restaurantId))
       .then(dispatch(getRestaurantTypes()))
       .then(dispatch(fetchOwnerMenuItems(restaurantId)));
+    return () => {
+      dispatch(clearRestaurant({}));
+    };
   }, [dispatch, restaurantId]);
 
   function addToCart(e, menuItem) {
@@ -58,7 +58,7 @@ function SingleRestaurant() {
     <>
       {restaurant && (
         <div>
-          <h1 className="restaurant-name">{getName[0]?.name}</h1>
+          <h1 className="restaurant-name">{restaurant[restaurantId]?.name}</h1>
           <h1>What customers are saying </h1>
           <div className="restaurantDetails">
             <div className="reviews-Container">
@@ -91,7 +91,12 @@ function SingleRestaurant() {
                   <img className="itemImage" src={item.imageUrl} />
                   <button
                     className="add-to-cart"
-                    onClick={(e) => addToCart(e, {...item, "restaurant": restaurant[restaurantId].name})}
+                    onClick={(e) =>
+                      addToCart(e, {
+                        ...item,
+                        restaurant: restaurant[restaurantId].name,
+                      })
+                    }
                   >
                     Add to Cart
                   </button>

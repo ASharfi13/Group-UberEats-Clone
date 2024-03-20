@@ -6,12 +6,13 @@ const ADD_RESTAURANT = "restaurant/addRestaurant";
 const REMOVE_RESTAURANT = "restaurant/removeRestaurant";
 const UPDATE_RESTAURANT = "restaurant/updateRestaurant";
 const LOAD_RESTAURANT_TYPES = "restaurant/loadTypes";
+const CLEAR_CURRENT_RESTAURANT = "restaurant/clearRestaurant";
 
 //action creator
 export const loadRestaurantTypes = (restaurantTypes) => {
   return {
     type: LOAD_RESTAURANT_TYPES,
-    restaurantTypes
+    restaurantTypes,
   };
 };
 
@@ -58,11 +59,18 @@ export const updateRestaurant = (restaurant) => {
   };
 };
 
+export const clearRestaurant = (restaurant) => {
+  return {
+    type: CLEAR_CURRENT_RESTAURANT,
+    restaurant,
+  };
+};
+
 //thunk action creator
 export const getRestaurantTypes = () => async (dispatch) => {
   const response = await fetch(`/api/restaurants/types`);
   const restaurantTypes = await response.json();
-  dispatch(loadRestaurantTypes(restaurantTypes))
+  dispatch(loadRestaurantTypes(restaurantTypes));
 };
 
 export const fetchRestaurant = (restaurantId) => async (dispatch) => {
@@ -119,7 +127,7 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
 };
 
 export const editRestaurant = (restaurantId, payload) => async (dispatch) => {
-  console.log(payload)
+  console.log(payload);
   const response = await fetch(`/api/restaurants/${restaurantId}`, {
     method: "PUT",
     header: { "Content-Type": "application/json" },
@@ -138,7 +146,7 @@ export const editRestaurant = (restaurantId, payload) => async (dispatch) => {
 const restaurantReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_RESTAURANT_TYPES:
-      return { ...state, ["types"]: action.restaurantTypes};
+      return { ...state, ["types"]: action.restaurantTypes };
     case LOAD_RESTAURANT:
       return { ...state, [action.restaurant.id]: action.restaurant };
     case LOAD_ALL_RESTAURANTS: {
@@ -166,6 +174,8 @@ const restaurantReducer = (state = {}, action) => {
     }
     case UPDATE_RESTAURANT:
       return { ...state, [action.restaurant.id]: action.restaurant };
+    case CLEAR_CURRENT_RESTAURANT:
+      return { ...state, [action.restaurant]: action.restaurant };
     default:
       return state;
   }
