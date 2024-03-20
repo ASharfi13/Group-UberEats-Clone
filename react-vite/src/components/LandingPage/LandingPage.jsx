@@ -51,7 +51,7 @@ function LandingPage() {
             <p className="name">{restaurant.name}</p>
 
             <div className="rating">
-              <p>{avgRating[restaurant.id]}</p>
+              <p>{avgRating[restaurant.id].toFixed(1)}</p>
               <img
                 className="star"
                 src="https://i.postimg.cc/QxSC3byV/stars-removebg-preview.png"

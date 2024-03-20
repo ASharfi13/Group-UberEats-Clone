@@ -76,7 +76,7 @@ function SingleRestaurant() {
       {restaurant && (
         <div>
           <h1 className="restaurant-name">{restaurant[restaurantId]?.name} </h1>
-          <h3 className="restaurantRating"> {avgReviews} <FaStar /> ({reviewsArr?.length})</h3>
+          <h3 className="restaurantRating"> {avgReviews.toFixed(1)} <FaStar /> ({reviewsArr?.length})</h3>
           <h1>What customers are saying </h1>
           <div className="restaurantDetails">
             <div className="reviews-Container">
