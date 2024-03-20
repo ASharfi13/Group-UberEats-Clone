@@ -11,19 +11,26 @@ function CartButton() {
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
-  const {cartItems, setCartItems} = useShoppingCart();
-//   console.log("THIS IS THE CART", cartItems)
+  const { cartItems, setCartItems } = useShoppingCart();
+  //   console.log("THIS IS THE CART", cartItems)
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
     setShowMenu(!showMenu);
   };
 
-  const checkOut = async (e) => {
+  const checkOutLoggedIn = async (e) => {
     e.preventDefault()
     const newOrder = await dispatch(checkOutCart(user.id, cartItems))
     setCartItems([])
     navigate("/orders")
   }
+
+  const checkOutLoggedOut = async (e) => {
+    e.preventDefault()
+    alert("Redirected to Login Page")
+    navigate("/login")
+  }
+
 
 
 
@@ -51,17 +58,17 @@ function CartButton() {
       </button>
       {showMenu && (
         <ul className={"cart-dropdown profile-dropdown"} ref={ulRef}>
-            <li>IN THE CART</li>
+          <li>IN THE CART</li>
 
           {cartItems?.map((item, index) => {
             item = JSON.parse(item)
             return <li key={index}>
-                {item.name}
+              {item.name}
             </li>
           })}
           <li>
-            <button onClick={(e) => checkOut(e)}>
-                Check Out
+            <button disabled={cartItems.length === 0} onClick={(e) => user ? checkOutLoggedIn(e) : checkOutLoggedOut(e)}>
+              Check Out
             </button>
           </li>
         </ul>
