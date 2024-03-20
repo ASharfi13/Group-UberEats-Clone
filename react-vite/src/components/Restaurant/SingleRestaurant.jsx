@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRestaurant } from "../../redux/restaurantReducer";
+import { fetchRestaurant, getRestaurantTypes } from "../../redux/restaurantReducer";
 import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
 import "./SingleRestaurant.css";
 import DeleteRestaurantButton from "./DeleteRestaurantButton";
 import DeleteMenuItemButton from "../MenuItems/DeleteMenuItemButton";
 import { useShoppingCart } from "../../context/CartContext";
-// import { loadAllMenuItems } from "../../redux/menuItemReducer";
+import { fetchOwnerMenuItems } from "../../redux/menuItemReducer";
 
 function SingleRestaurant() {
   const { restaurantId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const restaurant = useSelector((state) => state.restaurantState);
-  // console.log("THIS IS THE RESTAURANT", restaurant)
-  const restaurantArr = Object.values(restaurant);
+  const menu_items = useSelector((state) => state.menuItemState)
   const { cartItems, setCartItems } = useShoppingCart();
 
   const reviewsArr = restaurant[restaurantId]?.Reviews;
-  const menuItemsArr = restaurant[restaurantId]?.MenuItems;
+  const menuItemsArr = Object.values(menu_items);
 
   const user = useSelector((state) => state.session.user);
 
@@ -41,7 +40,9 @@ function SingleRestaurant() {
 
   //   console.log(restaurantArr);
   useEffect(() => {
-    dispatch(fetchRestaurant(restaurantId));
+    dispatch(fetchRestaurant(restaurantId))
+      .then(dispatch(getRestaurantTypes()))
+      .then(dispatch(fetchOwnerMenuItems(restaurantId)));
   }, [dispatch, restaurantId]);
 
   function addToCart(e, menuItem) {
@@ -89,7 +90,10 @@ function SingleRestaurant() {
               </button>
               <div className="ManageMenuItem">
                 {restaurant[restaurantId]?.owner_id === user.id && (
+                  <>
+                  <button onClick={() => navigate(`/menu-items/${item.id}/update`)}>Edit</button>
                   <DeleteMenuItemButton id={item.id} restaurantId={restaurantId} />
+                  </>
                 )}
               </div>
             </div>
@@ -97,7 +101,10 @@ function SingleRestaurant() {
         </div>
         <div className="ManageRestaurant">
           {restaurant[restaurantId]?.owner_id === user.id && (
+            <>
             <DeleteRestaurantButton id={restaurantId} />
+            <button onClick={() => navigate(`/restaurants/${restaurantId}/add-item`)}>Add Menu Item</button>
+            </>
           )}
         </div>
       </div>

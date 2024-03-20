@@ -235,7 +235,7 @@ menu_items=[
     },
     {
         "name": "Pad Thai Noodle",
-        "type": "Noddle",
+        "type": "Noodle",
         "price": 10.99,
         "restaurant_id": 9,
         "imageUrl": "https://i.postimg.cc/NjT6xcgW/pad-thai-noodle.jpg",

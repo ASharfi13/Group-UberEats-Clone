@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import restaurantReducer from "./restaurantReducer";
 import menuItemReducer from "./menuItemReducer";
-import { shoppingCartReducer } from "./shoppingCartReducer";
+import shoppingCartReducer from "./shoppingCartReducer";
 
 const rootReducer = combineReducers({
   session: sessionReducer,

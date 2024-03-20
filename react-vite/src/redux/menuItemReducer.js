@@ -1,12 +1,20 @@
 //action type creator
 const LOAD_MENU_ITEM = "menu-item/loadMenuItem";
 const LOAD_ALLMENU_ITEMS = "menu-item/loadAllMenuItems";
-const LOAD_OWNWER_MENU_ITEMS = "menu-item/ownerMenuItems";
+const LOAD_OWNER_MENU_ITEMS = "menu-item/ownerMenuItems";
 const ADD_MENU_ITEM = "menu-item/addMenuItem";
 const REMOVE_MENU_ITEM = "menu-item/removeMenuItem";
 const UPDATE_MENU_ITEM = "menu-item/updateMenuItem";
+const LOAD_MENU_ITEM_TYPES = "menu-item/loadTypes"
 
 //action creator
+export const loadMenuItemTypes = (types) => {
+  return {
+    type: LOAD_MENU_ITEM_TYPES,
+    types
+  };
+};
+
 export const loadMenuItem = (menu_item) => {
   return {
     type: LOAD_MENU_ITEM,
@@ -24,7 +32,7 @@ export const loadAllMenuItems = (menu_items) => {
 
 export const loadOwnerMenuItems = (menu_items) => {
   return {
-    type: LOAD_OWNWER_MENU_ITEMS,
+    type: LOAD_OWNER_MENU_ITEMS,
     menu_items,
   };
 };
@@ -51,8 +59,13 @@ export const updateMenuItem = (menu_item) => {
 };
 
 //thunk action creator
+export const getMenuItemTypes = () => async (dispatch) => {
+  const response = await fetch(`/api/menu-items/types`);
+  const types = await response.json();
+  dispatch(loadMenuItemTypes(types))
+};
 export const fetchMenuItem = (menu_itemId) => async (dispatch) => {
-  const response = await fetch(`/api/menu-item/${menu_itemId}`);
+  const response = await fetch(`/api/menu-items/${menu_itemId}`);
   const menu_item = await response.json();
   dispatch(loadMenuItem(menu_item));
 };
@@ -63,14 +76,14 @@ export const fetchAllMenuItems = () => async (dispatch) => {
   dispatch(loadAllMenuItems(menu_items));
 };
 
-export const fetchOwnerMenuItems = () => async (dispatch) => {
-  const response = await fetch(`/api/menu-items/current`);
+export const fetchOwnerMenuItems = (restaurantId) => async (dispatch) => {
+  const response = await fetch(`/api/restaurants/${restaurantId}/menu-items`);
   const menu_items = await response.json();
   dispatch(loadOwnerMenuItems(menu_items));
 };
 
-export const writeMenuItem = (payload) => async (dispatch) => {
-  const response = await fetch("/api/menu-items", {
+export const writeMenuItem = (restaurantId, payload) => async (dispatch) => {
+  const response = await fetch(`/api/restaurants/${restaurantId}/menu-items`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -94,13 +107,13 @@ export const deleteMenuItem = (menu_itemId) => async (dispatch) => {
     const menu_item = await response.json();
     // console.log(spotId, "thunk");
     // console.log(spot, "here is another log");
-    dispatch(removeMenuItem(menu_item.menuItemId));
+    dispatch(removeMenuItem(menu_itemId));
     return menu_item;
   }
 };
 
 export const editMenuItem = (menu_itemId, payload) => async (dispatch) => {
-  const response = await fetch(`/api/menu-item/${menu_itemId}`, {
+  const response = await fetch(`/api/menu-items/${menu_itemId}`, {
     method: "PUT",
     header: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -117,6 +130,8 @@ export const editMenuItem = (menu_itemId, payload) => async (dispatch) => {
 //reducer
 const menuItemReducer = (state = {}, action) => {
   switch (action.type) {
+    case LOAD_MENU_ITEM_TYPES:
+      return { ...state, ["types"]: action.types};
     case LOAD_MENU_ITEM:
       return { ...state, [action.menu_item.id]: action.menu_item };
     case LOAD_ALLMENU_ITEMS: {
@@ -126,9 +141,9 @@ const menuItemReducer = (state = {}, action) => {
       });
       return menuItemState;
     }
-    case LOAD_OWNWER_MENU_ITEMS: {
+    case LOAD_OWNER_MENU_ITEMS: {
       const menuItemState = {};
-      action.menu_item.Menu_Item.forEach((menu_item) => {
+      action.menu_items.items.forEach((menu_item) => {
         menuItemState[menu_item.id] = menu_item;
       });
       return menuItemState;

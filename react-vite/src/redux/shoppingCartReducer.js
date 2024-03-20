@@ -57,7 +57,7 @@ export const getOrders = (user_id) => async (dispatch) => {
     }
 }
 
-export const shoppingCartReducer = (state = {}, action) => {
+const shoppingCartReducer = (state = {}, action) => {
     switch(action.type) {
         case LOAD_ORDERS:
             const ordersState = {};
@@ -71,3 +71,5 @@ export const shoppingCartReducer = (state = {}, action) => {
             return state;
     }
 }
+
+export default shoppingCartReducer

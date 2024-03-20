@@ -22,7 +22,7 @@ function LoginFormModal() {
     );
 
     if (serverResponse) {
-      setErrors(serverResponse);
+      setErrors(serverResponse.errors);
     } else {
       closeModal();
     }

@@ -32,7 +32,7 @@ function SignupFormModal() {
     );
 
     if (serverResponse) {
-      setErrors(serverResponse);
+      setErrors(serverResponse.errors);
     } else {
       closeModal();
     }
@@ -54,7 +54,7 @@ function SignupFormModal() {
         </label>
         {errors.email && <p>{errors.email}</p>}
         <label>
-          Username
+          Name
           <input
             type="text"
             value={username}
@@ -62,7 +62,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.name && <p>{errors.name}</p>}
         <label>
           Password
           <input

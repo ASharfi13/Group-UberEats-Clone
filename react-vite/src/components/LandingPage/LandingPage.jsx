@@ -38,11 +38,11 @@ function LandingPage() {
     <div>
       <h1>This is the Landing Page</h1>
       <div className="restaurantDivs">
-        {restaurantArr?.map((restaurant) => (
+        {restaurantArr?.map((restaurant, idx) => (
           <div
             className="restaurantCard"
             style={{ border: "2px solid black" }}
-            key={restaurant.id}
+            key={idx}
             onClick={() => navigate(`restaurants/${restaurant.id}`)}
           >
             <p>{restaurant.name}</p>

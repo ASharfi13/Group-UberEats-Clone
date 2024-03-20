@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf"
-
 //action type creator
 const LOAD_RESTAURANT = "restaurant/loadRestaurant";
 const LOAD_ALL_RESTAURANTS = "restaurant/loadAllRestaurants";
@@ -7,8 +5,16 @@ const LOAD_OWNER_RESTAURANTS = "restaurant/ownerRestaurants";
 const ADD_RESTAURANT = "restaurant/addRestaurant";
 const REMOVE_RESTAURANT = "restaurant/removeRestaurant";
 const UPDATE_RESTAURANT = "restaurant/updateRestaurant";
+const LOAD_RESTAURANT_TYPES = "restaurant/loadTypes";
 
 //action creator
+export const loadRestaurantTypes = (restaurantTypes) => {
+  return {
+    type: LOAD_RESTAURANT_TYPES,
+    restaurantTypes
+  };
+};
+
 export const loadRestaurant = (restaurant) => {
   return {
     type: LOAD_RESTAURANT,
@@ -53,6 +59,12 @@ export const updateRestaurant = (restaurant) => {
 };
 
 //thunk action creator
+export const getRestaurantTypes = () => async (dispatch) => {
+  const response = await fetch(`/api/restaurants/types`);
+  const restaurantTypes = await response.json();
+  dispatch(loadRestaurantTypes(restaurantTypes))
+};
+
 export const fetchRestaurant = (restaurantId) => async (dispatch) => {
   const response = await fetch(`/api/restaurants/${restaurantId}`);
   const restaurant = await response.json();
@@ -77,7 +89,7 @@ export const writeRestaurant = (payload) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  console.log(response);
+  // console.log(response);
   const restaurant = await response.json();
   if (response.status !== 201) {
     return restaurant;
@@ -107,6 +119,7 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
 };
 
 export const editRestaurant = (restaurantId, payload) => async (dispatch) => {
+  console.log(payload)
   const response = await fetch(`/api/restaurants/${restaurantId}`, {
     method: "PUT",
     header: { "Content-Type": "application/json" },
@@ -124,6 +137,8 @@ export const editRestaurant = (restaurantId, payload) => async (dispatch) => {
 //reducer
 const restaurantReducer = (state = {}, action) => {
   switch (action.type) {
+    case LOAD_RESTAURANT_TYPES:
+      return { ...state, ["types"]: action.restaurantTypes};
     case LOAD_RESTAURANT:
       return { ...state, [action.restaurant.id]: action.restaurant };
     case LOAD_ALL_RESTAURANTS: {

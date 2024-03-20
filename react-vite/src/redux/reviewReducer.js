@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf";
-
 //action type creator
 const LOAD_REVIEWS = "review/loadReviews";
 const ADD_REVIEW = "review/addReview";
@@ -37,7 +35,7 @@ export const fetchAllReviews = (restuarantId) => async (dispatch) => {
 };
 
 export const createReview = (payload, restuarantId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/restaurants/${restuarantId}/reviews`, {
+  const response = await fetch(`/api/restaurants/${restuarantId}/reviews`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -56,7 +54,7 @@ export const createReview = (payload, restuarantId) => async (dispatch) => {
 };
 
 export const removeReview = (restuarantId, reviewId) => async (dispatch) => {
-  const response = await csrfFetch(
+  const response = await fetch(
     `/api/restaurants/${restuarantId}/reviews/${reviewId}`,
     {
       method: "DELETE",

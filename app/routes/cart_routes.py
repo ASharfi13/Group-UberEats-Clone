@@ -22,7 +22,6 @@ def allOrders(user_id):
             }
         else:
             orders[item.order_id]['items'].append(item.menu_item_id)
-    print(list(orders.values()))
     return json.dumps({"orders": list(orders.values())})
 
 # CHECKOUT CURRENT CART at ["/api/shopping-carts/check-out"]
