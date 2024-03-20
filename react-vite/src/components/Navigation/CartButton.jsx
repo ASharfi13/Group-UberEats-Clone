@@ -53,9 +53,9 @@ function CartButton() {
         <ul className={"cart-dropdown profile-dropdown"} ref={ulRef}>
             <li>IN THE CART</li>
 
-          {cartItems?.map((item) => {
+          {cartItems?.map((item, index) => {
             item = JSON.parse(item)
-            return <li key={item.id}>
+            return <li key={index}>
                 {item.name}
             </li>
           })}

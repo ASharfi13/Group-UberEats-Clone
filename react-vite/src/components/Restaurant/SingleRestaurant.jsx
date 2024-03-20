@@ -88,7 +88,7 @@ function SingleRestaurant() {
                   <img className="itemImage" src={item.imageUrl} />
                   <button
                     className="add-to-cart"
-                    onClick={(e) => addToCart(e, item)}
+                    onClick={(e) => addToCart(e, {...item, "restaurant": restaurant[restaurantId].name})}
                   >
                     Add to Cart
                   </button>
