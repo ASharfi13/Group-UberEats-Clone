@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FiAlignJustify } from "react-icons/fi";
+import { FaRegUserCircle, FaReceipt, FaComment, FaWallet, FaUtensils } from "react-icons/fa";
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
@@ -57,33 +58,38 @@ function ProfileButton() {
           <ul className={"profile-dropdown"} ref={ulRef}>
             {user ? (
               <>
-                <ul>{user.name}</ul>
-                <ul>{user.email}</ul>
-                <ul>
-                  <button onClick={() => navigate("/orders")}>My Orders</button>
-                </ul>
-                <ul>
-                  <button onClick={logout}>Log Out</button>
-                </ul>
-                <ul>
+                <div className="user-info-container">
+                  <FaRegUserCircle />
+                  <div className="user-info">
+                    <li>{user.name}</li>
+                    <li>{user.email}</li>
+                  </div>
+                </div>
+                <li className="profile-item">
+                  <FaReceipt />
+                  <button className="style-hover" onClick={() => navigate("/orders")}>My Orders</button>
+                </li>
+                <li className="profile-item">
+                  <FaComment />
+                  <button className="style-hover" onClick={() => navigate("/orders/reviews")}>My Reviews</button>
+                </li>
+                <li className="profile-item">
+                  <FaWallet />
                   <OpenModalMenuItem
                   itemText="Add Funds"
                   onItemClick={closeMenu}
                   modalComponent={<AddFundsModal />} />
-                </ul>
-                <ul>
-                  <button onClick={() => navigate("/restaurants/new")}>
-                    Add Restaurant
-                  </button>
-                </ul>
-                <ul>
-                  <button onClick={() => navigate("/orders/reviews")}>
-                    My Reviews
-                  </button>
-                </ul>
+                </li>
+                <li className="profile-item">
+                  <FaUtensils />
+                  <button className="style-hover" onClick={() => navigate("/restaurants/new")}>Add Restaurant</button>
+                </li>
+                <li className="logout">
+                  <button className="style-hover" onClick={logout}>Sign Out</button>
+                </li>
               </>
             ) : (
-              <div className="log-sign">
+              <>
                 <OpenModalMenuItem
                   itemText="Log In"
                   onItemClick={closeMenu}
@@ -94,7 +100,7 @@ function ProfileButton() {
                   onItemClick={closeMenu}
                   modalComponent={<SignupFormModal />}
                 />
-              </div>
+              </>
             )}
           </ul>
         )}

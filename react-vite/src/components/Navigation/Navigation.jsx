@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import CartButton from "./CartButton";
+import { FaSearch } from "react-icons/fa";
 import "./Navigation.css";
 
 function Navigation() {
@@ -13,7 +14,7 @@ function Navigation() {
     <ul className="nav-bar">
       <div className="left-side-nav-bar">
         <ProfileButton />
-        <NavLink to="/">
+        <NavLink to="/" className="main-logo">
           <img
             className="landing-logo"
             src="https://i.postimg.cc/zBFrwRpH/logo-landing-page-removebg-preview.png"
@@ -31,13 +32,14 @@ function Navigation() {
       </div>
 
       <div className="right-side-nav-bar">
-        <input
-          className="search-bar "
-          type="text"
-          name="search-bar"
-          placeholder="Search for a restaurant"
-          onClick={(e) => handleFeature(e)}
-        />
+        <div className="search-bar" onClick={(e) => handleFeature(e)}>
+          <FaSearch />
+          <input
+            type="text"
+            name="search-bar"
+            placeholder="Search for a restaurant"
+          />
+        </div>
         <CartButton />
       </div>
     </ul>
