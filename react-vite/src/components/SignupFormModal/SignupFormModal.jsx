@@ -26,7 +26,7 @@ function SignupFormModal() {
     const serverResponse = await dispatch(
       thunkSignup({
         email,
-        "name": username,
+        name: username,
         password,
       })
     );
@@ -39,11 +39,11 @@ function SignupFormModal() {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div className="sign-up-modal">
+      <h1 className="sign-up-logo">Sign Up</h1>
+      {errors.server && <p className="sign-up-errors">{errors.server}</p>}
+      <form className="sign-up-form" onSubmit={handleSubmit}>
+        <label className="email-label">
           Email
           <input
             type="text"
@@ -52,8 +52,8 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
+        {errors.email && <p className="sign-up-errors">{errors.email}</p>}
+        <label className="name-label">
           Name
           <input
             type="text"
@@ -62,8 +62,8 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.name && <p>{errors.name}</p>}
-        <label>
+        {errors.name && <p className="sign-up-errors">{errors.name}</p>}
+        <label className="password-label">
           Password
           <input
             type="password"
@@ -72,8 +72,8 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
+        {errors.password && <p className="sign-up-errors">{errors.password}</p>}
+        <label className="confirm-password-label">
           Confirm Password
           <input
             type="password"
@@ -82,10 +82,12 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && (
+          <p className="sign-up-errors">{errors.confirmPassword}</p>
+        )}
         <button type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

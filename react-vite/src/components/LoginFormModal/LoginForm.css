@@ -1,0 +1,41 @@
+.log-in-modal {
+  justify-content: flex;
+  padding: 20px;
+  border: 3px solid black;
+}
+
+.log-in-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.log-in-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.email-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.passtime {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.demo-user {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  width: 250px;
+}
+
+.errors {
+  display: flex;
+  font-weight: 500;
+  justify-content: center;
+  color: red;
+}
