@@ -3,101 +3,121 @@ users= [
         "name": "John White",
         "email": "jwhite@gmail.com",
         "password": "jwpassword12",
+        "wallet": "100.00"
     },
     {
         "name": "Jane Wallen",
         "email": "wallenj@yahoo.com",
         "password": "foodlover243",
+        "wallet": "100.00"
     },
     {
         "name": "Mike Wazowski",
         "email": "googlybear@hotmail.com",
         "password": "scarymonster564",
+        "wallet": "100.00"
     },
     {
         "name": "James Sullivan",
         "email": "boomonster@gmail.com",
         "password": "purpledotsonme32",
+        "wallet": "100.00"
     },
     {
         "name": "Donald Duck",
         "email": "quackquack@yahoo.com",
         "password": "ilovedaisy45",
+        "wallet": "100.00"
     },
     {
         "name": "Daisy Duck",
         "email": "ballerina@hotmail.com",
         "password": "daisyismyname278",
+        "wallet": "100.00"
     },
     {
         "name": "Peter Pan",
         "email": "neverland@gmail.com",
         "password": "captainhookiscrazy13",
+        "wallet": "100.00"
     },
     {
         "name": "Bud Robinson",
         "email": "inventions@yahoo.com",
         "password": "tothefuture732",
+        "wallet": "100.00"
     },
     {
         "name": "Toby Turtle",
         "email": "journeysawait@hotmail.com",
         "password": "slowwinstherace27",
+        "wallet": "100.00"
     },
     {
         "name": "Jack Sparrow",
         "email": "richesgalore@gmail.com",
         "password": "iamapirate68",
+        "wallet": "100.00"
     },
     {
         "name": "Buzz Lightyear",
         "email": "toinfinity@yahoo.com",
         "password": "beyondspace694",
+        "wallet": "100.00"
     },
     {
         "name": "Luke Skywalker",
         "email": "theforce@hotmail.com",
         "password": "r2d23cpo",
+        "wallet": "100.00"
     },
     {
         "name": "Han Solo",
         "email": "memyselfandi@gmail.com",
         "password": "iloveleia678",
+        "wallet": "100.00"
     },
     {
         "name": "Mace Windu",
         "email": "purplesaber@yahoo.com",
         "password": "republic532",
+        "wallet": "100.00"
     },
     {
         "name": "Ahsoka Tano",
         "email": "thebestpadawan@hotmail.com",
         "password": "goodoverevil832",
+        "wallet": "100.00"
     },
     {
         "name": "Doc Hudson",
         "email": "oldcar@gmail.com",
         "password": "iloveracing947",
+        "wallet": "100.00"
     },
     {
         "name": "Carl Fredricksen",
         "email": "oldman@yahoo.com",
         "password": "traveltheworld453",
+        "wallet": "100.00"
     },
     {
         "name": "Charles Muntz",
         "email": "travelerofeverywhere@hotmail.com",
         "password": "paradisefalls238",
+        "wallet": "100.00"
     },
     {
         "name": "Mei Lee",
         "email": "redpanda@gmail.com",
         "password": "fourtown4life",
+        "wallet": "100.00"
     },
     {
         "name": "Barley Lightfoot",
         "email": "wizardmaster@yahoo.com",
         "password": "wheresdad452",
+        "wallet": "100.00"
     }
 
 ]
