@@ -13,21 +13,25 @@ import { useShoppingCart } from "../../context/CartContext";
 import { fetchOwnerMenuItems } from "../../redux/menuItemReducer";
 import { FaStar } from "react-icons/fa";
 
-
 function SingleRestaurant() {
   const { restaurantId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const restaurant = useSelector((state) => state.restaurantState);
   const menu_items = useSelector((state) => state.menuItemState);
-  const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
+  const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } =
+    useShoppingCart();
 
   const reviewsArr = restaurant[restaurantId]?.Reviews;
   const menuItemsArr = Object.values(menu_items);
 
   const user = useSelector((state) => state.session.user);
 
-  const avgReviews = reviewsArr?.length > 0 ? reviewsArr?.reduce((acc, item) => acc + item.stars, 0) / reviewsArr?.length : 0
+  const avgReviews =
+    reviewsArr?.length > 0
+      ? reviewsArr?.reduce((acc, item) => acc + item.stars, 0) /
+        reviewsArr?.length
+      : 0;
 
   //   console.log(restaurant[restaurantId]?.Reviews[0]?.description, "over here");
   // put this in the route!!!
@@ -57,26 +61,33 @@ function SingleRestaurant() {
   function addToCart(e, menuItem) {
     if (cartRestaurant == 0) {
       setCartItems([...cartItems, JSON.stringify(menuItem)]);
-      setCartRestaurant(menuItem.restaurant_id)
+      setCartRestaurant(menuItem.restaurant_id);
     } else if (cartRestaurant !== menuItem.restaurant_id) {
-      window.alert("Menu Item from a different Restaurant cannot be added to Current Cart. Please Checkout or Clear Cart")
+      window.alert(
+        "Menu Item from a different Restaurant cannot be added to Current Cart. Please Checkout or Clear Cart"
+      );
     } else {
       setCartItems([...cartItems, JSON.stringify(menuItem)]);
     }
   }
 
-  let cartRestaurantId
+  let cartRestaurantId;
 
-  cartItems?.length > 0 ? cartRestaurantId = cartItems[0].restaurant_id : cartRestaurantId = null
+  cartItems?.length > 0
+    ? (cartRestaurantId = cartItems[0].restaurant_id)
+    : (cartRestaurantId = null);
 
-  console.log(cartRestaurantId)
+  console.log(cartRestaurantId);
 
   return (
     <>
       {restaurant && (
         <div>
           <h1 className="restaurant-name">{restaurant[restaurantId]?.name} </h1>
-          <h3 className="restaurantRating"> {avgReviews.toFixed(1)} <FaStar /> ({reviewsArr?.length})</h3>
+          <h3 className="restaurantRating">
+            {" "}
+            {avgReviews.toFixed(1)} <FaStar /> ({reviewsArr?.length})
+          </h3>
           <h1>What customers are saying </h1>
           <div className="restaurantDetails">
             <div className="reviews-Container">
@@ -122,6 +133,7 @@ function SingleRestaurant() {
                     {restaurant[restaurantId]?.owner_id === user?.id && (
                       <>
                         <button
+                          className="edit-button"
                           onClick={() =>
                             navigate(`/menu-items/${item.id}/update`)
                           }
@@ -141,8 +153,12 @@ function SingleRestaurant() {
             <div className="ManageRestaurant">
               {restaurant[restaurantId]?.owner_id === user?.id && (
                 <>
-                  <DeleteRestaurantButton id={restaurantId} />
+                  <DeleteRestaurantButton
+                    className="delete-button"
+                    id={restaurantId}
+                  />
                   <button
+                    className="add-item"
                     onClick={() =>
                       navigate(`/restaurants/${restaurantId}/add-item`)
                     }

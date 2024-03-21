@@ -18,12 +18,18 @@ ul {
 }
 
 .landing-logo {
-  width: 225px;
+  width: 250px;
   height: 85px;
+}
+
+.left-side-nav-bar {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 200px;
 }
 
 .right-side-nav-bar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 50px;
 }

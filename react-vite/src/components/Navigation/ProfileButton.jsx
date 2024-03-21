@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaUserCircle } from "react-icons/fa";
+import { FiAlignJustify } from "react-icons/fi";
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../../context/CartContext";
-
+import "./ProfileButton.css";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -48,31 +48,31 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
+      <button className="profilebutton" onClick={toggleMenu}>
+        <FiAlignJustify className="three-lines" />
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>{user.name}</li>
-              <li>{user.email}</li>
-              <li>
+              <ul>{user.name}</ul>
+              <ul>{user.email}</ul>
+              <ul>
                 <button onClick={() => navigate("/orders")}>My Orders</button>
-              </li>
-              <li>
+              </ul>
+              <ul>
                 <button onClick={logout}>Log Out</button>
-              </li>
-              <li>
+              </ul>
+              <ul>
                 <button onClick={() => navigate("/restaurants/new")}>
                   Add Restaurant
                 </button>
-              </li>
-              <li>
+              </ul>
+              <ul>
                 <button onClick={() => navigate("/orders/reviews")}>
                   My Reviews
                 </button>
-              </li>
+              </ul>
             </>
           ) : (
             <>
