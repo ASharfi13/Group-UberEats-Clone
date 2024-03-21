@@ -5,6 +5,7 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import AddFundsModal from "../AddFundsModal";
 import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../../context/CartContext";
 import "./ProfileButton.css";
@@ -63,6 +64,12 @@ function ProfileButton() {
                 </ul>
                 <ul>
                   <button onClick={logout}>Log Out</button>
+                </ul>
+                <ul>
+                  <OpenModalMenuItem
+                  itemText="Add Funds"
+                  onItemClick={closeMenu}
+                  modalComponent={<AddFundsModal />} />
                 </ul>
                 <ul>
                   <button onClick={() => navigate("/restaurants/new")}>

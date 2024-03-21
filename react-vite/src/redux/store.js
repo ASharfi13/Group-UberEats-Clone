@@ -18,6 +18,7 @@ const rootReducer = combineReducers({
   menuItemState: menuItemReducer,
   orderState: shoppingCartReducer,
   reviewState: reviewReducer,
+  walletState: walletReducer
 });
 
 let enhancer;
