@@ -36,6 +36,7 @@ function Navigation() {
           type="text"
           name="search-bar"
           placeholder="Search for a restaurant"
+          onClick={(e) => handleFeature(e)}
         />
         <CartButton />
       </div>
