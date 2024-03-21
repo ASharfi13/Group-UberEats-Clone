@@ -1,0 +1,27 @@
+.restaurant-page-create {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 200px;
+  margin-left: 40px;
+}
+
+.restaurant-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant-title-form {
+  color: black;
+  font-size: 40px;
+}
+
+.restaurant-errors {
+  color: red;
+  font-weight: 900;
+}
+
+res-logo {
+  width: 500px;
+}
