@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: adc19c13d024
+Revision ID: c01ce817a86e
 Revises:
-Create Date: 2024-03-17 14:54:43.042176
+Create Date: 2024-03-21 13:09:00.420651
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'adc19c13d024'
+revision = 'c01ce817a86e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,8 +40,7 @@ def upgrade():
     sa.Column('createdAt', sa.Date(), nullable=True),
     sa.Column('updatedAt', sa.Date(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('location')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('menu_items',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -75,7 +74,9 @@ def upgrade():
     sa.Column('order_id', sa.Integer(), nullable=True),
     sa.Column('createdAt', sa.Date(), nullable=True),
     sa.Column('updatedAt', sa.Date(), nullable=True),
-    sa.ForeignKeyConstraint(['menu_item_id'], ['menu_items.id'], ),
+    sa.Column('restaurant_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['menu_item_id'], ['menu_items.id'],ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ondelete='SET NULL'),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

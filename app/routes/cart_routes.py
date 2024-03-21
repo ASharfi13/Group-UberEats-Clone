@@ -13,19 +13,24 @@ def allOrders(user_id):
     orderItems = ShoppingCart.query.filter_by(user_id=user_id).all()
     allMenuItems = MenuItem.query.all()
     menuItemDict = {item.id : item for item in allMenuItems}
-    print(menuItemDict[1].restaurant.name)
+
     orders = {}
     for item in orderItems:
         # menu_item = MenuItem.query.get(item.menu_item_id)
-        if item.order_id not in orders:
-            orders[item.order_id] = {
-                "order_id": item.order_id,
-                "restaurant": menuItemDict[item.menu_item_id].restaurant.name,
-                "items" : [menuItemDict[item.menu_item_id].to_dict()],
-                "createdAt": str(item.createdAt)
+        try:
+            if item.order_id not in orders:
+                orders[item.order_id] = {
+                    "order_id": item.order_id,
+                    "restaurant": menuItemDict.get(item.menu_item_id).restaurant.name,
+                    "items" : [menuItemDict.get(item.menu_item_id).to_dict()],
+                    "createdAt": str(item.createdAt)
             }
-        else:
-            orders[item.order_id]['items'].append(menuItemDict[item.menu_item_id].to_dict())
+            else:
+                orders[item.order_id]['items'].append(menuItemDict.get(item.menu_item_id).to_dict())
+        except:
+            continue
+
+
     return json.dumps({"orders": list(orders.values())})
 
 # CHECKOUT CURRENT CART at ["/api/shopping-carts/check-out"]

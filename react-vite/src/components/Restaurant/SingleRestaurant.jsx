@@ -30,7 +30,7 @@ function SingleRestaurant() {
   const avgReviews =
     reviewsArr?.length > 0
       ? reviewsArr?.reduce((acc, item) => acc + item.stars, 0) /
-        reviewsArr?.length
+      reviewsArr?.length
       : 0;
 
   //   console.log(restaurant[restaurantId]?.Reviews[0]?.description, "over here");
@@ -53,21 +53,20 @@ function SingleRestaurant() {
     dispatch(fetchRestaurant(restaurantId))
       .then(dispatch(getRestaurantTypes()))
       .then(dispatch(fetchOwnerMenuItems(restaurantId)));
-    return () => {
-      dispatch(clearRestaurant({}));
-    };
   }, [dispatch, restaurantId]);
 
   function addToCart(e, menuItem) {
     if (cartRestaurant == 0) {
       setCartItems([...cartItems, JSON.stringify(menuItem)]);
       setCartRestaurant(menuItem.restaurant_id);
+      window.alert(`${menuItem.name} added to Cart!`)
     } else if (cartRestaurant !== menuItem.restaurant_id) {
       window.alert(
         "Menu Item from a different Restaurant cannot be added to Current Cart. Please Checkout or Clear Cart"
       );
     } else {
       setCartItems([...cartItems, JSON.stringify(menuItem)]);
+      window.alert(`${menuItem.name} added to Cart!`)
     }
   }
 
@@ -77,12 +76,25 @@ function SingleRestaurant() {
     ? (cartRestaurantId = cartItems[0].restaurant_id)
     : (cartRestaurantId = null);
 
-  console.log(cartRestaurantId);
+  console.log(cartItems)
+  console.log(JSON.stringify(menuItemsArr[0]))
+
+  console.log(cartItems.includes(JSON.stringify(menuItemsArr[0])))
+
+  const removeFromCart = async (e, menuItem) => {
+    const tempCartItems = [...cartItems]
+    const targetItem = cartItems.findIndex((element) => element.includes(`{"id":${menuItem.id},`))
+    tempCartItems.splice(targetItem, 1)
+    setCartItems(tempCartItems)
+  }
 
   return (
     <>
       {restaurant && (
         <div>
+          <div>
+            <img src={restaurant[restaurantId]?.imageUrl}></img>
+          </div>
           <h1 className="restaurant-name">{restaurant[restaurantId]?.name} </h1>
           <h3 className="restaurantRating">
             {" "}
@@ -118,6 +130,7 @@ function SingleRestaurant() {
                   <p className="name-item">{item.name}</p>
                   <p>${item.price}</p>
                   <img className="itemImage" src={item.imageUrl} />
+
                   <button
                     className="add-to-cart"
                     onClick={(e) =>
@@ -129,6 +142,16 @@ function SingleRestaurant() {
                   >
                     Add to Cart
                   </button>
+
+
+                  {
+                    cartItems.findIndex((element) => element.includes(`{"id":${item.id},`)) !== -1 &&
+                    (<button onClick={(e) => removeFromCart(e, item)}>
+                      Remove Item From Cart
+                    </button>)
+                  }
+
+
                   <div className="ManageMenuItem">
                     {restaurant[restaurantId]?.owner_id === user?.id && (
                       <>
@@ -153,6 +176,11 @@ function SingleRestaurant() {
             <div className="ManageRestaurant">
               {restaurant[restaurantId]?.owner_id === user?.id && (
                 <>
+                  <button className="add-item" onClick={() =>
+                    navigate(`/restaurants/${restaurantId}/update`)
+                  }>
+                    Edit Restaurant
+                  </button>
                   <DeleteRestaurantButton
                     className="delete-button"
                     id={restaurantId}

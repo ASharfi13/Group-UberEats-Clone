@@ -20,14 +20,14 @@ function Navigation() {
             alt="logo"
           />
         </NavLink>
-        <button className="delivery-pickup">
+        <div className="delivery-pickup">
           <button className="button-delivery" onClick={handleFeature}>
             Delivery
           </button>
           <button className="button-pickup" onClick={handleFeature}>
             Pickup
           </button>
-        </button>
+        </div>
       </div>
 
       <div className="right-side-nav-bar">

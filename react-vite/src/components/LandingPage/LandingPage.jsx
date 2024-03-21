@@ -4,6 +4,7 @@ import { fetchAllRestaurants } from "../../redux/restaurantReducer";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { loadAllMenuItems } from "../../redux/menuItemReducer";
 import "./LandingPage.css";
+import { FaStar } from "react-icons/fa";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -44,21 +45,23 @@ function LandingPage() {
         {restaurantArr?.map((restaurant, idx) => (
           <div
             className="restaurantCard"
-            style={{ backgroundColor: `${user?.id == restaurant?.owner_id ? "#64B41C" : null}` }}
+            // style={{ backgroundColor: `${user?.id == restaurant?.owner_id ? "#64B41C" : null}` }}
             key={idx}
             onClick={() => navigate(`restaurants/${restaurant.id}`)}
           >
             <p className="name">{restaurant.name}</p>
 
             <div className="rating">
-              <p>{avgRating[restaurant.id]?.toFixed(1)}</p>
-              <img
-                className="star"
-                src="https://i.postimg.cc/QxSC3byV/stars-removebg-preview.png"
-                alt="star"
-              />
+              <p>{avgRating[restaurant.id]?.toFixed(1)} <FaStar/></p>
             </div>
-            <img className="resCardImage" src={restaurant.imageUrl} />
+            <img className="resCardImage" src={restaurant?.imageUrl} />
+            {user?.id == restaurant?.owner_id && (
+              <button className="add-item" onClick={() =>
+                navigate(`/restaurants/${restaurant?.id}/update`)
+              }>
+                Edit Restaurant
+              </button>
+            )}
           </div>
         ))}
       </div>

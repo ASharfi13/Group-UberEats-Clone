@@ -3,6 +3,9 @@
   justify-content: space-between;
   text-align: center;
   padding-left: 0px;
+  position: sticky;
+  top: 0px;
+  background-color: lightgreen;
 }
 
 .profile-dropdown {

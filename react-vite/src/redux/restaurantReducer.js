@@ -121,7 +121,7 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
     const restaurant = await response.json();
     // console.log(spotId, "thunk");
     // console.log(spot, "here is another log");
-    dispatch(removeRestaurant(restaurant.restaurantId));
+    dispatch(removeRestaurant(restaurantId));
     return restaurant;
   }
 };

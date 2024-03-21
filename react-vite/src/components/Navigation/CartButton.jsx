@@ -29,7 +29,7 @@ function CartButton() {
     if (userWallet >= total) {
       const newOrder = await dispatch(checkOutCart(user.id, cartItems))
       const newUserBalance = await dispatch(decreaseFunds(-total, user.id))
-      const newRestaurantBalance = await dispatch(increaseFunds(total*0.95, restaurants[cartRestaurant].owner_id))
+      const newRestaurantBalance = await dispatch(increaseFunds(total * 0.95, restaurants[cartRestaurant].owner_id))
       setCartItems([])
       setCartRestaurant(0)
       navigate("/orders")
@@ -65,6 +65,10 @@ function CartButton() {
   }, [showMenu, cartItems.length]);
 
   const closeMenu = () => setShowMenu(false);
+
+  const handleRemoveItem = async (e) => {
+    set
+  }
 
   return (
     <>

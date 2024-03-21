@@ -2,14 +2,18 @@ import { useDispatch } from "react-redux";
 import { deleteMenuItem } from "../../redux/menuItemReducer";
 import { useNavigate } from "react-router-dom";
 import "./DeleteMenuItemButton.css";
+import { useShoppingCart } from "../../context/CartContext";
+
 
 function DeleteMenuItemButton({ id, restaurantId }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } =
+    useShoppingCart();
 
   const removeMenuItem = async (e) => {
     e.preventDefault();
-    dispatch(deleteMenuItem(id)).then(navigate(`/restaurants/${restaurantId}`));
+    dispatch(deleteMenuItem(id)).then(setCartItems([])).then(setCartRestaurant(0)).then(navigate(`/restaurants/${restaurantId}`));
   };
   return (
     <button
