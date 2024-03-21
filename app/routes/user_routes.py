@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, request
 from flask_login import login_required
-from app.models import User
+from app.models import User, db
+from app.utils import get_current_user
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +24,21 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/add-funds', methods =['PUT'])
+@login_required
+def wallet():
+
+    incoming_funds = request.data['funds']
+    user = User.query.get(get_current_user())
+    user.wallet += incoming_funds
+    db.session.commit()
+    return user.to_dict_private()
+
+@user_routes.route('/get-funds')
+@login_required
+def get_wallet():
+
+    user = User.query.get(get_current_user())
+    return user.wallet

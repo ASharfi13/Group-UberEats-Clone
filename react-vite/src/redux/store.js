@@ -10,6 +10,7 @@ import restaurantReducer from "./restaurantReducer";
 import menuItemReducer from "./menuItemReducer";
 import shoppingCartReducer from "./shoppingCartReducer";
 import reviewReducer from "./reviewReducer";
+import walletReducer from "./walletReducer";
 
 const rootReducer = combineReducers({
   session: sessionReducer,

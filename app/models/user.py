@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     location = db.Column(db.String, nullable=True)
-    wallet = db.Column(db.Float, nullable=True)
+    wallet = db.Column(db.Float, nullable=True, default =0)
     order_id = db.Column(db.Integer, default=1)
 
     @property
@@ -36,6 +36,15 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+    def to_dict_private(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            "order_id": self.order_id,
+            "wallet": self.wallet
+        }
 
     def to_dict(self):
         return {
