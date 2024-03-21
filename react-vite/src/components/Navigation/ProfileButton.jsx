@@ -48,48 +48,50 @@ function ProfileButton() {
 
   return (
     <>
-      <button className="profilebutton" onClick={toggleMenu}>
-        <FiAlignJustify className="three-lines" />
-      </button>
-      {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
-          {user ? (
-            <>
-              <ul>{user.name}</ul>
-              <ul>{user.email}</ul>
-              <ul>
-                <button onClick={() => navigate("/orders")}>My Orders</button>
-              </ul>
-              <ul>
-                <button onClick={logout}>Log Out</button>
-              </ul>
-              <ul>
-                <button onClick={() => navigate("/restaurants/new")}>
-                  Add Restaurant
-                </button>
-              </ul>
-              <ul>
-                <button onClick={() => navigate("/orders/reviews")}>
-                  My Reviews
-                </button>
-              </ul>
-            </>
-          ) : (
-            <>
-              <OpenModalMenuItem
-                itemText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-            </>
-          )}
-        </ul>
-      )}
+      <div className="burger-container">
+        <button className="profilebutton" onClick={toggleMenu}>
+          <FiAlignJustify className="three-lines" />
+        </button>
+        {showMenu && (
+          <ul className={"profile-dropdown"} ref={ulRef}>
+            {user ? (
+              <>
+                <ul>{user.name}</ul>
+                <ul>{user.email}</ul>
+                <ul>
+                  <button onClick={() => navigate("/orders")}>My Orders</button>
+                </ul>
+                <ul>
+                  <button onClick={logout}>Log Out</button>
+                </ul>
+                <ul>
+                  <button onClick={() => navigate("/restaurants/new")}>
+                    Add Restaurant
+                  </button>
+                </ul>
+                <ul>
+                  <button onClick={() => navigate("/orders/reviews")}>
+                    My Reviews
+                  </button>
+                </ul>
+              </>
+            ) : (
+              <div className="log-sign">
+                <OpenModalMenuItem
+                  itemText="Log In"
+                  onItemClick={closeMenu}
+                  modalComponent={<LoginFormModal />}
+                />
+                <OpenModalMenuItem
+                  itemText="Sign Up"
+                  onItemClick={closeMenu}
+                  modalComponent={<SignupFormModal />}
+                />
+              </div>
+            )}
+          </ul>
+        )}
+      </div>
     </>
   );
 }

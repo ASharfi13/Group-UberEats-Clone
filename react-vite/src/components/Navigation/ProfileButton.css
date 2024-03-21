@@ -2,9 +2,22 @@
   height: 40px;
   color: black;
   width: 40px;
+  position: relative;
+  /* border: 2px black solid; */
 }
 
 .three-lines {
   width: 20px;
   height: 20px;
+}
+
+.burger-container {
+  display: flex;
+  justify-content: flex-start;
+  /* border: 2px solid black; */
+  width: 25%;
+}
+
+ul {
+  list-style-type: none;
 }

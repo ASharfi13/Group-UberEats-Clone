@@ -12,11 +12,12 @@ function Navigation() {
   return (
     <ul className="nav-bar">
       <div className="left-side-nav-bar">
+        <ProfileButton />
         <NavLink to="/">
           <img
             className="landing-logo"
             src="https://i.postimg.cc/zBFrwRpH/logo-landing-page-removebg-preview.png"
-            alt="logi"
+            alt="logo"
           />
         </NavLink>
         <button className="delivery-pickup">
@@ -36,7 +37,6 @@ function Navigation() {
           name="search-bar"
           placeholder="Search for a restaurant"
         />
-        <ProfileButton />
         <CartButton />
       </div>
     </ul>

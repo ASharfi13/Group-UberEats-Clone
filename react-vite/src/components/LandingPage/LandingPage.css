@@ -1,6 +1,7 @@
 .featured-on {
   margin-bottom: 20px;
   margin-left: 20px;
+  margin-top: 60px;
 }
 .restaurantDivs {
   display: flex;
@@ -54,4 +55,8 @@
   width: 200px;
   height: 200px;
   border-radius: 20px;
+}
+
+.log-sign {
+  margin-left: 120%;
 }

@@ -2,18 +2,18 @@
   display: flex;
   justify-content: space-between;
   text-align: center;
+  padding-left: 0px;
 }
 
 .profile-dropdown {
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-ul {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 150px;
+  justify-content: flex-start;
+  gap: 2px;
+  width: fit-content;
+  /* border: 2px solid black; */
+  padding-left: 2px;
 }
 
 .cart-dropdown {
@@ -30,8 +30,8 @@ ul {
 
 .left-side-nav-bar {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: space-around;
+  width: 50%;
 }
 
 .right-side-nav-bar {
