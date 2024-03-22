@@ -91,16 +91,22 @@ function SingleRestaurant() {
   return (
     <>
       {restaurant && (
-        <div>
-          <div>
-            <img src={restaurant[restaurantId]?.imageUrl}></img>
+        <div className="restaurant-details-container">
+          <div className="restaurant-image-container">
+            <img className="restaurant-image" src={restaurant[restaurantId]?.imageUrl}></img>
           </div>
-          <h1 className="restaurant-name">{restaurant[restaurantId]?.name} </h1>
-          <h3 className="restaurantRating">
-            {" "}
-            {avgReviews.toFixed(1)} <FaStar /> ({reviewsArr?.length})
-          </h3>
-          <h1>What customers are saying </h1>
+          <div className="restaurant-details-header-container">
+            <h1 className="restaurant-name">{restaurant[restaurantId]?.name} </h1>
+            <h3 className="restaurantRating">
+              {/* {" "} */}
+              {avgReviews.toFixed(1)} <FaStar /> ({reviewsArr?.length}) reviews
+            </h3>
+          </div>
+          <div className="reviews-header-container">
+            <h1>Top Reviews</h1>
+            <h4>From customers who've ordered here</h4>
+
+          </div>
           <div className="restaurantDetails">
             <div className="reviews-Container">
               {reviewsArr?.map((review) => (
@@ -118,64 +124,78 @@ function SingleRestaurant() {
                       alt="star"
                     />
                   </div>
-                  <p className="description-review">{review.description}</p>
+                  <p className="description-review">"{review.description}"</p>
                 </div>
               ))}
             </div>
             <h1>Featured Items</h1>
-            <hr />
+
             <div className="menuItemsContainer">
               {menuItemsArr?.map((item) => (
                 <div className="menuItemCard" key={item.id}>
-                  <p className="name-item">{item.name}</p>
-                  <p>${item.price}</p>
-                  <img className="itemImage" src={item.imageUrl} />
+                  <div className="menu-item-card-left">
+                    <div className="menu-item-card-header">
+                      <p className="name-item">{item.name}</p>
+                      <p className="price-item">${item.price}</p>
+                    </div>
 
-                  <button
-                    className="add-to-cart"
-                    onClick={(e) =>
-                      addToCart(e, {
-                        ...item,
-                        restaurant: restaurant[restaurantId].name,
-                      })
-                    }
-                  >
-                    Add to Cart
-                  </button>
-
-
-                  {
-                    cartItems.findIndex((element) => element.includes(`{"id":${item.id},`)) !== -1 &&
-                    (<button onClick={(e) => removeFromCart(e, item)}>
-                      Remove Item From Cart
-                    </button>)
-                  }
+                    <div className="menu-item-buttons-container">
+                      <button
+                        className="add-to-cart"
+                        onClick={(e) =>
+                          addToCart(e, {
+                            ...item,
+                            restaurant: restaurant[restaurantId].name,
+                          })
+                        }
+                      >
+                        Add to Cart
+                      </button>
 
 
-                  <div className="ManageMenuItem">
-                    {restaurant[restaurantId]?.owner_id === user?.id && (
-                      <>
-                        <button
-                          className="edit-button"
-                          onClick={() =>
-                            navigate(`/menu-items/${item.id}/update`)
-                          }
-                        >
-                          Edit
-                        </button>
-                        <DeleteMenuItemButton
-                          id={item.id}
-                          restaurantId={restaurantId}
-                        />
-                      </>
-                    )}
+                      {
+                        cartItems.findIndex((element) => element.includes(`{"id":${item.id},`)) !== -1 &&
+                        (<button onClick={(e) => removeFromCart(e, item)}>
+                          Remove Item From Cart
+                        </button>)
+                      }
+
+
+                      <div className="ManageMenuItem">
+                        {restaurant[restaurantId]?.owner_id === user?.id && (
+                          <>
+                            <button
+                              className="edit-button"
+                              onClick={() =>
+                                navigate(`/menu-items/${item.id}/update`)
+                              }
+                            >
+                              Edit
+                            </button>
+                            <DeleteMenuItemButton
+                              id={item.id}
+                              restaurantId={restaurantId}
+                            />
+                          </>
+                        )}
+                      </div>
+                    </div>
                   </div>
+
+
+
+                  <div className="menu-item-image-container">
+                    <img className="itemImage" src={item.imageUrl} />
+                  </div>
+
                 </div>
               ))}
             </div>
             <div className="ManageRestaurant">
               {restaurant[restaurantId]?.owner_id === user?.id && (
                 <>
+                  <h1>Manage Restaurant</h1>
+                  {/* <hr /> */}
                   <button className="add-item" onClick={() =>
                     navigate(`/restaurants/${restaurantId}/update`)
                   }>

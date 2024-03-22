@@ -1,20 +1,72 @@
+.restaurant-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+.restaurant-image-container {
+  display: flex;
+  justify-content: center;
+  height: 12vw;
+  width: 70vw;
+}
+
+.restaurant-image {
+  width: 50%;
+  /* height: auto; */
+  object-fit: contain;
+}
+
+/* .restaurant-details {
+  width: ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
 .restaurant-name {
   font-size: 45px;
   display: flex;
   justify-content: center;
+  margin-bottom: 0;
+}
+.restaurantRating {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 0px;
+}
+.reviews-header-container {
+  width: 50vw;
+}
+.reviews-header-container h1 {
+  margin-bottom: 2px;
+}
+
+.restaurantDetails {
+  width: 50vw;
 }
 .reviews-Container {
   display: flex;
+  width: 50vw;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
-  margin-left: 20px;
+  /* margin-left: 20px;
   margin-right: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 10px; */
+  padding-top: 10px;
 }
 
+h4 {
+  font-weight: 400;
+  color: darkslategray;
+  margin-top: 0px;
+}
 .review-Card {
   display: flex;
+  background-color: lightgreen;
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
@@ -45,30 +97,74 @@
 
 .menuItemsContainer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
   gap: 30px;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  margin-right: 20px;
+  /* margin-left: 20px; */
+  /* margin-bottom: 10px; */
+  /* margin-right: 20px; */
 }
 
+
+
+/* .menuItemCard {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 250px;
+  gap: 10px;
+  padding: 15px;
+} */
 .menuItemCard {
+  width: 50vw;
+  margin-left: 0px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
-  /* border: 2px solid grey;
-  border-radius: 15px; */
-  width: 250px;
-  gap: 10px;
+  border-radius: 20px;
+  border: 1px lightgray solid;
   padding: 15px;
+}
+
+.menu-item-card-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 72%;
+}
+
+.menu-item-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.name-item {
+  font-size: larger;
+  margin-bottom: 4px;
+  margin-top: 0px;
+}
+
+.price-item {
+  font-weight: 400;
+  color: darkslategray;
+  margin-top: 0px;
 }
 
 .itemImage {
   width: 250px;
   height: 200px;
   border-radius: 20px;
+  border: 1px lightgray solid;
+}
+
+.restaurant-details-container button {
+  background-color: darkslategray;
+  color: white;
+  font-size: medium;
+  padding: 10px 24px;
 }
 
 .name-item {
@@ -105,9 +201,12 @@ button {
 
 .ManageRestaurant {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 20px;
+  padding-bottom: 100px;
 }
+
 .add-item {
   border: 1px black solid;
   border-radius: 5px;
