@@ -1,0 +1,38 @@
+.add-funds-modal {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border: 3px solid black;
+}
+
+.add-funds-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.add-funds-form > label {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-funds-form > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    color: white;
+    font-size: x-large;
+    height: 40px;
+    width: 120px;
+    border-radius: 20px;
+    border: none;
+    background-color: black;
+    margin-top: 15%;
+}
