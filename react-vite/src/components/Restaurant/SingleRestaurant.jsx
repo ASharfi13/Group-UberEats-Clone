@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  clearRestaurant,
-  fetchRestaurant,
-  getRestaurantTypes,
-} from "../../redux/restaurantReducer";
-import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
+import { fetchRestaurant, getRestaurantTypes } from "../../redux/restaurantReducer";
+import { useNavigate, useParams } from "react-router-dom";
 import "./SingleRestaurant.css";
 import DeleteRestaurantButton from "./DeleteRestaurantButton";
 import DeleteMenuItemButton from "../MenuItems/DeleteMenuItemButton";
@@ -33,22 +29,6 @@ function SingleRestaurant() {
       reviewsArr?.length
       : 0;
 
-  //   console.log(restaurant[restaurantId]?.Reviews[0]?.description, "over here");
-  // put this in the route!!!
-  //   const avgRating = {};
-  //   restaurantArr.forEach((restaurant) => {
-  //     let sum = 0;
-  //     restaurant.reviews
-  //       ? restaurant.reviews.forEach((res) => {
-  //           sum += res.stars;
-  //         })
-  //       : null;
-  //     avgRating[restaurant.id] = sum / restaurant.reviews.length;
-  //   });
-
-  //   console.log(avgRating);
-
-  //   console.log(restaurantArr);
   useEffect(() => {
     dispatch(fetchRestaurant(restaurantId))
       .then(dispatch(getRestaurantTypes()))
@@ -76,11 +56,6 @@ function SingleRestaurant() {
     ? (cartRestaurantId = cartItems[0].restaurant_id)
     : (cartRestaurantId = null);
 
-  console.log(cartItems)
-  console.log(JSON.stringify(menuItemsArr[0]))
-
-  console.log(cartItems.includes(JSON.stringify(menuItemsArr[0])))
-
   const removeFromCart = async (e, menuItem) => {
     const tempCartItems = [...cartItems]
     const targetItem = cartItems.findIndex((element) => element.includes(`{"id":${menuItem.id},`))
@@ -98,7 +73,6 @@ function SingleRestaurant() {
           <div className="restaurant-details-header-container">
             <h1 className="restaurant-name">{restaurant[restaurantId]?.name} </h1>
             <h3 className="restaurantRating">
-              {/* {" "} */}
               {avgReviews.toFixed(1)} <FaStar /> ({reviewsArr?.length}) reviews
             </h3>
           </div>
@@ -112,7 +86,6 @@ function SingleRestaurant() {
               {reviewsArr?.map((review) => (
                 <div
                   className="review-Card"
-                  // style={{ border: "2px solid black" }}
                   key={review.id}
                 >
                   <p className="name-review">{review.name}</p>
@@ -131,8 +104,8 @@ function SingleRestaurant() {
             <h1>Featured Items</h1>
 
             <div className="menuItemsContainer">
-              {menuItemsArr?.map((item) => (
-                <div className="menuItemCard" key={item.id}>
+              {menuItemsArr?.map((item, index) => (
+                <div className="menuItemCard" key={index}>
                   <div className="menu-item-card-left">
                     <div className="menu-item-card-header">
                       <p className="name-item">{item.name}</p>
@@ -151,15 +124,12 @@ function SingleRestaurant() {
                       >
                         Add to Cart
                       </button>
-
-
                       {
                         cartItems.findIndex((element) => element.includes(`{"id":${item.id},`)) !== -1 &&
                         (<button onClick={(e) => removeFromCart(e, item)}>
                           Remove Item From Cart
                         </button>)
                       }
-
 
                       <div className="ManageMenuItem">
                         {restaurant[restaurantId]?.owner_id === user?.id && (
@@ -181,8 +151,6 @@ function SingleRestaurant() {
                       </div>
                     </div>
                   </div>
-
-
 
                   <div className="menu-item-image-container">
                     <img className="itemImage" src={item.imageUrl} />

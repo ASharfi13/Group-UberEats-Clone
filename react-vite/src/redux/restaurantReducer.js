@@ -6,7 +6,7 @@ const ADD_RESTAURANT = "restaurant/addRestaurant";
 const REMOVE_RESTAURANT = "restaurant/removeRestaurant";
 const UPDATE_RESTAURANT = "restaurant/updateRestaurant";
 const LOAD_RESTAURANT_TYPES = "restaurant/loadTypes";
-const CLEAR_CURRENT_RESTAURANT = "restaurant/clearRestaurant";
+const CLEAR_RESTAURANTS = "restaurant/clearRestaurants";
 
 //action creator
 export const loadRestaurantTypes = (restaurantTypes) => {
@@ -59,10 +59,9 @@ export const updateRestaurant = (restaurant) => {
   };
 };
 
-export const clearRestaurant = (restaurant) => {
+export const clearRestaurants = () => {
   return {
-    type: CLEAR_CURRENT_RESTAURANT,
-    restaurant,
+    type: CLEAR_RESTAURANTS
   };
 };
 
@@ -97,16 +96,10 @@ export const writeRestaurant = (payload) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  // console.log(response);
   const restaurant = await response.json();
   if (response.status !== 201) {
     return restaurant;
   }
-  // if(response.status == 500) {
-  //   return {
-  //     "error": " backend constraint failed"
-  //   }
-  // }
   if (response.ok) {
     dispatch(addRestaurant(restaurant));
     return restaurant;
@@ -119,15 +112,12 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
   });
   if (response.ok) {
     const restaurant = await response.json();
-    // console.log(spotId, "thunk");
-    // console.log(spot, "here is another log");
     dispatch(removeRestaurant(restaurantId));
     return restaurant;
   }
 };
 
 export const editRestaurant = (restaurantId, payload) => async (dispatch) => {
-  console.log(payload);
   const response = await fetch(`/api/restaurants/${restaurantId}`, {
     method: "PUT",
     header: { "Content-Type": "application/json" },
@@ -169,13 +159,13 @@ const restaurantReducer = (state = {}, action) => {
     //   return { ...state, [action.image.id]: action.image };
     case REMOVE_RESTAURANT: {
       const newState = { ...state };
-      delete newState[action.restaurants.id];
+      delete newState[action.restaurantId];
       return newState;
     }
     case UPDATE_RESTAURANT:
       return { ...state, [action.restaurant.id]: action.restaurant };
-    case CLEAR_CURRENT_RESTAURANT:
-      return { ...state, [action.restaurant]: action.restaurant };
+    case CLEAR_RESTAURANTS:
+      return {};
     default:
       return state;
   }

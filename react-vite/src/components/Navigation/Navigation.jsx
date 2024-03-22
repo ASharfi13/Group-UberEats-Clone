@@ -6,7 +6,6 @@ import "./Navigation.css";
 
 function Navigation() {
   const handleFeature = (e) => {
-    console.log("feature coming soon", e);
     alert("Feature Coming Soon");
   };
 

@@ -10,14 +10,15 @@ class ShoppingCart(db.Model):
 
     id= db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
-    menu_item_id=db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("menu_items.id"), ondelete="SET NULL"))
+    menu_item_id=db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("menu_items.id")))
     checkedOut= db.Column(db.Boolean, default=False)
     order_id=db.Column(db.Integer, default=1)
     createdAt = db.Column(db.Date, default=dt.datetime.now())
     updatedAt = db.Column(db.Date, default=dt.datetime.now())
     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id"), ondelete="SET NULL"), nullable=True)
 
-    
+    menu_item = db.relationship("MenuItem")
+
     def to_dict(self):
         return {
             'id': self.id,

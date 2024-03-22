@@ -39,6 +39,8 @@ class MenuItem(db.Model):
 
     restaurant = db.relationship("Restaurant", back_populates="menu_items")
 
+    shopping_carts = db.relationship("ShoppingCart", back_populates="menu_item", cascade="all, delete-orphan")
+
     def to_dict(self):
         return {
             'id': self.id,

@@ -44,11 +44,12 @@ export default function MenuItemForm() {
         <div className="update-menu-page">
           <form className="update-form" onSubmit={onSubmit}>
             <h1 className="update-menu-title">Create A New Menu Item</h1>
-            <div>
+            <div className="column-styles">
+              <p>Name</p>
               <input
                 className="input-area"
                 type="text"
-                placeholder="Enter item name"
+                placeholder="Enter A Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 // required
@@ -56,24 +57,26 @@ export default function MenuItemForm() {
               <p className="errors">{errors.name ? errors.name : null}</p>
             </div>
 
-            <div>
+            <div className="column-styles">
+              <p>Price</p>
               <input
                 className="input-area"
-                type="number"
-                placeholder="Enter the price"
+                type="text"
+                placeholder="Enter A Price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 // required
               ></input>
               <p className="errors">{errors.price ? errors.price : null}</p>
             </div>
-            <div>
+            <div className="column-styles">
+              <p>Type</p>
               <select
                 className="input-area"
                 value={type}
                 onChange={(e) => setType(e.target.value)}
               >
-                <option value={""} disabled selected>
+                <option value={""} disabled defaultValue={""}>
                   Select Type
                 </option>
                 {menuItemTypes.map((menuItem, idx) => (
@@ -82,11 +85,12 @@ export default function MenuItemForm() {
               </select>
               <p className="errors">{errors.type ? errors.type : null}</p>
             </div>
-            <div>
+            <div className="column-styles">
+              <p>Image Url</p>
               <input
                 className="input-area"
                 type="url"
-                placeholder="Enter Image Url"
+                placeholder="Enter New Image Url"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>

@@ -75,8 +75,8 @@ def upgrade():
     sa.Column('createdAt', sa.Date(), nullable=True),
     sa.Column('updatedAt', sa.Date(), nullable=True),
     sa.Column('restaurant_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['menu_item_id'], ['menu_items.id'],ondelete='SET NULL'),
-    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['menu_item_id'], ['menu_items.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

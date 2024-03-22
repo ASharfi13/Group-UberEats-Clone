@@ -5,9 +5,11 @@ from app.models.menu_item import menuItemTypes
 import re
 
 def two_decimals(form, field):
-    dec = str(field.data).split(".")[1]
-    if dec and len(dec) > 2:
-        raise ValidationError('Price must have 2 decimals or less')
+    check = str(field.data).split(".")
+    if len(check) > 1:
+        dec=check[1]
+        if dec and len(dec) > 2:
+            raise ValidationError('Price must have 2 decimals or less')
 
 def valid_type(form, field):
     if field.data not in menuItemTypes:

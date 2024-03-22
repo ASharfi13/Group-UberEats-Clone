@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getOrders } from "../../redux/shoppingCartReducer";
-import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
+import { getOrders, clearOrders } from "../../redux/shoppingCartReducer";
+import { useNavigate } from "react-router-dom";
 import "./ReviewsOrdersStyling.css";
-import { clearReviews, fetchOwnerReviews, removeReview } from "../../redux/reviewReducer";
+import { clearReviews, fetchOwnerReviews } from "../../redux/reviewReducer";
 import { fetchAllRestaurants } from "../../redux/restaurantReducer";
 
 function OrdersPage() {
@@ -11,18 +11,12 @@ function OrdersPage() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
   const orders = useSelector((state) => state.orderState);
-  const reviews = useSelector((state) => state.reviewState);
   const restaurants = useSelector((state) => state.restaurantState);
-
-  const ordersArr = Object.values(orders)
-
-  const reviewsArr = Object.values(reviews)
 
   const restaurantsArr = Object.values(restaurants)
 
-  console.log(restaurantsArr)
-
   useEffect(() => {
+    dispatch(clearOrders());
     dispatch(getOrders(user?.id));
     dispatch(fetchOwnerReviews());
     dispatch(fetchAllRestaurants())
@@ -30,8 +24,6 @@ function OrdersPage() {
       dispatch(clearReviews())
     }
   }, [dispatch, user?.id]);
-
-  const reviewedRestaurants = reviewsArr?.map((review) => review.restaurant_id)
 
   const orderKeys = Object.keys(orders).map((item) => Number(item)).sort().reverse()
 
@@ -44,7 +36,7 @@ function OrdersPage() {
             let total = 0;
             let restaurantId = null;
             let order = orders[orderNumber]
-            let restaurantImg
+            let restaurantImg = "http://www.vintage-breitling.com/wp-content/uploads/2015/06/no-longer-available.jpg"
             restaurantsArr.forEach((res) => {
               if (res.name == order?.restaurant) restaurantImg = res.imageUrl
             })

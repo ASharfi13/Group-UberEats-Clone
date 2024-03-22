@@ -88,7 +88,6 @@ export const writeMenuItem = (restaurantId, payload) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  // console.log(response);
   const menu_item = await response.json();
   if (response.status !== 201) {
     return menu_item;
@@ -105,8 +104,6 @@ export const deleteMenuItem = (menu_itemId) => async (dispatch) => {
   });
   if (response.ok) {
     const menu_item = await response.json();
-    // console.log(spotId, "thunk");
-    // console.log(spot, "here is another log");
     dispatch(removeMenuItem(menu_itemId));
     return menu_item;
   }

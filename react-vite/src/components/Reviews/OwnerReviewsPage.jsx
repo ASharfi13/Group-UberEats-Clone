@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchOwnerReviews, removeReview } from "../../redux/reviewReducer";
-import { fetchAllRestaurants } from "../../redux/restaurantReducer";
+import { fetchOwnerReviews, removeReview, clearReviews } from "../../redux/reviewReducer";
+import { fetchAllRestaurants, clearRestaurants } from "../../redux/restaurantReducer";
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "../OrdersPage/ReviewsOrdersStyling.css"
@@ -15,14 +15,9 @@ function OwnerReviews() {
 
     const reviewsArr = Object.values(reviews)
 
-    console.log(restaurants)
-
-    console.log(reviewsArr)
-
-    console.log(reviewsArr[0])
-
-
     useEffect(() => {
+        dispatch(clearRestaurants())
+        dispatch(clearReviews())
         dispatch(fetchOwnerReviews())
         dispatch(fetchAllRestaurants())
     }, [dispatch])
@@ -30,16 +25,15 @@ function OwnerReviews() {
 
     return (
         <>
-            <h1>This Is My Reviews</h1>
+            <h1>My Reviews</h1>
             {reviewsArr.map((review) => {
-                console.log(typeof review?.id)
                 return (
                     <div className="reviewCard" key={review?.id}>
                         <img className="review-img" src={restaurants[review.restaurant_id]?.imageUrl}></img>
                         <div className="reviewContent">
                             <p>{review?.description}</p>
                             <span> <span style={{fontWeight: "bold"}}>Rating: </span>{review?.stars} <FaStar /></span>
-                            <span>{restaurants[review?.id]?.name}</span>
+                            <span>{restaurants[review?.restaurant_id]?.name}</span>
                             <span>{review?.createdAt}</span>
                         </div>
                         <button

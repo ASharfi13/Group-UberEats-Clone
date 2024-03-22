@@ -89,7 +89,7 @@ export default function UpdateMenuItem() {
                 value={type}
                 onChange={(e) => setType(e.target.value)}
               >
-                <option value={""} disabled selected>
+                <option value={""} disabled defaultValue={""}>
                   Select Type
                 </option>
                 {menuItemTypes.map((menuItem, idx) => (
@@ -117,7 +117,7 @@ export default function UpdateMenuItem() {
           </form>
           <img
             className="res-logo"
-            src="https://i.postimg.cc/0yLWjssc/menu-logo.avif"
+            src={menuItem?.imageUrl}
             alt="menu-logo"
           />
         </div>

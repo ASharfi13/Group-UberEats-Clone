@@ -148,6 +148,12 @@ def createMenuItem(restaurantId):
 @restaurant_routes.route('/<int:restaurantId>/reviews', methods=["POST"])
 @login_required
 def createReview(restaurantId):
+    restaurant = Restaurant.query.get(restaurantId)
+    if not restaurant:
+        return json.dumps({
+            "message": "Restaurant couldn't be found"
+        }), 404
+
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

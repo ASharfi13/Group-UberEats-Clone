@@ -17,7 +17,6 @@ function CartButton() {
   const restaurants = useSelector((store) => store.restaurantState)
   const ulRef = useRef();
   const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
-  //   console.log("THIS IS THE CART", cartItems)
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
     setShowMenu(!showMenu);

@@ -27,9 +27,6 @@ function LandingPage() {
     }
   });
 
-  // console.log(avgRating);
-
-  // console.log(restaurantArr);
   useEffect(() => {
     dispatch(fetchAllRestaurants());
   }, [dispatch]);
@@ -51,11 +48,10 @@ function LandingPage() {
               navigate(`/restaurants/${restaurant.id}`);
             }}
           >
-            <p className="name">{restaurant.name}</p>
-
-            <div className="rating">
-              <p>
-                {avgRating[restaurant.id]?.toFixed(1)} <FaStar />
+            <div className="info">
+              <p className="name">{restaurant.name}</p>
+              <p className="review-info">
+                {avgRating[restaurant.id]?.toFixed(1) || "(New)"} <FaStar />
               </p>
             </div>
             <img className="resCardImage" src={restaurant?.imageUrl} />

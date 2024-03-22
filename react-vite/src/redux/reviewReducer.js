@@ -44,8 +44,6 @@ export const clearReviews = () => {
 export const fetchAllReviews = (restuarantId) => async (dispatch) => {
   const response = await fetch(`/api/restaurants/${restuarantId}/reviews`);
   const reviews = await response.json();
-  // console.log(response, "review response");
-  // console.log(reviews, "here is the reviews");
   dispatch(loadReviews(reviews));
 };
 
@@ -55,15 +53,12 @@ export const createReview = (payload, restuarantId) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  // console.log(response, "here is the response");
   const review = await response.json();
   if (response.status !== 201) {
-    // console.log(review);
     return review;
   }
   if (response.ok) {
     dispatch(addReview(review));
-    // console.log(review);
     return review;
   }
 };
@@ -75,10 +70,8 @@ export const removeReview = (reviewId) => async (dispatch) => {
       method: "DELETE",
     }
   );
-  // console.log(response, "here is the response");
   if (response.ok) {
     const review = await response.json();
-    // console.log(review, "here is the review");
     dispatch(deleteReview(reviewId));
     return review;
   }

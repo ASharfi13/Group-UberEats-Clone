@@ -2,6 +2,7 @@ const LOAD_ORDERS = "shopping-cart/loadOrders";
 const ADD_CART_ITEM = "shopping-cart/addCartItem";
 const REMOVE_CART_ITEM = "shopping-cart/removeCartItem";
 const ADD_ORDER = "shopping-cart/addOrder";
+const CLEAR_ORDERS = "shopping-cart/clearOrders";
 
 export const loadOrders = (orders) => {
   return {
@@ -32,6 +33,12 @@ export const addOrder = (order) => {
     order,
   };
 };
+
+export const clearOrders = () => {
+  return {
+    type: CLEAR_ORDERS
+  }
+}
 
 export const checkOutCart = (user_id, cart_items) => async (dispatch) => {
   const response = await fetch("/api/shopping-carts/check-out", {
@@ -69,6 +76,8 @@ const shoppingCartReducer = (state = {}, action) => {
     }
     case ADD_ORDER:
       return { ...state, [action.order.order_id]: action.order };
+    case CLEAR_ORDERS:
+      return {};
     default:
       return state;
   }

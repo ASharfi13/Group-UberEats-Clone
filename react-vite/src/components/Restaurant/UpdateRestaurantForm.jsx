@@ -50,7 +50,7 @@ function UpdateRestaurant() {
       imageUrl: image,
     };
 
-    const response = await dispatch(editRestaurant(payload));
+    const response = await dispatch(editRestaurant(restaurantId, payload));
     if (response.errors) setErrors(response.errors);
     else navigate(`/restaurants/${response.id}`);
   };
@@ -97,7 +97,7 @@ function UpdateRestaurant() {
                 value={type}
                 onChange={(e) => setType(e.target.value)}
               >
-                <option value={""} disabled selected>
+                <option value={""} disabled defaultValue={""}>
                   Select Type
                 </option>
                 {restaurantTypes.map((restaurant, idx) => (
@@ -127,7 +127,7 @@ function UpdateRestaurant() {
           </form>
           <img
             className="res-logo"
-            src="https://i.postimg.cc/8cdCxDbc/restaurant-logo.jpg"
+            src={restaurant?.imageUrl}
             alt="res-logo"
           />
         </div>
