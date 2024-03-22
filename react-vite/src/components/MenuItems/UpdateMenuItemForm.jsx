@@ -59,6 +59,7 @@ export default function UpdateMenuItem() {
             <h1 className="update-menu-title">Update Your Menu Item</h1>
             <div>
               <input
+                className="input-area"
                 type="text"
                 placeholder="Enter A Name"
                 value={name}
@@ -70,6 +71,7 @@ export default function UpdateMenuItem() {
 
             <div>
               <input
+                className="input-area"
                 type="text"
                 placeholder="Enter A Price"
                 value={price}
@@ -79,7 +81,11 @@ export default function UpdateMenuItem() {
               <p className="errors">{errors.price ? errors.price : null}</p>
             </div>
             <div>
-              <select value={type} onChange={(e) => setType(e.target.value)}>
+              <select
+                className="input-area"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
                 <option value={""} disabled selected>
                   Select Type
                 </option>
@@ -91,6 +97,7 @@ export default function UpdateMenuItem() {
             </div>
             <div>
               <input
+                className="input-area"
                 type="url"
                 placeholder="Enter New Image Url"
                 value={image}
@@ -100,9 +107,12 @@ export default function UpdateMenuItem() {
                 {errors.imageUrl ? errors.imageUrl : null}
               </p>
             </div>
-            <button type="submit">Submit</button>
+            <button className="menu-submit" type="submit">
+              Submit
+            </button>
           </form>
           <img
+            className="res-logo"
             src="https://i.postimg.cc/0yLWjssc/menu-logo.avif"
             alt="menu-logo"
           />

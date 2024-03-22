@@ -1,20 +1,45 @@
 .update-menu-page {
+  width: fit-content;
   display: flex;
   justify-content: space-around;
-  flex-direction: row;
+  /* text-align: center; */
+  gap: 200px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 30px;
 }
 
 .update-form {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
+  justify-content: flex-start;
   flex-direction: column;
+  border: 2px black solid;
+  border-radius: 20px;
+  background-color: rgb(5, 162, 5);
+  padding: 40px;
+  gap: 10px;
 }
 
 .update-menu-title {
-  color: red;
+  color: black;
+  font-size: 30px;
+}
+
+.input-area {
+  height: 40px;
+  border-radius: 20px;
+}
+
+.res-logo {
+  width: 700px;
 }
 
 .errors {
   color: red;
   font-weight: 800;
+}
+
+.menu-submit {
+  width: 80px;
+  border-radius: 20px;
 }

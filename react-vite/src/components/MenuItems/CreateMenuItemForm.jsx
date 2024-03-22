@@ -46,8 +46,9 @@ export default function MenuItemForm() {
             <h1 className="update-menu-title">Create A New Menu Item</h1>
             <div>
               <input
+                className="input-area"
                 type="text"
-                placeholder="Enter the name of the item"
+                placeholder="Enter item name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 // required
@@ -57,8 +58,9 @@ export default function MenuItemForm() {
 
             <div>
               <input
+                className="input-area"
                 type="number"
-                placeholder="Enter the price of the item"
+                placeholder="Enter the price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 // required
@@ -66,7 +68,11 @@ export default function MenuItemForm() {
               <p className="errors">{errors.price ? errors.price : null}</p>
             </div>
             <div>
-              <select value={type} onChange={(e) => setType(e.target.value)}>
+              <select
+                className="input-area"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
                 <option value={""} disabled selected>
                   Select Type
                 </option>
@@ -78,6 +84,7 @@ export default function MenuItemForm() {
             </div>
             <div>
               <input
+                className="input-area"
                 type="url"
                 placeholder="Enter Image Url"
                 value={image}
@@ -87,9 +94,12 @@ export default function MenuItemForm() {
                 {errors.imageUrl ? errors.imageUrl : null}
               </p>
             </div>
-            <button type="submit">Submit</button>
+            <button className="menu-submit" type="submit">
+              Submit
+            </button>
           </form>
           <img
+            className="res-logo"
             src="https://i.postimg.cc/0yLWjssc/menu-logo.avif"
             alt="menu-logo"
           />

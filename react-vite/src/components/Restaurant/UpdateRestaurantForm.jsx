@@ -61,8 +61,10 @@ function UpdateRestaurant() {
         <div className="restaurant-page-create">
           <form className="restaurant-form" onSubmit={onSubmit}>
             <h1 className="restaurant-title-form">Update Your Restaurant</h1>
-            <div>
+            <div className="column-styles">
+              <p>Name</p>
               <input
+                className="input-area"
                 type="text"
                 placeholder="Enter A Name"
                 value={name}
@@ -74,8 +76,10 @@ function UpdateRestaurant() {
               </p>
             </div>
 
-            <div>
+            <div className="column-styles">
+              <p>Location</p>
               <input
+                className="input-area"
                 type="text"
                 placeholder="Enter A Location"
                 value={location}
@@ -86,8 +90,13 @@ function UpdateRestaurant() {
                 {errors.location ? errors.location : null}
               </p>
             </div>
-            <div>
-              <select value={type} onChange={(e) => setType(e.target.value)}>
+            <div className="column-styles">
+              <p>Type</p>
+              <select
+                className="input-area"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
                 <option value={""} disabled selected>
                   Select Type
                 </option>
@@ -99,8 +108,10 @@ function UpdateRestaurant() {
                 {errors.type ? errors.type : null}
               </p>
             </div>
-            <div>
+            <div className="column-styles">
+              <p>Image Url</p>
               <input
+                className="input-area"
                 type="url"
                 placeholder="Enter New Image Url"
                 value={image}

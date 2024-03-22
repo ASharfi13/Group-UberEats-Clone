@@ -44,6 +44,7 @@ function RestaurantForm() {
             <h1 className="restaurant-title-form">Create A New Restaurant</h1>
             <div>
               <input
+                className="input-area"
                 type="text"
                 placeholder="Enter A Name"
                 value={name}
@@ -55,6 +56,7 @@ function RestaurantForm() {
 
             <div>
               <input
+                className="input-area"
                 type="text"
                 placeholder="Enter A Location"
                 value={location}
@@ -66,7 +68,11 @@ function RestaurantForm() {
               </p>
             </div>
             <div>
-              <select value={type} onChange={(e) => setType(e.target.value)}>
+              <select
+                className="input-area"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
                 <option value={""} disabled selected>
                   Select Type
                 </option>
@@ -78,6 +84,7 @@ function RestaurantForm() {
             </div>
             <div>
               <input
+                className="input-area"
                 type="url"
                 placeholder="Enter Image Url"
                 value={image}
