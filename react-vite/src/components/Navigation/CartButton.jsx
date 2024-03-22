@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart, FaWallet } from 'react-icons/fa';
+import { IoMdClose } from 'react-icons/io'
 import { useShoppingCart } from "../../context/CartContext";
 import { checkOutCart } from "../../redux/shoppingCartReducer";
 import { decreaseFunds, increaseFunds, loadFunds } from "../../redux/walletReducer";
@@ -71,38 +72,50 @@ function CartButton() {
   }
 
   return (
-    <>
+    <div className="cart-button">
       <button onClick={toggleMenu}>
         <FaShoppingCart />
+      <span>{cartItems?.length} items</span>
       </button>
       {showMenu && (
         <ul className={"cart-dropdown"} ref={ulRef}>
-          <li>Cart For {restaurantName}</li>
-          {cartItems?.map((item, index) => {
-            item = JSON.parse(item)
-            total += item.price
-            return <li key={index}>
-              {item.name} | {item.price}
+          <div className="cart-header">
+            <IoMdClose className="close-cart" onClick={closeMenu}/>
+            <div className="wallet-info">
+              <FaWallet />
+              <li>${userWallet?.toFixed(2)}</li>
+            </div>
+          </div>
+          <div className="cart-content">
+            <h4>Cart For: {restaurantName}</h4>
+            <div className="cart-items">
+              Items:
+              {cartItems?.map((item, index) => {
+                item = JSON.parse(item)
+                total += item.price
+                return <li key={index} className="cart-item">
+                  {item.name} | $ {item.price}
+                </li>
+              })}
+            </div>
+            {cartItems?.length > 0 ? (<li className="total-price">Total: $ {total.toFixed(2)}</li>) : null}
+            <li>
+              <button disabled={cartItems.length === 0} onClick={(e) => user ? checkOutLoggedIn(e) : checkOutLoggedOut(e)}>
+                Check Out
+              </button>
             </li>
-          })}
-          <li>Current Balance: ${userWallet?.toFixed(2)}</li>
-          {cartItems?.length > 0 ? (<li>Total Price : {total.toFixed(2)}</li>) : null}
-          <li>
-            <button disabled={cartItems.length === 0} onClick={(e) => user ? checkOutLoggedIn(e) : checkOutLoggedOut(e)}>
-              Check Out
-            </button>
-          </li>
-          <li>
-            <button onClick={() => {
-              setCartItems([])
-              setCartRestaurant(0)
-            }}>
-              Clear Cart
-            </button>
-          </li>
+            <li>
+              <button onClick={() => {
+                setCartItems([])
+                setCartRestaurant(0)
+              }}>
+                Clear Cart
+              </button>
+            </li>
+          </div>
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

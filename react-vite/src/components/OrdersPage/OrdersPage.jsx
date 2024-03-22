@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrders } from "../../redux/shoppingCartReducer";
 import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
-import "./OrdersPage.css";
+import "./ReviewsOrdersStyling.css";
 import { clearReviews, fetchOwnerReviews, removeReview } from "../../redux/reviewReducer";
+import { fetchAllRestaurants } from "../../redux/restaurantReducer";
 
 function OrdersPage() {
   const dispatch = useDispatch();
@@ -11,14 +12,20 @@ function OrdersPage() {
   const user = useSelector((state) => state.session.user);
   const orders = useSelector((state) => state.orderState);
   const reviews = useSelector((state) => state.reviewState);
+  const restaurants = useSelector((state) => state.restaurantState);
 
   const ordersArr = Object.values(orders)
 
-  const reviewsArr = (Object.values(reviews))
+  const reviewsArr = Object.values(reviews)
+
+  const restaurantsArr = Object.values(restaurants)
+
+  console.log(restaurantsArr)
 
   useEffect(() => {
     dispatch(getOrders(user?.id));
     dispatch(fetchOwnerReviews());
+    dispatch(fetchAllRestaurants())
     return () => {
       dispatch(clearReviews())
     }
@@ -32,34 +39,46 @@ function OrdersPage() {
     <>
       {user ? (
         <div className="ordersContent">
-          <h1>This is the Orders Page</h1>
+          <h1>Past Orders</h1>
           {orderKeys?.map((orderNumber, idx) => {
             let total = 0;
             let restaurantId = null;
             let order = orders[orderNumber]
+            let restaurantImg
+            restaurantsArr.forEach((res) => {
+              if (res.name == order?.restaurant) restaurantImg = res.imageUrl
+            })
             return (
               <div key={idx} className="orderCard">
-                <h3>
-                  {order.order_id} | <span>{order.createdAt} | </span>
-                  <span>{order.restaurant}</span>
-                </h3>
+                <img className="order-img" src={restaurantImg}></img>
+                <div className="order-text">
 
-                {order.items.map((item, index) => {
-                  total += item.price;
-                  restaurantId = item.restaurant_id;
-                  return (
-                    <div
-                      className="orderItemCard"
-                      key={String(index) + String(idx)}
-                    >
-                      <span>
-                        {item.name} | ${item.price}
-                      </span>
-                    </div>
-                  );
-                })}
-                <p>Total Price: ${total.toFixed(2)}</p>
+                  <h2>{order.restaurant}</h2>
+
+                  <h3>{order.createdAt}</h3>
+
+                  {order.items.map((item, index) => {
+                    total += item.price;
+                    restaurantId = item.restaurant_id;
+                    // restaurantsArr.forEach((res) => (
+                    //   if(res.name == item.)
+                    // ))
+                    return (
+                      <div
+                        className="orderItemCard"
+                        key={String(index) + String(idx)}
+                      >
+                        <span>
+                          {item.name} | ${item.price}
+                        </span>
+                      </div>
+                    );
+                  })}
+                  <p>Total Price: ${total.toFixed(2)}</p>
+                </div>
                 {order?.order_id == orderKeys[0] && (<button
+                  className="order-button"
+                  style={{}}
                   onClick={() =>
                     navigate(`/restaurants/${restaurantId}/add-review`)
                   }

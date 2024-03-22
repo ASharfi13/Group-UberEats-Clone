@@ -4,7 +4,8 @@
   width: 40px;
   position: relative;
   z-index: 1;
-  /* border: 2px black solid; */
+  background-color: transparent;
+  border: none
 }
 
 .three-lines {
@@ -15,8 +16,8 @@
 .burger-container {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   /* border: 2px solid black; */
-  width: 25%;
 }
 
 ul {
