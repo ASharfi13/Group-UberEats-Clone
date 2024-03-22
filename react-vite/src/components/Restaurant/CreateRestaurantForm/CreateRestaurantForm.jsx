@@ -1,44 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  fetchRestaurant,
-  editRestaurant,
-  getRestaurantTypes,
-} from "../../redux/restaurantReducer";
-import "./CreateRestaurantForm/CreateRestaurantForm.css";
+import { writeRestaurant } from "../../../redux/restaurantReducer";
+import { useNavigate } from "react-router-dom";
+import { getRestaurantTypes } from "../../../redux/restaurantReducer";
+import "./CreateRestaurantForm.css";
+// import Layout from "../../router/Layout"
 
-function UpdateRestaurant() {
+function RestaurantForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { restaurantId } = useParams();
-  const restaurant = useSelector(
-    (state) => state.restaurantState[restaurantId]
-  );
   const restaurantTypes = useSelector((state) => state.restaurantState.types);
 
-  const [name, setName] = useState(restaurant?.name);
-  const [location, setLocation] = useState(restaurant?.location);
-  const [type, setType] = useState(restaurant?.type);
-  const [image, setImage] = useState(restaurant?.imageUrl);
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [type, setType] = useState("");
+  const [image, setImage] = useState("");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    dispatch(fetchRestaurant(restaurantId)).then(
-      dispatch(getRestaurantTypes())
-    );
-    setName(restaurant?.name);
-    setLocation(restaurant?.location);
-    setType(restaurant?.type);
-    setImage(restaurant?.imageUrl);
-  }, [
-    dispatch,
-    restaurantId,
-    restaurant?.name,
-    restaurant?.location,
-    restaurant?.type,
-    restaurant?.imageUrl,
-  ]);
+    dispatch(getRestaurantTypes());
+  }, [dispatch]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -50,17 +31,17 @@ function UpdateRestaurant() {
       imageUrl: image,
     };
 
-    const response = await dispatch(editRestaurant(payload));
-    if (response.errors) setErrors(response.errors);
-    else navigate(`/restaurants/${response.id}`);
+    const newRestaurant = await dispatch(writeRestaurant(payload));
+    if (newRestaurant.errors) setErrors(newRestaurant.errors);
+    else navigate(`/restaurants/${newRestaurant.id}`);
   };
 
   return (
-    <div>
-      {restaurant && restaurantTypes && (
+    <>
+      {restaurantTypes && (
         <div className="restaurant-page-create">
           <form className="restaurant-form" onSubmit={onSubmit}>
-            <h1 className="restaurant-title-form">Update Your Restaurant</h1>
+            <h1 className="restaurant-title-form">Create A New Restaurant</h1>
             <div>
               <input
                 type="text"
@@ -69,9 +50,7 @@ function UpdateRestaurant() {
                 onChange={(e) => setName(e.target.value)}
                 // required
               ></input>
-              <p className="restaurant-errors">
-                {errors.name ? errors.name : null}
-              </p>
+              <p className="restaurant-errors">{errors ? errors.name : null}</p>
             </div>
 
             <div>
@@ -83,7 +62,7 @@ function UpdateRestaurant() {
                 // required
               ></input>
               <p className="restaurant-errors">
-                {errors.location ? errors.location : null}
+                {errors ? errors.location : null}
               </p>
             </div>
             <div>
@@ -95,19 +74,17 @@ function UpdateRestaurant() {
                   <option key={idx}>{restaurant}</option>
                 ))}
               </select>
-              <p className="restaurant-errors">
-                {errors.type ? errors.type : null}
-              </p>
+              <p className="restaurant-errors">{errors ? errors.type : null}</p>
             </div>
             <div>
               <input
                 type="url"
-                placeholder="Enter New Image Url"
+                placeholder="Enter Image Url"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
               <p className="restaurant-errors">
-                {errors.imageUrl ? errors.imageUrl : null}
+                {errors ? errors.imageUrl : null}
               </p>
             </div>
             <button className="restaurant-submit" type="submit">
@@ -121,8 +98,8 @@ function UpdateRestaurant() {
           />
         </div>
       )}
-    </div>
+    </>
   );
 }
 
-export default UpdateRestaurant;
+export default RestaurantForm;

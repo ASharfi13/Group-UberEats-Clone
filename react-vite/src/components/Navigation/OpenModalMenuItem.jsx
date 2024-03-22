@@ -16,9 +16,9 @@ function OpenModalMenuItem({
   };
 
   return (
-    <li className="style-hover" onClick={onClick}>
+    <button className="style-hover" onClick={onClick}>
       {itemText}
-    </li>
+    </button>
   );
 }
 

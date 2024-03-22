@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
 import LandingPage from "../../src/components/LandingPage";
 import SingleRestaurant from "../components/Restaurant/SingleRestaurant";
-import CreateRestaurantForm from "../../src/components/Restaurant/CreateRestaurantForm";
+import CreateRestaurantForm from "../../src/components/Restaurant/CreateRestaurantForm/CreateRestaurantForm";
 import UpdateRestaurant from "../components/Restaurant/UpdateRestaurantForm";
 import OrdersPage from "../components/OrdersPage";
 import MenuItemForm from "../components/MenuItems/CreateMenuItemForm";
@@ -49,12 +49,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <LoginFormPage />
+        element: <LoginFormPage />,
       },
       {
         path: "/orders/reviews",
-        element: <OwnerReviews/>
-      }
+        element: <OwnerReviews />,
+      },
     ],
   },
 ]);

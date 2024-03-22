@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchMenuItem, editMenuItem, getMenuItemTypes } from "../../redux/menuItemReducer";
+import {
+  fetchMenuItem,
+  editMenuItem,
+  getMenuItemTypes,
+} from "../../redux/menuItemReducer";
+import "./UpdateMenuItemForm.css";
 
 export default function UpdateMenuItem() {
   const dispatch = useDispatch();
@@ -15,7 +20,7 @@ export default function UpdateMenuItem() {
   const [image, setImage] = useState(menuItem?.imageUrl);
   const [errors, setErrors] = useState({});
 
-  const menuItemTypes = useSelector((state) => state.menuItemState.types)
+  const menuItemTypes = useSelector((state) => state.menuItemState.types);
 
   useEffect(() => {
     dispatch(fetchMenuItem(menuItemId)).then(dispatch(getMenuItemTypes()));
@@ -43,15 +48,15 @@ export default function UpdateMenuItem() {
     };
 
     const newItem = await dispatch(editMenuItem(menuItemId, payload));
-    if (newItem.errors) setErrors(newItem.errors)
-    else navigate(`/restaurants/${newItem.restaurant_id}`)
+    if (newItem.errors) setErrors(newItem.errors);
+    else navigate(`/restaurants/${newItem.restaurant_id}`);
   };
   return (
     <div>
       {menuItem && menuItemTypes && (
-        <div>
-          <form onSubmit={onSubmit}>
-            <h1>Update Your Menu Item</h1>
+        <div className="update-menu-page">
+          <form className="update-form" onSubmit={onSubmit}>
+            <h1 className="update-menu-title">Update Your Menu Item</h1>
             <div>
               <input
                 type="text"
@@ -97,6 +102,10 @@ export default function UpdateMenuItem() {
             </div>
             <button type="submit">Submit</button>
           </form>
+          <img
+            src="https://i.postimg.cc/0yLWjssc/menu-logo.avif"
+            alt="menu-logo"
+          />
         </div>
       )}
     </div>

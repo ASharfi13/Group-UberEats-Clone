@@ -1,0 +1,20 @@
+.update-menu-page {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.update-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.update-menu-title {
+  color: red;
+}
+
+.errors {
+  color: red;
+  font-weight: 800;
+}

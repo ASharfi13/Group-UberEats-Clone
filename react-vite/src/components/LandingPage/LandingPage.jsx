@@ -11,7 +11,7 @@ function LandingPage() {
   const navigate = useNavigate();
   const restaurants = useSelector((state) => state.restaurantState);
   const restaurantArr = Object.values(restaurants);
-  const user = useSelector((state) => state.session.user)
+  const user = useSelector((state) => state.session.user);
 
   const avgRating = {};
 
@@ -47,18 +47,26 @@ function LandingPage() {
             className="restaurantCard"
             // style={{ backgroundColor: `${user?.id == restaurant?.owner_id ? "#64B41C" : null}` }}
             key={idx}
-            onClick={() => navigate(`restaurants/${restaurant.id}`)}
+            onClick={() => {
+              navigate(`/restaurants/${restaurant.id}`);
+            }}
           >
             <p className="name">{restaurant.name}</p>
 
             <div className="rating">
-              <p>{avgRating[restaurant.id]?.toFixed(1)} <FaStar/></p>
+              <p>
+                {avgRating[restaurant.id]?.toFixed(1)} <FaStar />
+              </p>
             </div>
             <img className="resCardImage" src={restaurant?.imageUrl} />
             {user?.id == restaurant?.owner_id && (
-              <button className="add-item" onClick={() =>
-                navigate(`/restaurants/${restaurant?.id}/update`)
-              }>
+              <button
+                className="add-item edit-restaurant"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/restaurants/${restaurant?.id}/update`);
+                }}
+              >
                 Edit Restaurant
               </button>
             )}

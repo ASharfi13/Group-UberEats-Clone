@@ -4,6 +4,7 @@ import { fetchOwnerReviews, removeReview } from "../../redux/reviewReducer";
 import { fetchAllRestaurants } from "../../redux/restaurantReducer";
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import "../OrdersPage/ReviewsOrdersStyling.css"
 
 function OwnerReviews() {
     const dispatch = useDispatch()
@@ -18,6 +19,8 @@ function OwnerReviews() {
 
     console.log(reviewsArr)
 
+    console.log(reviewsArr[0])
+
 
     useEffect(() => {
         dispatch(fetchOwnerReviews())
@@ -31,12 +34,17 @@ function OwnerReviews() {
             {reviewsArr.map((review) => {
                 console.log(typeof review?.id)
                 return (
-                    <div className="orderCard" key={review?.id}>
-                        <span>{review?.description}</span>
-                        <span>{review?.stars}</span>
-                        <span>{restaurants[review?.id]?.name}</span>
-                        <span>{review?.createdAt}</span>
-                        <button onClick={() => {
+                    <div className="reviewCard" key={review?.id}>
+                        <img className="review-img" src={restaurants[review.restaurant_id]?.imageUrl}></img>
+                        <div className="reviewContent">
+                            <p>{review?.description}</p>
+                            <span> <span style={{fontWeight: "bold"}}>Rating: </span>{review?.stars} <FaStar /></span>
+                            <span>{restaurants[review?.id]?.name}</span>
+                            <span>{review?.createdAt}</span>
+                        </div>
+                        <button
+                        className="order-button"
+                        onClick={() => {
                             dispatch(removeReview(review?.id)).then(
                                 navigate(`/restaurants/${review?.restaurant_id}`)
                             )

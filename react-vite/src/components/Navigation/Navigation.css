@@ -1,11 +1,13 @@
 .nav-bar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-align: center;
   padding-left: 0px;
   position: sticky;
+  margin: 0;
   top: 0px;
-  background-color: lightgreen;
+  height: 50px;
 }
 
 .profile-dropdown {
@@ -13,42 +15,192 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: fit-content;
-  /* border: 2px solid black; */
-  padding-left: 2px;
+  align-items: flex-start;
+  top: 50px;
+  padding-top: 1%;
+  background-color: lightgreen;
+  gap: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  width: 15%;
+  font-size: x-large;
+}
+
+.profile-item {
+  display: flex;
+  padding-left: 10px;
+}
+.profile-item > button {
+  font-size: large;
+  background: none;
+  border: none;
+  margin-left: 5px;
+}
+
+.logout {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.logout > button {
+  background: none;
+  border: none;
+  font-size: large;
+  color: gray;
+}
+.user-info-container {
+  display: flex;
+  align-items: center;
+}
+
+.user-info-container > svg {
+  font-size: xxx-large;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 15px;
+  font-weight: bold;
 }
 
 .cart-dropdown {
-  right: 100px;
+  position: absolute;
+  width: 15%;
+  top: 50px;
+  right: 2%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: lightgreen;
+  gap: 10px;
+  padding: 0;
+  font-size: large;
 }
 
+.cart-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.close-cart{
+  border-radius: 50%;
+  padding: 5%;
+}
+.close-cart:hover {
+  cursor: pointer;
+  background-color: aquamarine;
+}
+
+.cart-content > h4 {
+  margin: 0;
+  font-size: large;
+}
+.wallet-info {
+  display: flex;
+  align-self: center;
+  gap: 10px;
+  margin-right: 10px;
+}
+
+.cart-content{
+  margin: 0 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-weight: bold;
+  margin-top: 5%;
+  gap: 5px;
+}
+
+.cart-item {
+  font-size: large;
+  font-weight: normal;
+}
+
+.total-price {
+  margin: 10% 0;
+  text-align: right;
+  font-weight: bold;
+}
+
+.cart-content > li {
+  width: 100%;
+}
+.cart-content > li > button {
+  font-size: large;
+  width: 100%;
+  margin-bottom: 5%;
+  background-color: black;
+  color: white;
+  border: 0px;
+  border-radius: 5px;
+  padding: 10px 5px;
+}
 .landing-logo {
-  width: 250px;
-  height: 85px;
+  width: 100%;
 }
 
 .left-side-nav-bar {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: flex-start;
   width: 50%;
+}
+
+.main-logo {
+  width: 20%;
+  margin: 0 3%;
 }
 
 .right-side-nav-bar {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  width: 50%;
+  justify-content: flex-end;
+  align-items: center;
 }
-
+.cart-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5%;
+}
+.cart-button > button {
+  display: flex;
+  align-items: center;
+  padding-left: 20%;
+  padding-right: 20%;
+  z-index: 1;
+  color: white;
+  font-size: x-large;
+  height: 40px;
+  width: 120px;
+  border-radius: 20px;
+  border: none;
+  background-color: black;
+}
+.cart-button > button > span {
+  font-size: small;
+  margin-left: 5px;
+}
 .delivery-pickup {
   display: flex;
   height: 45px;
-  width: 140px;
-  border-radius: 20px;
-  margin-top: 40px;
-  border: 1px black solid;
+  width: 20%;
+  border-radius: 23px;
+  background-color: lightgray;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 3px;
 }
 
 .button-pickup {
@@ -56,6 +208,7 @@
   width: 80px;
   border-radius: 20px;
   border: none;
+  background-color: transparent;
 }
 
 .button-delivery {
@@ -63,13 +216,25 @@
   width: 80px;
   border-radius: 20px;
   border: none;
+  background-color: white;
 }
 
 .search-bar {
-  border-radius: 10px;
-  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 20px;
+  width: 50%;
+  height: 40px;
   padding-left: 20px;
   padding-right: 20px;
+  margin-right: 10%;
   border: 1px black solid;
-  margin-top: 50px;
+  background-color: lightgray;
+}
+
+.search-bar > input {
+  width: 90%;
+  background-color: transparent;
+  border: none;
 }
