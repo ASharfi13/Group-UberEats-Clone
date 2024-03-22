@@ -57,7 +57,8 @@ export default function UpdateMenuItem() {
         <div className="update-menu-page">
           <form className="update-form" onSubmit={onSubmit}>
             <h1 className="update-menu-title">Update Your Menu Item</h1>
-            <div>
+            <div className="column-styles">
+              <p>Name</p>
               <input
                 className="input-area"
                 type="text"
@@ -69,7 +70,8 @@ export default function UpdateMenuItem() {
               <p className="errors">{errors.name ? errors.name : null}</p>
             </div>
 
-            <div>
+            <div className="column-styles">
+              <p>Price</p>
               <input
                 className="input-area"
                 type="text"
@@ -80,7 +82,8 @@ export default function UpdateMenuItem() {
               ></input>
               <p className="errors">{errors.price ? errors.price : null}</p>
             </div>
-            <div>
+            <div className="column-styles">
+              <p>Type</p>
               <select
                 className="input-area"
                 value={type}
@@ -95,7 +98,8 @@ export default function UpdateMenuItem() {
               </select>
               <p className="errors">{errors.type ? errors.type : null}</p>
             </div>
-            <div>
+            <div className="column-styles">
+              <p>Image Url</p>
               <input
                 className="input-area"
                 type="url"

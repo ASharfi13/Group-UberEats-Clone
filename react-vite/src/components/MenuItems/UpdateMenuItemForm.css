@@ -43,3 +43,11 @@
   width: 80px;
   border-radius: 20px;
 }
+
+.column-styles {
+  display: flex;
+  text-align: start;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 10px;
+}
