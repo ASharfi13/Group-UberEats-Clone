@@ -5,11 +5,15 @@
   text-align: center;
   gap: 200px;
   margin-left: 40px;
+  border: 2px black solid;
+  margin-top: 20px;
 }
 
 .restaurant-form {
   display: flex;
   flex-direction: column;
+  border: 2px red solid;
+  padding: 40px;
 }
 
 .restaurant-title-form {
