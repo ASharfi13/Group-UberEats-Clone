@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FiAlignJustify } from "react-icons/fi";
 import { FaRegUserCircle, FaReceipt, FaComment, FaWallet, FaUtensils } from "react-icons/fa";
+import { CiLogin, CiLogout } from "react-icons/ci";
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
@@ -90,16 +91,22 @@ function ProfileButton() {
               </>
             ) : (
               <>
+              <li className="profile-item">
+                <CiLogin />
                 <OpenModalMenuItem
                   itemText="Log In"
                   onItemClick={closeMenu}
                   modalComponent={<LoginFormModal />}
                 />
+              </li>
+              <li className="profile-item ending">
+                <CiLogout />
                 <OpenModalMenuItem
                   itemText="Sign Up"
                   onItemClick={closeMenu}
                   modalComponent={<SignupFormModal />}
                 />
+              </li>
               </>
             )}
           </ul>
