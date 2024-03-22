@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 def seed_shopping_cart():
     cart1 = ShoppingCart(
-        user_id=1, menu_item_id=1
+        user_id=1, menu_item_id=1, order_id=0
     )
     db.session.add(cart1)
     db.session.commit()
