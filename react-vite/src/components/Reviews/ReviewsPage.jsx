@@ -27,7 +27,7 @@ function ReviewsPage() {
   return (
     <>
       <h1>Reviews Page</h1>
-      <form onSubmit={handleSubmit} className="review-form">
+      <form onSubmit={handleSubmit} className="restaurant-form">
         <textarea
           name="description"
           value={description}
@@ -35,23 +35,20 @@ function ReviewsPage() {
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
         <p className="errors">{errors ? errors.description : null}</p>
-        {/* <div onClick={(e) => setStars(e.target.value)}>
-          <FaStar value={1} />
-          <FaStar value={2} />
-          <FaStar value={3} />
-          <FaStar value={4} />
-          <FaStar value={5} />
-        </div> */}
-        <input
-          onChange={(e) => setStars(e.target.value)}
-          type="number"
-          value={stars}
-          name="stars"
-          max={5}
-          min={0}
-        />
+        <label>
+          Star Rating:
+          <input
+            onChange={(e) => setStars(e.target.value)}
+            type="number"
+            value={stars}
+            name="stars"
+            max={5}
+            min={0}
+          />
+          <FaStar />
+        </label>
         <p className="errors">{errors ? errors.stars : null}</p>
-        <button>Submit Review</button>
+        <button className="order-button">Submit Review</button>
       </form>
     </>
   );
