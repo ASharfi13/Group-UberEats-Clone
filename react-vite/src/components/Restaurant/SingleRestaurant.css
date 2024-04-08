@@ -5,6 +5,7 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
 }
+
 .restaurant-image-container {
   display: flex;
   justify-content: center;
@@ -31,15 +32,18 @@
   justify-content: center;
   margin-bottom: 0;
 }
+
 .restaurantRating {
   display: flex;
   justify-content: center;
   gap: 5px;
   margin-top: 0px;
 }
+
 .reviews-header-container {
   width: 50vw;
 }
+
 .reviews-header-container h1 {
   margin-bottom: 2px;
 }
@@ -47,6 +51,7 @@
 .restaurantDetails {
   width: 50vw;
 }
+
 .reviews-Container {
   display: flex;
   width: 50vw;
@@ -64,6 +69,7 @@ h4 {
   color: darkslategray;
   margin-top: 0px;
 }
+
 .review-Card {
   display: flex;
   background-color: lightgreen;
@@ -128,6 +134,12 @@ h4 {
   padding: 15px;
 }
 
+@media only screen and (max-width:1020px) {
+  .menuItemCard {
+    width: 500px;
+  }
+}
+
 .menu-item-card-left {
   display: flex;
   flex-direction: column;
@@ -178,6 +190,8 @@ h4 {
   background-color: rgb(211, 209, 209);
   color: black;
   font-size: 12px;
+  height: 40px;
+  width: 150px;
 }
 
 button {
@@ -191,6 +205,8 @@ button {
   background-color: rgb(211, 209, 209);
   color: black;
   font-size: 12px;
+  height: 40px;
+  width: 80px;
 }
 
 .ManageMenuItem {
