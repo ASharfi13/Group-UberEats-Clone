@@ -19,7 +19,7 @@ function DeleteMenuItemButton({ id, restaurantId }) {
     <button
       className="delete-menu-button"
       onClick={(e) => {
-        if (window.confirm("Are you sure you want to delete this menu item?")) {
+        if (window.confirm("Are you sure you want to delete this menu item? It will erase this Menu Item from Order History")) {
           removeMenuItem(e);
         }
       }}

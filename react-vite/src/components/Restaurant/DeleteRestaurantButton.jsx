@@ -22,7 +22,7 @@ function DeleteRestaurantButton({ id }) {
       className="delete-restaurant-button"
       onClick={(e) => {
         if (
-          window.confirm("Are you sure you want to delete this restaurant?")
+          window.confirm("Are you sure you want to delete this restaurant? It will erase this Restaurant from Order History.")
         ) {
           removeRestaurant(e);
         }
