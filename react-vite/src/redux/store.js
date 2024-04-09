@@ -11,6 +11,7 @@ import menuItemReducer from "./menuItemReducer";
 import shoppingCartReducer from "./shoppingCartReducer";
 import reviewReducer from "./reviewReducer";
 import walletReducer from "./walletReducer";
+import mapsReducer from "./maps";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   menuItemState: menuItemReducer,
   orderState: shoppingCartReducer,
   reviewState: reviewReducer,
-  walletState: walletReducer
+  walletState: walletReducer,
+  mapState: mapsReducer
 });
 
 let enhancer;
