@@ -10,7 +10,7 @@ import UpdateMenuItem from "../components/MenuItems/UpdateMenuItemForm";
 import ReviewsPage from "../components/Reviews/ReviewsPage";
 import LoginFormPage from "../components/LoginFormPage/LoginFormPage";
 import OwnerReviews from "../components/Reviews/OwnerReviewsPage";
-import MapContainer from "../components/Maps";
+import Map from "../components/Maps/UserAddress";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/maps",
-        element: <MapContainer />
+        element: <Map />
       }
     ],
   },

@@ -4,3 +4,4 @@ from .user_routes import user_routes
 from .restaurant_routes import restaurant_routes
 from .review_routes import review_routes
 from .cart_routes import cart_routes
+from .map_routes import map_routes
