@@ -27,9 +27,9 @@ function LandingPage() {
     }
   });
 
-  useEffect(() => {
-    dispatch(fetchAllRestaurants());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAllRestaurants());
+  // }, [dispatch]);
 
   if (!restaurants) return;
   if (!restaurantArr) return;
