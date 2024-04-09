@@ -55,10 +55,6 @@ export const router = createBrowserRouter([
       {
         path: "/orders/reviews",
         element: <OwnerReviews />,
-      },
-      {
-        path: "/maps",
-        element: <Map />
       }
     ],
   },

@@ -10,7 +10,7 @@ export default function UserAddress() {
     console.log(request)
 
     return (
-        <APIProvider apiKey="AIzaSyBgx4z6ZvY6IYmCpMA-JxSgrLuY39y1PAk">
+        <APIProvider>
             <Map
                 style={{width: '100vw', height: '100vh'}}
                 defaultCenter={{

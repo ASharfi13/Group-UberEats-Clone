@@ -10,7 +10,7 @@ function LandingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const restaurants = useSelector((state) => state.restaurantState);
-  const restaurantArr = Object.values(restaurants);
+  const restaurantArr = Object.entries(restaurants).filter(([key, restaurant]) => key != "types");
   const user = useSelector((state) => state.session.user);
 
   const avgRating = {};
@@ -39,7 +39,7 @@ function LandingPage() {
       <h1 className="featured-on">Featured on Uber Eats</h1>
       <hr />
       <div className="restaurantDivs">
-        {restaurantArr?.map((restaurant, idx) => (
+        {restaurantArr?.map(([id, restaurant], idx) => (
           <div
             className="restaurantCard"
             // style={{ backgroundColor: `${user?.id == restaurant?.owner_id ? "#64B41C" : null}` }}
