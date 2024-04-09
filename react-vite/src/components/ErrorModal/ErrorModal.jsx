@@ -3,13 +3,12 @@
 import { useModal } from "../../context/Modal";
 import "./ErrorModal.css"
 
-function ErrorModal({message, cbFunction}) {
+function ErrorModal({message}) {
     // const dispatch = useDispatch()
     const { closeModal } = useModal()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        cbFunction();
         closeModal()
     }
 

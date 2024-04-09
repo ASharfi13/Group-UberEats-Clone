@@ -10,6 +10,7 @@ import { fetchOwnerMenuItems } from "../../redux/menuItemReducer";
 import { FaStar } from "react-icons/fa";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import ErrorModal from "../ErrorModal/ErrorModal";
 import DeleteRestaurantModal from "./DeleteRestaurantModal";
 import DeleteMenuItemModal from "../MenuItems/DeleteMenuItemModal";
 

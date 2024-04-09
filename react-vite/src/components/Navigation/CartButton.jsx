@@ -8,6 +8,7 @@ import { decreaseFunds, increaseFunds, loadFunds } from "../../redux/walletReduc
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import ErrorModal from "../ErrorModal/ErrorModal";
+import LoginFormModal from "../LoginFormModal";
 
 function CartButton() {
   const dispatch = useDispatch();
@@ -45,8 +46,9 @@ function CartButton() {
 
   const checkOutLoggedOut = async (e) => {
     e.preventDefault()
-    alert("Redirecting to Login Page")
-    navigate("/login")
+    // alert("Redirecting to Login Page")
+    setModalContent(<LoginFormModal/>)
+    // navigate("/")
   }
 
   const restaurantName = cartItems?.length > 0 ? JSON.parse(cartItems[0]).restaurant : ""
