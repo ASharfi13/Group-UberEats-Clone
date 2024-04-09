@@ -6,6 +6,8 @@ import { useShoppingCart } from "../../context/CartContext";
 import { checkOutCart } from "../../redux/shoppingCartReducer";
 import { decreaseFunds, increaseFunds, loadFunds } from "../../redux/walletReducer";
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../context/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 function CartButton() {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ function CartButton() {
   const restaurants = useSelector((store) => store.restaurantState)
   const ulRef = useRef();
   const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
+  const { setModalContent } = useModal()
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
     setShowMenu(!showMenu);
@@ -34,7 +37,9 @@ function CartButton() {
       setCartRestaurant(0)
       navigate("/orders")
     } else {
-      alert("Insufficient Funds, Please Add Funds in your profile")
+
+      setModalContent(<ErrorModal message={"Insufficient Funds, Please Add Funds in your profile"}/>)
+      // alert("Insufficient Funds, Please Add Funds in your profile")
     }
   }
 
@@ -66,9 +71,9 @@ function CartButton() {
 
   const closeMenu = () => setShowMenu(false);
 
-  const handleRemoveItem = async (e) => {
-    set
-  }
+  // const handleRemoveItem = async (e) => {
+  //   set
+  // }
 
   return (
     <div className="cart-button">

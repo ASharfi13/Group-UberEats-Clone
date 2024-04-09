@@ -3,6 +3,8 @@ import { deleteRestaurant } from "../../redux/restaurantReducer";
 import { useNavigate } from "react-router-dom";
 import "./DeleteRestaurantButton.css";
 import { useShoppingCart } from "../../context/CartContext";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 function DeleteRestaurantButton({ id }) {
   const dispatch = useDispatch();

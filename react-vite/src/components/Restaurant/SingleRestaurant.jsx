@@ -8,6 +8,10 @@ import DeleteMenuItemButton from "../MenuItems/DeleteMenuItemButton";
 import { useShoppingCart } from "../../context/CartContext";
 import { fetchOwnerMenuItems } from "../../redux/menuItemReducer";
 import { FaStar } from "react-icons/fa";
+import { useModal } from "../../context/Modal";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import DeleteRestaurantModal from "./DeleteRestaurantModal";
+import DeleteMenuItemModal from "../MenuItems/DeleteMenuItemModal";
 
 function SingleRestaurant() {
   const { restaurantId } = useParams();
@@ -17,6 +21,7 @@ function SingleRestaurant() {
   const menu_items = useSelector((state) => state.menuItemState);
   const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } =
     useShoppingCart();
+  const { setModalContent } = useModal()
 
   const reviewsArr = restaurant[restaurantId]?.Reviews;
   const menuItemsArr = Object.values(menu_items);
@@ -41,9 +46,10 @@ function SingleRestaurant() {
       setCartRestaurant(menuItem.restaurant_id);
       window.alert(`${menuItem.name} added to Cart!`)
     } else if (cartRestaurant !== menuItem.restaurant_id) {
-      window.alert(
-        "Menu Item from a different Restaurant cannot be added to Current Cart. Please Checkout or Clear Cart"
-      );
+        setModalContent(<ErrorModal message={"Menu Item from a different Restaurant cannot be added to Current Cart. Please Checkout or Clear Cart"}/>)
+      // window.alert(
+      //   "Menu Item from a different Restaurant cannot be added to Current Cart. Please Checkout or Clear Cart"
+      // );
     } else {
       setCartItems([...cartItems, JSON.stringify(menuItem)]);
       window.alert(`${menuItem.name} added to Cart!`)
@@ -142,10 +148,10 @@ function SingleRestaurant() {
                             >
                               Edit
                             </button>
-                            <DeleteMenuItemButton
-                              id={item.id}
-                              restaurantId={restaurantId}
-                            />
+                            <OpenModalButton
+                              buttonText={"Delete"}
+                              modalComponent={<DeleteMenuItemModal itemId={item.id} restaurantId={restaurantId} message={"Are you sure you want to delete this menu item? It will erase this Menu Item from Order History"}/>}
+                              />
                           </>
                         )}
                       </div>
@@ -169,10 +175,14 @@ function SingleRestaurant() {
                   }>
                     Edit Restaurant
                   </button>
-                  <DeleteRestaurantButton
+                  <OpenModalButton
+                    buttonText={"Delete Restaurant"}
+                    modalComponent={<DeleteRestaurantModal restaurantId={restaurantId} message={"Are you sure you want to delete this restaurant? It will erase this Restaurant from Order History."}/>}
+                  />
+                  {/* <DeleteRestaurantButton
                     className="delete-button"
                     id={restaurantId}
-                  />
+                  /> */}
                   <button
                     className="add-item"
                     onClick={() =>
