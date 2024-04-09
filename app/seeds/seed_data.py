@@ -193,7 +193,63 @@ restaurants= [
         "type": "Korean",
         "owner_id": 1,
         "imageUrl": "https://i.postimg.cc/ZKZNPbF1/pocha-house.jpg"
-    }
+    },
+    {
+        "name": "Yue Huang",
+        "location": "20 Gateway Park Blvd",
+        "type": "Chinese",
+        "owner_id": 2,
+        "imageUrl": "https://i.postimg.cc/2ScKrsGZ/yue-huang.jpg"
+    },
+     {
+        "name": "Chipotle",
+        "location": "21 Del Paso Rd",
+        "type": "Mexican",
+        "owner_id": 3,
+        "imageUrl": "https://i.postimg.cc/VNVMd9Z7/chipotle.webp"
+    },
+    {
+        "name": "El Aguacatero",
+        "location": "22 Northgate Rd",
+        "type": "Mexican",
+        "owner_id": 4,
+        "imageUrl": "https://i.postimg.cc/Vs3xX3bw/aguacatero.jpg"
+    },
+    {
+        "name": "Poke Fix",
+        "location": "23 North Rd",
+        "type": "Hawaiian",
+        "owner_id": 5,
+        "imageUrl": "https://i.postimg.cc/CxK90Y3j/poke-fix.png"
+    },
+    {
+        "name": "Fire Wings",
+        "location": "24 Norwood Rd",
+        "type": "American",
+        "owner_id": 6,
+        "imageUrl": "https://i.postimg.cc/wTRWHVFj/fire-wings.jpg"
+    },
+    {
+        "name": "Chaat Cafe",
+        "location": "25 Gateway Rd",
+        "type": "Indian",
+        "owner_id": 7,
+        "imageUrl": "https://i.postimg.cc/mDNShXJQ/chaat-cafe.webp"
+    },
+    {
+        "name": "Pho ABC",
+        "location": "26 Greenback Ln",
+        "type": "Vietnamese",
+        "owner_id": 8,
+        "imageUrl": "https://i.postimg.cc/gjxQRPWC/phoabc.webp"
+    },
+    {
+        "name": "Jollibee",
+        "location": "27 Midview Ln",
+        "type": "Filipino",
+        "owner_id": 9,
+        "imageUrl": "https://i.postimg.cc/NFbnWfx2/jollibee.png"
+    },
 ]
 
 menu_items=[
@@ -406,7 +462,287 @@ menu_items=[
         "price": 11.99,
         "restaurant_id": 10,
         "imageUrl": "https://i.postimg.cc/YCr761Bg/kimchi-fried-rice.jpg",
-    }
+    },
+    {
+        "name": "Shrimp Dumplings",
+        "type": "Shrimp",
+        "price": 9.99,
+        "restaurant_id": 11,
+        "imageUrl": "https://i.postimg.cc/cLLk2n6s/shrimp-dumplings.webp",
+    },
+    {
+        "name": "Pork Fried Rice",
+        "type": "Pork",
+        "price": 12.99,
+        "restaurant_id": 11,
+        "imageUrl": "https://i.postimg.cc/Tw5nDR1M/pork-fried-rice.jpg",
+    },
+    {
+        "name": "Fried Flounder",
+        "type": "Fish",
+        "price": 11.99,
+        "restaurant_id": 11,
+        "imageUrl": "https://i.postimg.cc/8PNr1dRV/fried-flounder-recipe-snippet-3.jpg",
+    },
+    {
+        "name": "Sweet and Sour Pork",
+        "type": "Pork",
+        "price": 11.99,
+        "restaurant_id": 11,
+        "imageUrl": "https://i.postimg.cc/VNvCxXxW/sweet-pork.jpg",
+    },
+    {
+        "name": "Siu Mai",
+        "type": "Pork",
+        "price": 8.99,
+        "restaurant_id": 11,
+        "imageUrl": "https://i.postimg.cc/908VHjP0/siu-mai.jpg",
+    },
+    {
+        "name": "Carne Asada Burrito",
+        "type": "Beef",
+        "price": 13.99,
+        "restaurant_id": 12,
+        "imageUrl": "https://i.postimg.cc/1XWdmkmj/chipotle-burrito.jpg",
+    },
+    {
+        "name": "Chicken Bowl",
+        "type": "Chicken",
+        "price": 10.99,
+        "restaurant_id": 12,
+        "imageUrl": "https://i.postimg.cc/C11NSm1v/chipotle-bowl.jpg",
+    },
+    {
+        "name": "Chicken Quesadilla",
+        "type": "Chicken",
+        "price": 8.99,
+        "restaurant_id": 12,
+        "imageUrl": "https://i.postimg.cc/vm9zBcLn/chipotle-quesadilla.jpg",
+    },
+    {
+        "name": "Pork Tacos",
+        "type": "Pork",
+        "price": 7.99,
+        "restaurant_id": 12,
+        "imageUrl": "https://i.postimg.cc/3J8YFGkK/chipotle-tacos.jpg",
+    },
+    {
+        "name": "Nachos",
+        "type": "Chicken",
+        "price": 9.99,
+        "restaurant_id": 12,
+        "imageUrl": "https://i.postimg.cc/Zq3GSYW7/chipotle-nachos.jpg",
+    },
+    {
+        "name": "Torta",
+        "type": "Pork",
+        "price": 14.99,
+        "restaurant_id": 13,
+        "imageUrl": "https://i.postimg.cc/9XTswQ1c/torta.jpg",
+    },
+    {
+        "name": "Carne Asada Tacos",
+        "type": "Beef",
+        "price": 7.99,
+        "restaurant_id": 13,
+        "imageUrl": "https://i.postimg.cc/zG1zHQTc/agua-tacos.jpg",
+    },
+    {
+        "name": "Al Pastor Burrito",
+        "type": "Pork",
+        "price": 12.99,
+        "restaurant_id": 13,
+        "imageUrl": "https://i.postimg.cc/FK6szHpj/agua-burrito.jpg",
+    },
+    {
+        "name": "Al Pastor Tacos",
+        "type": "Pastor",
+        "price": 8.99,
+        "restaurant_id": 13,
+        "imageUrl": "https://i.postimg.cc/t4Pz2sZg/agua-pork-taco.avif",
+    },
+    {
+        "name": "Birria Tacos",
+        "type": "Pork",
+        "price": 10.99,
+        "restaurant_id": 13,
+        "imageUrl": "https://i.postimg.cc/RFfGhGK4/agua-birria-tacos.avif",
+    },
+    {
+        "name": "Sushi Bake",
+        "type": "Rice",
+        "price": 7.99,
+        "restaurant_id": 14,
+        "imageUrl": "https://i.postimg.cc/Dw2k14wq/sushi-bake.avif",
+    },
+    {
+        "name": "Poke Bowl",
+        "type": "Fish",
+        "price": 14.99,
+        "restaurant_id": 14,
+        "imageUrl": "https://i.postimg.cc/V67dcPZh/poke-bowl.jpg",
+    },
+    {
+        "name": "Poke Burrito",
+        "type": "Fish",
+        "price": 15.99,
+        "restaurant_id": 14,
+        "imageUrl": "https://i.postimg.cc/TYjhRbsm/poke-burrito.jpg",
+    },
+    {
+        "name": "Chicken Karaager",
+        "type": "Chicken",
+        "price": 9.99,
+        "restaurant_id": 14,
+        "imageUrl": "https://i.postimg.cc/Sxv4qNmC/chicken-karaage.jpg",
+    },
+    {
+        "name": "Spam Masubi",
+        "type": "Rice",
+        "price": 5.99,
+        "restaurant_id": 14,
+        "imageUrl": "https://i.postimg.cc/L56QnLTX/spam-masubi.jpg",
+    },
+    {
+        "name": "Chicken Wings",
+        "type": "Chicken",
+        "price": 9.99,
+        "restaurant_id": 15,
+        "imageUrl": "https://i.postimg.cc/dtxvcmR4/chicken-wings.webp",
+    },
+    {
+        "name": "Cheese Fries",
+        "type": "Fries",
+        "price": 7.99,
+        "restaurant_id": 15,
+        "imageUrl": "https://i.postimg.cc/900SLKkV/cheese-fries.avif",
+    },
+    {
+        "name": "Regular Fries",
+        "type": "Fries",
+        "price": 5.99,
+        "restaurant_id": 15,
+        "imageUrl": "https://i.postimg.cc/Fst8yWZt/regular-fries.avif",
+    },
+    {
+        "name": "Boneless Wings",
+        "type": "Chicken",
+        "price": 9.99,
+        "restaurant_id": 15,
+        "imageUrl": "https://i.postimg.cc/G3jGK9Pc/boneless-wings.webp",
+    },
+    {
+        "name": "Tater Tots",
+        "type": "Fries",
+        "price": 7.99,
+        "restaurant_id": 15,
+        "imageUrl": "https://i.postimg.cc/CKyRSVCP/tater-tots.jpg",
+    },
+     {
+        "name": "Papri Chaat",
+        "type": "Potato",
+        "price": 6.99,
+        "restaurant_id": 16,
+        "imageUrl": "https://i.postimg.cc/7h9ytjwZ/pari-chaat.jpg",
+    },
+      {
+        "name": "Chickn Biryani",
+        "type": "Chicken",
+        "price": 13.99,
+        "restaurant_id": 16,
+        "imageUrl": "https://i.postimg.cc/7hsW24q0/chicken-byrani.jpg",
+    },
+       {
+        "name": "Lamb Biryani",
+        "type": "Lamb",
+        "price": 14.99,
+        "restaurant_id": 16,
+        "imageUrl": "https://i.postimg.cc/QMFcqWcF/lamb-biryani.webp",
+    },
+        {
+        "name": "Chicken Tandoori",
+        "type": "Chicken",
+        "price": 12.99,
+        "restaurant_id": 16,
+        "imageUrl": "https://i.postimg.cc/wMZC7N5D/chicken-tandoori.jpg",
+    },
+         {
+        "name": "Chicken Tikka Plate",
+        "type": "Chicken",
+        "price": 10.99,
+        "restaurant_id": 16,
+        "imageUrl": "https://i.postimg.cc/pXk0Gz5C/chicken-tikka-recipe-1957388-Final-5bb021874cedfd0026da89fd.jpg",
+    },
+    {
+        "name": "Spring Rolls",
+        "type": "Shrimp",
+        "price": 6.99,
+        "restaurant_id": 17,
+        "imageUrl": "https://i.postimg.cc/sDpzS1Ms/spring-rolls.jpg",
+    },
+    {
+        "name": "Beef Pho",
+        "type": "Beef",
+        "price": 9.99,
+        "restaurant_id": 17,
+        "imageUrl": "https://i.postimg.cc/N0xLxpLG/beef-pho.jpg",
+    },
+    {
+        "name": "Pork Chop Over Rice",
+        "type": "Pork",
+        "price": 10.99,
+        "restaurant_id": 17,
+        "imageUrl": "https://i.postimg.cc/J4bynrmB/pork-chop.avif",
+    },
+    {
+        "name": "Chicken Pho",
+        "type": "Chicken",
+        "price": 10.99,
+        "restaurant_id": 17,
+        "imageUrl": "https://i.postimg.cc/3xNHq1LJ/chicken-pho.jpg",
+    },
+    {
+        "name": "Fried Spring Rolls",
+        "type": "Shrimp",
+        "price": 10.99,
+        "restaurant_id": 17,
+        "imageUrl": "https://i.postimg.cc/7LqSDC26/fried-spring-rolls.webp",
+    },
+    {
+        "name": "Fried Chicken",
+        "type": "Chicken",
+        "price": 8.99,
+        "restaurant_id": 18,
+        "imageUrl": "https://i.postimg.cc/7LqSDC26/fried-spring-rolls.webp",
+    },
+    {
+        "name": "Spaghetti",
+        "type": "Noodles",
+        "price": 12.99,
+        "restaurant_id": 18,
+        "imageUrl": "https://i.postimg.cc/7LqSDC26/fried-spring-rolls.webp",
+    },
+    {
+        "name": "Chicken Sandwich",
+        "type": "Chicken",
+        "price": 6.99,
+        "restaurant_id": 18,
+        "imageUrl": "https://i.postimg.cc/7LqSDC26/fried-spring-rolls.webp",
+    },
+    {
+        "name": "Yumburger",
+        "type": "Beef",
+        "price": 7.99,
+        "restaurant_id": 18,
+        "imageUrl": "https://i.postimg.cc/GprvptH4/yumburger.jpg",
+    },
+    {
+        "name": "Burger Steak",
+        "type": "Beef",
+        "price": 9.99,
+        "restaurant_id": 18,
+        "imageUrl": "https://i.postimg.cc/x8SX6FMc/burger-steak.webp",
+    },
 ]
 
 reviews=[
@@ -523,7 +859,55 @@ reviews=[
         "description": "Not a big fan of pizza.",
         "restaurant_id": 1,
         "user_id": 20
-    }
+    },
+    {
+        "stars": 5,
+        "description": "The dumplings were amazing. I would recommend you all to try it.",
+        "restaurant_id": 11,
+        "user_id": 1
+    },
+    {
+        "stars": 3,
+        "description": "It was okay. It was nothing special",
+        "restaurant_id": 12,
+        "user_id": 2
+    },
+    {
+        "stars": 5,
+        "description": "Their torta is amazing. I have never had something this good",
+        "restaurant_id": 13,
+        "user_id": 3
+    },
+    {
+        "stars": 2,
+        "description": "I hate raw fish. I do not know why I came here.",
+        "restaurant_id": 14,
+        "user_id": 4
+    },
+    {
+        "stars": 4,
+        "description": "Their wings are so crispy. You can hear the crunch",
+        "restaurant_id": 15,
+        "user_id": 5
+    },
+    {
+        "stars": 4,
+        "description": "The food was amazing. They gave a very big portion.",
+        "restaurant_id": 16,
+        "user_id": 6
+    },
+    {
+        "stars": 4,
+        "description": "The food was okay. I think it would have been better if was warmer.",
+        "restaurant_id": 17,
+        "user_id": 7
+    },
+    {
+        "stars": 5,
+        "description": "This place is so good. Their fried chicken is so delicious.",
+        "restaurant_id": 18,
+        "user_id": 8
+    },
 ]
 
 shopping_carts=[

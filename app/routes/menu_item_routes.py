@@ -1,9 +1,9 @@
 from flask import Blueprint, Flask, request
 from app.models import db, MenuItem
 from app.models.menu_item import menuItemTypes
-from app.forms import MenuItemForm
+from app.forms import EditMenuItemForm
 from flask_login import login_required
-from app.utils import is_menu_item_owner
+from app.utils import is_menu_item_owner, get_unique_filename, upload_file_to_s3
 import json
 from types import SimpleNamespace
 
@@ -35,13 +35,22 @@ def updateMenuItem(itemId):
         return json.dumps({
             "message": "Menu Item couldn't be found"
         }), 404
-
-    data = json.loads(request.data, object_hook=lambda d: SimpleNamespace(**d)) # convert JSON to Object so form can key in using .
-    form = MenuItemForm(obj=data)
+    form = EditMenuItemForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        form.populate_obj(item)
-        db.session.add(item)
+        image = form.data["image"]
+        if image:
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            print(upload)
+            if "url" not in upload:
+                return {'message': 'Bad Request', 'errors': {"image": "Upload Failed"}}, 500
+        else:
+            upload = {"url": item.imageUrl}
+        item.name=form.data['name']
+        item.price=form.data['price']
+        item.type=form.data['type']
+        item.imageUrl=upload["url"]
         db.session.commit()
         return json.dumps(item.to_dict())
     return {'message': 'Bad Request', 'errors': form.errors}, 400

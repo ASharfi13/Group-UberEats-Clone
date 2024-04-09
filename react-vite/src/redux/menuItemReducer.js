@@ -85,8 +85,7 @@ export const fetchOwnerMenuItems = (restaurantId) => async (dispatch) => {
 export const writeMenuItem = (restaurantId, payload) => async (dispatch) => {
   const response = await fetch(`/api/restaurants/${restaurantId}/menu-items`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: payload,
   });
   const menu_item = await response.json();
   if (response.status !== 201) {
@@ -112,8 +111,7 @@ export const deleteMenuItem = (menu_itemId) => async (dispatch) => {
 export const editMenuItem = (menu_itemId, payload) => async (dispatch) => {
   const response = await fetch(`/api/menu-items/${menu_itemId}`, {
     method: "PUT",
-    header: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: payload,
   });
   if (response.ok) {
     const menu_item = await response.json();

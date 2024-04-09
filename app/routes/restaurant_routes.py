@@ -1,9 +1,9 @@
 from app.models import db, Restaurant, MenuItem, Review, User
 from app.models.restaurant import restaurantTypes
-from app.forms import RestaurantForm, MenuItemForm, ReviewForm
+from app.forms import RestaurantForm, MenuItemForm, ReviewForm, EditRestaurantForm
 from flask import Blueprint, request
 from flask_login import login_required
-from app.utils import is_restaurant_owner, get_current_user
+from app.utils import is_restaurant_owner, get_current_user, get_unique_filename, upload_file_to_s3
 import json
 from types import SimpleNamespace
 
@@ -27,11 +27,17 @@ def newRestaurant():
     form = RestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        image = form.data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print(upload)
+        if "url" not in upload:
+            return {'message': 'Bad Request', 'errors': {"image": "Upload Failed"}}, 500
         newRestaurant = Restaurant(
             name=form.data['name'],
             location=form.data['location'],
             type=form.data['type'],
-            imageUrl=form.data['imageUrl'],
+            imageUrl=upload["url"],
             owner_id=get_current_user()
         )
         db.session.add(newRestaurant)
@@ -91,12 +97,22 @@ def updateRestaurant(restaurantId):
         return json.dumps({
             "message": "Restaurant couldn't be found"
         }), 404
-    data = json.loads(request.data, object_hook=lambda d: SimpleNamespace(**d)) # convert JSON to Object so form can key in using .
-    form = RestaurantForm(obj=data)
+    form = EditRestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        form.populate_obj(restaurant)
-        db.session.add(restaurant)
+        image = form.data["image"]
+        if image:
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            print(upload)
+            if "url" not in upload:
+                return {'message': 'Bad Request', 'errors': {"image": "Upload Failed"}}, 500
+        else:
+            upload = {"url": restaurant.imageUrl}
+        restaurant.name=form.data['name']
+        restaurant.location=form.data['location']
+        restaurant.type=form.data['type']
+        restaurant.imageUrl=upload["url"]
         db.session.commit()
         return json.dumps(restaurant.to_dict())
     return {'message': 'Bad Request', 'errors': form.errors}, 400
@@ -132,11 +148,17 @@ def createMenuItem(restaurantId):
     form = MenuItemForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        image = form.data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print(upload)
+        if "url" not in upload:
+            return {'message': 'Bad Request', 'errors': {"image": "Upload Failed"}}, 500
         newItem = MenuItem(
             name=form.data['name'],
             price=form.data['price'],
             type=form.data['type'],
-            imageUrl=form.data['imageUrl'],
+            imageUrl=upload["url"],
             restaurant_id=restaurantId
         )
         db.session.add(newItem)

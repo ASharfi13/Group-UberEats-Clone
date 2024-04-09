@@ -14,24 +14,37 @@ function RestaurantForm() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageURL, setImageURL] = useState(null)
+  const [imageLoading, setImageLoading] = useState(false)
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     dispatch(getRestaurantTypes());
   }, [dispatch]);
 
+  const handleFile = (e) => {
+    e.stopPropagation();
+    const tempFile = e.target.files[0]
+    if (tempFile.size > 5000000) {
+      setErrors({...errors, "image": "Selected Image exceeds maximum file size of 5mb"})
+      return
+    }
+    const newImageURL = URL.createObjectURL(tempFile);
+    setImageURL(newImageURL);
+    setImage(tempFile);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("location", location);
+    formData.append("type", type);
+    formData.append("image", image);
+    setImageLoading(true);
 
-    const payload = {
-      name,
-      location,
-      type,
-      imageUrl: image,
-    };
-
-    const newRestaurant = await dispatch(writeRestaurant(payload));
+    const newRestaurant = await dispatch(writeRestaurant(formData));
     if (newRestaurant.errors) setErrors(newRestaurant.errors);
     else navigate(`/restaurants/${newRestaurant.id}`);
   };
@@ -41,7 +54,7 @@ function RestaurantForm() {
       <div>
         {restaurantTypes && (
           <div className="restaurant-page-create">
-            <form className="restaurant-form" onSubmit={onSubmit}>
+            <form className="restaurant-form" onSubmit={onSubmit} encType="multipart/form-data">
               <h1 className="restaurant-title-form">Create Your Restaurant</h1>
               <div className="column-styles">
                 <p>Name</p>
@@ -91,16 +104,14 @@ function RestaurantForm() {
                 </p>
               </div>
               <div className="column-styles">
-                <p>Image Url</p>
+                <p>Image</p>
                 <input
-                  className="input-area"
-                  type="url"
-                  placeholder="Enter New Image Url"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                ></input>
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFile(e)}
+                />
                 <p className="restaurant-errors">
-                  {errors.imageUrl ? errors.imageUrl : null}
+                  {errors.image ? errors.image : null}
                 </p>
               </div>
               <button className="restaurant-submit" type="submit">
@@ -109,7 +120,7 @@ function RestaurantForm() {
             </form>
             <img
               className="res-logo"
-              src="https://i.postimg.cc/8cdCxDbc/restaurant-logo.jpg"
+              src={imageURL ? imageURL : "https://i.postimg.cc/8cdCxDbc/restaurant-logo.jpg"}
               alt="res-logo"
             />
           </div>
