@@ -5,10 +5,10 @@ This application is a partial clone of Uber Eats, a delivery platform that conne
 https://ahmed-joel-khobe-royce-ubereats-project.onrender.com
 
 # Contributors
-- Ahmed Sharfi: ![LinkedIn](https://www.linkedin.com/in/ahmedsharfi/) ![GitHub](https://github.com/asharfi13)
-- Joel Abitzen: ![LinkedIn](https://www.linkedin.com/in/joel-abitzen/) ![GitHub](https://github.com/jabitzen)
-- Khobe Arzadon: ![LinkedIn](https://www.linkedin.com/in/khobe-arzadon-4b985a202/) ![GitHub](https://github.com/khobearzadon24)
-- Royce Jiang: ![LinkedIn](https://www.linkedin.com/in/jiangroyce/) ![GitHub](https://github.com/jiangroyce)
+- Ahmed Sharfi: [LinkedIn](https://www.linkedin.com/in/ahmedsharfi/) | [GitHub](https://github.com/asharfi13)
+- Joel Abitzen: [LinkedIn](https://www.linkedin.com/in/joel-abitzen/) | [GitHub](https://github.com/jabitzen)
+- Khobe Arzadon: [LinkedIn](https://www.linkedin.com/in/khobe-arzadon-4b985a202/) | [GitHub](https://github.com/khobearzadon24)
+- Royce Jiang: [LinkedIn](https://www.linkedin.com/in/jiangroyce/) | [GitHub](https://github.com/jiangroyce)
 
 # Tech Stack
 ## Framework and Libraries
