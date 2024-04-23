@@ -15,7 +15,7 @@ function LandingPage() {
 
   const avgRating = {};
 
-  restaurantArr?.forEach((restaurant) => {
+  restaurantArr?.forEach(([key, restaurant]) => {
     let sum = 0;
     if (restaurant.reviews) {
       restaurant?.reviews?.forEach((res) => {
