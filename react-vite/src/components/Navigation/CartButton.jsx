@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaShoppingCart, FaWallet } from 'react-icons/fa';
-import { IoMdClose } from 'react-icons/io'
 import { useShoppingCart } from "../../context/CartContext";
 import { checkOutCart } from "../../redux/shoppingCartReducer";
 import { decreaseFunds, increaseFunds, loadFunds } from "../../redux/walletReducer";
@@ -9,81 +8,38 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import ErrorModal from "../ErrorModal/ErrorModal";
 import LoginFormModal from "../LoginFormModal";
+import OpenSideModalButton from "../OpenSideModalButton";
+import CartModal from "../CartModal";
 
 function CartButton() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const wallets = useSelector((store) => store.walletState);
   const userWallet = wallets ? wallets[user?.id] : null;
   const restaurants = useSelector((store) => store.restaurantState)
-  const ulRef = useRef();
   const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
-  const { setModalContent } = useModal()
-  const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
-    setShowMenu(!showMenu);
-  };
-
-  let total = 0
-
-  const checkOutLoggedIn = async (e) => {
-    e.preventDefault()
-    if (userWallet >= total) {
-      const newOrder = await dispatch(checkOutCart(user.id, cartItems))
-      const newUserBalance = await dispatch(decreaseFunds(-total, user.id))
-      const newRestaurantBalance = await dispatch(increaseFunds(total * 0.95, restaurants[cartRestaurant].owner_id))
-      setCartItems([])
-      setCartRestaurant(0)
-      navigate("/orders")
-    } else {
-
-      setModalContent(<ErrorModal message={"Insufficient Funds, Please Add Funds in your profile"}/>)
-      // alert("Insufficient Funds, Please Add Funds in your profile")
-    }
-  }
-
-  const checkOutLoggedOut = async (e) => {
-    e.preventDefault()
-    // alert("Redirecting to Login Page")
-    setModalContent(<LoginFormModal/>)
-    // navigate("/")
-  }
-
   const restaurantName = cartItems?.length > 0 ? JSON.parse(cartItems[0]).restaurant : ""
 
   useEffect(() => {
     dispatch(loadFunds(user?.id))
   }, [dispatch, user?.id])
 
-  useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = (e) => {
-      if (ulRef.current && !ulRef.current.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
-
-    // document.addEventListener("click", closeMenu);
-
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu, cartItems.length]);
-
-  const closeMenu = () => setShowMenu(false);
-
-  // const handleRemoveItem = async (e) => {
-  //   set
-  // }
-
   return (
     <div className="cart-button">
-      <button onClick={toggleMenu}>
-        <FaShoppingCart />
-      <span>{cartItems?.length} items</span>
-      </button>
-      {showMenu && (
+      <OpenSideModalButton
+        buttonText={<><FaShoppingCart /><span>{cartItems?.length} items</span></>}
+        modalComponent={<CartModal
+          user={user}
+          restaurantName={restaurantName}
+          userWallet={userWallet}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+          cartRestaurant={cartRestaurant}
+          setCartRestaurant={setCartRestaurant}
+          restaurants={restaurants} />}
+        modalSide="right"
+      />
+      {/* {showMenu && (
         <ul className={"cart-dropdown"} ref={ulRef}>
           <div className="cart-header">
             <IoMdClose className="close-cart" onClick={closeMenu}/>
@@ -120,7 +76,7 @@ function CartButton() {
             </li>
           </div>
         </ul>
-      )}
+      )} */}
     </div>
   );
 }
