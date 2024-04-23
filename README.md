@@ -1,4 +1,24 @@
-# Group1 UberEats Clone
+# Group 1 UberEats Clone (Name Pending) 
+This application is a partial clone of Uber Eats, a delivery platform that connects restaurants with drivers to deliver an all in one food ordering experience to the consumer. We aim to capture the intutive user interface of UberEats and extend it to the creating and managing of restaurants. Currently we have implemented full CRUD functionality for restaurants, food items as well as basic shopping cart and checkout functionality. We are currently working on styling the site to match the UberEats site. We plan to implement the Google Maps API to further enhance the user experience. 
+
+# Live Link
+https://ahmed-joel-khobe-royce-ubereats-project.onrender.com
+
+# Contributors
+- Ahmed Sharfi: [LinkedIn](https://www.linkedin.com/in/ahmedsharfi/) | [GitHub](https://github.com/asharfi13)
+- Joel Abitzen: [LinkedIn](https://www.linkedin.com/in/joel-abitzen/) | [GitHub](https://github.com/jabitzen)
+- Khobe Arzadon: [LinkedIn](https://www.linkedin.com/in/khobe-arzadon-4b985a202/) | [GitHub](https://github.com/khobearzadon24)
+- Royce Jiang: [LinkedIn](https://www.linkedin.com/in/jiangroyce/) | [GitHub](https://github.com/jiangroyce)
+
+# Tech Stack
+## Framework and Libraries
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)![Flask](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-%2523323330.svg?style=for-the-badge&logo=sqlalchemy)![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
+## Database
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
+## Hosting
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
 ## Database Schema
 ![alt text](<DatabaseSchema.png>)
