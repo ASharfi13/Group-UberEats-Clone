@@ -1,0 +1,25 @@
+#side-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+}
+
+#side-modal-content.right {
+  position: absolute;
+  background-color:white;
+  height: 100%;
+  z-index: +1;
+  right: 0;
+  width: 460px;
+}
+
+#side-modal-content {
+  position: absolute;
+  background-color:white;
+  width: 320px;
+  height: 100%;
+  z-index: +1;
+}

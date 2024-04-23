@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FiAlignJustify } from "react-icons/fi";
+import { VscThreeBars } from "react-icons/vsc";
 import { FaRegUserCircle, FaReceipt, FaComment, FaWallet, FaUtensils } from "react-icons/fa";
 import { CiLogin, CiLogout } from "react-icons/ci";
 import { thunkLogout } from "../../redux/session";
@@ -8,9 +8,11 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import AddFundsModal from "../AddFundsModal";
+import OpenSideModalButton from "../OpenSideModalButton";
 import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../../context/CartContext";
 import "./ProfileButton.css";
+import ProfileModal from "../ProfileModal";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -41,21 +43,11 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(thunkLogout());
-    closeMenu();
-    setCartItems([]);
-    navigate("/");
-  };
-
   return (
     <>
       <div className="burger-container">
-        <button className="profilebutton" onClick={toggleMenu}>
-          <FiAlignJustify className="three-lines" />
-        </button>
-        {showMenu && (
+        <OpenSideModalButton className="profilebutton" onClick={toggleMenu} buttonText={<VscThreeBars viewBox="0 0 24 24" width="20" height="20" className="three-lines"/>} modalComponent={<ProfileModal user={user} />} modalSide={"left"}/>
+        {/* {showMenu && (
           <ul className={"profile-dropdown"} ref={ulRef}>
             {user ? (
               <>
@@ -110,7 +102,7 @@ function ProfileButton() {
               </>
             )}
           </ul>
-        )}
+        )} */}
       </div>
     </>
   );
