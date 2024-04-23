@@ -39,10 +39,6 @@
   margin-left: 5px;
 }
 
-.ending {
-  margin-bottom: 20px;
-}
-
 .logout {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -164,8 +160,8 @@
 }
 
 .address-bar {
-  margin-left: 24px;
-  margin-right: 24px;
+  margin-left: 36px;
+  margin-right: 32px;
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -184,7 +180,7 @@
 
 .main-logo {
   width: 20%;
-  margin: 0 3%;
+  margin: 0 8px;
 }
 
 .right-side-nav-bar {

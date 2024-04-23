@@ -25,6 +25,11 @@ function ProfileModal({user}) {
     navigate("/");
   };
 
+  const handleClick = (url) => {
+    closeModal();
+    navigate(url)
+  }
+
   return (
       <ul className={"profile-modal"}>
             {user ? (
@@ -38,11 +43,11 @@ function ProfileModal({user}) {
                 </div>
                 <li className="profile-item">
                   <FaReceipt />
-                  <button className="style-hover" onClick={() => navigate("/orders")}>My Orders</button>
+                  <button className="style-hover" onClick={() => handleClick("/orders")}>My Orders</button>
                 </li>
                 <li className="profile-item">
                   <FaComment />
-                  <button className="style-hover" onClick={() => navigate("/orders/reviews")}>My Reviews</button>
+                  <button className="style-hover" onClick={() => handleClick("/orders/reviews")}>My Reviews</button>
                 </li>
                 <li className="profile-item">
                   <FaWallet />
@@ -53,7 +58,7 @@ function ProfileModal({user}) {
                 </li>
                 <li className="profile-item">
                   <FaUtensils />
-                  <button className="style-hover" onClick={() => navigate("/restaurants/new")}>Add Restaurant</button>
+                  <button className="style-hover" onClick={() => handleClick("/restaurants/new")}>Add Restaurant</button>
                 </li>
                 <li className="logout">
                   <button className="login-button" onClick={logout}>Sign Out</button>
