@@ -36,7 +36,8 @@ function OrdersPage() {
             let total = 0;
             let restaurantId = null;
             let order = orders[orderNumber]
-            let restaurantImg = "http://www.vintage-breitling.com/wp-content/uploads/2015/06/no-longer-available.jpg"
+            let restaurantImg = "http://www.vintage-breitling.com/wp-content/uploads/2015/06/no-longer-available.jpg";
+            let processedItems = Object.groupBy(order.items, ({id})=>id)
             restaurantsArr.forEach((res) => {
               if (res.name == order?.restaurant) restaurantImg = res.imageUrl
             })
@@ -49,8 +50,10 @@ function OrdersPage() {
 
                   <h3>{order.createdAt}</h3>
 
-                  {order.items.map((item, index) => {
-                    total += item.price;
+                  {Object.values(processedItems).map((items, index) => {
+                    let item = items[0]
+                    let quantity = items.length;
+                    total += item.price * quantity;
                     restaurantId = item.restaurant_id;
                     // restaurantsArr.forEach((res) => (
                     //   if(res.name == item.)
@@ -61,7 +64,7 @@ function OrdersPage() {
                         key={String(index) + String(idx)}
                       >
                         <span>
-                          {item.name} | ${item.price}
+                          {item.name} | {quantity} | ${item.price * quantity}
                         </span>
                       </div>
                     );

@@ -5,16 +5,24 @@ import { IoMdClose } from 'react-icons/io';
 import { useSideModal } from '../../context/SideModal';
 import { useModal } from '../../context/Modal';
 import { checkOutCart } from "../../redux/shoppingCartReducer";
+import { useShoppingCart } from "../../context/CartContext";
 import { decreaseFunds, increaseFunds } from "../../redux/walletReducer";
 import ErrorModal from "../ErrorModal/ErrorModal";
 import LoginFormModal from "../LoginFormModal";
+import { processCart } from '../../context/CartContext';
+import CartItem from './CartItem';
 import "./CartModal.css"
 
-function CartModal({user, restaurantName, userWallet, cartItems, setCartItems, setCartRestaurant, cartRestaurant, restaurants}) {
+function CartModal({user, restaurantName, userWallet, restaurants}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { closeModal } = useSideModal();
     const { setModalContent } = useModal();
+    const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
+    const processedCart = processCart(cartItems);
+
+    console.log(cartItems)
+    console.log(processedCart)
 
     let total = 0
 
@@ -53,12 +61,12 @@ function CartModal({user, restaurantName, userWallet, cartItems, setCartItems, s
             <h4>Cart For: {restaurantName}</h4>
             <div className="cart-items">
               Items:
-              {cartItems?.map((item, index) => {
+              {Object.values(processedCart)?.map((items, index) => {
+                let quantity = items.length
+                let item = items[0]
                 item = JSON.parse(item)
-                total += item.price
-                return <li key={index} className="cart-item">
-                  {item.name} | $ {item.price}
-                </li>
+                total += item.price * quantity
+                return <CartItem key={index} item={item} quantity={quantity} />
               })}
             </div>
             {cartItems?.length > 0 ? (<li className="total-price">Total: $ {total.toFixed(2)}</li>) : null}

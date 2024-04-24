@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchRestaurant, getRestaurantTypes } from "../../redux/restaurantReducer";
 import { useNavigate, useParams } from "react-router-dom";
 import "./SingleRestaurant.css";
-import DeleteRestaurantButton from "./DeleteRestaurantButton";
-import DeleteMenuItemButton from "../MenuItems/DeleteMenuItemButton";
 import { useShoppingCart } from "../../context/CartContext";
 import { fetchOwnerMenuItems } from "../../redux/menuItemReducer";
 import { FaStar } from "react-icons/fa";
@@ -13,6 +11,8 @@ import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import ErrorModal from "../ErrorModal/ErrorModal";
 import DeleteRestaurantModal from "./DeleteRestaurantModal";
 import DeleteMenuItemModal from "../MenuItems/DeleteMenuItemModal";
+import { useSideModal } from "../../context/SideModal";
+import CartModal from "../CartModal";
 
 function SingleRestaurant() {
   const { restaurantId } = useParams();
@@ -20,14 +20,18 @@ function SingleRestaurant() {
   const navigate = useNavigate();
   const restaurant = useSelector((state) => state.restaurantState);
   const menu_items = useSelector((state) => state.menuItemState);
+  const user = useSelector((state) => state.session.user);
+  const wallets = useSelector((store) => store.walletState);
+  const userWallet = wallets ? wallets[user?.id] : null;
   const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } =
     useShoppingCart();
-  const { setModalContent } = useModal()
+  const { setModalContent } = useModal();
+  const setCartModal = useSideModal().setModalContent;
+  const { setModalSide } = useSideModal();
 
   const reviewsArr = restaurant[restaurantId]?.Reviews;
   const menuItemsArr = Object.values(menu_items);
 
-  const user = useSelector((state) => state.session.user);
 
   const avgReviews =
     reviewsArr?.length > 0
@@ -45,15 +49,22 @@ function SingleRestaurant() {
     if (cartRestaurant == 0) {
       setCartItems([...cartItems, JSON.stringify(menuItem)]);
       setCartRestaurant(menuItem.restaurant_id);
-      window.alert(`${menuItem.name} added to Cart!`)
+      setModalSide("right");
+      setCartModal(<CartModal
+        user={user}
+        restaurantName={restaurant[restaurantId].name}
+        userWallet={userWallet}
+        restaurants={restaurant} />)
     } else if (cartRestaurant !== menuItem.restaurant_id) {
         setModalContent(<ErrorModal message={"Menu Item from a different Restaurant cannot be added to Current Cart. Please Checkout or Clear Cart"}/>)
-      // window.alert(
-      //   "Menu Item from a different Restaurant cannot be added to Current Cart. Please Checkout or Clear Cart"
-      // );
     } else {
       setCartItems([...cartItems, JSON.stringify(menuItem)]);
-      window.alert(`${menuItem.name} added to Cart!`)
+      setModalSide("right");
+      setCartModal(<CartModal
+        user={user}
+        restaurantName={restaurant[restaurantId].name}
+        userWallet={userWallet}
+        restaurants={restaurant} />)
     }
   }
 

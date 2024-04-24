@@ -1,13 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaShoppingCart, FaWallet } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 import { useShoppingCart } from "../../context/CartContext";
-import { checkOutCart } from "../../redux/shoppingCartReducer";
-import { decreaseFunds, increaseFunds, loadFunds } from "../../redux/walletReducer";
-import { useNavigate } from "react-router-dom";
-import { useModal } from "../../context/Modal";
-import ErrorModal from "../ErrorModal/ErrorModal";
-import LoginFormModal from "../LoginFormModal";
+import { loadFunds } from "../../redux/walletReducer";
 import OpenSideModalButton from "../OpenSideModalButton";
 import CartModal from "../CartModal";
 
@@ -39,44 +34,6 @@ function CartButton() {
           restaurants={restaurants} />}
         modalSide="right"
       />
-      {/* {showMenu && (
-        <ul className={"cart-dropdown"} ref={ulRef}>
-          <div className="cart-header">
-            <IoMdClose className="close-cart" onClick={closeMenu}/>
-            <div className="wallet-info">
-              <FaWallet />
-              <li>${userWallet?.toFixed(2)}</li>
-            </div>
-          </div>
-          <div className="cart-content">
-            <h4>Cart For: {restaurantName}</h4>
-            <div className="cart-items">
-              Items:
-              {cartItems?.map((item, index) => {
-                item = JSON.parse(item)
-                total += item.price
-                return <li key={index} className="cart-item">
-                  {item.name} | $ {item.price}
-                </li>
-              })}
-            </div>
-            {cartItems?.length > 0 ? (<li className="total-price">Total: $ {total.toFixed(2)}</li>) : null}
-            <li>
-              <button disabled={cartItems.length === 0} onClick={(e) => user ? checkOutLoggedIn(e) : checkOutLoggedOut(e)}>
-                Check Out
-              </button>
-            </li>
-            <li>
-              <button onClick={() => {
-                setCartItems([])
-                setCartRestaurant(0)
-              }}>
-                Clear Cart
-              </button>
-            </li>
-          </div>
-        </ul>
-      )} */}
     </div>
   );
 }

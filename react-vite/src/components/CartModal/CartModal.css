@@ -1,0 +1,22 @@
+.cart-item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.cart-items {
+    width: 100%;
+}
+
+.cart-item-name > * {
+    margin: 0;
+    font-size: medium;
+}
+
+.cart-item-quantity {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}

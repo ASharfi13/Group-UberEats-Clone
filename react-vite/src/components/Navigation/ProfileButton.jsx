@@ -1,9 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { VscThreeBars } from "react-icons/vsc";
 import OpenSideModalButton from "../OpenSideModalButton";
-import { useNavigate } from "react-router-dom";
-import { useShoppingCart } from "../../context/CartContext";
 import "./ProfileButton.css";
 import ProfileModal from "../ProfileModal";
 
