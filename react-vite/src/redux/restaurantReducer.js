@@ -138,7 +138,7 @@ const restaurantReducer = (state = {}, action) => {
     case LOAD_RESTAURANT:
       return { ...state, [action.restaurant.id]: action.restaurant };
     case LOAD_ALL_RESTAURANTS: {
-      const restaurantState = {};
+      const restaurantState = { ...state };
       action.restaurants.restaurants.forEach((restaurant) => {
         restaurantState[restaurant.id] = restaurant;
       });

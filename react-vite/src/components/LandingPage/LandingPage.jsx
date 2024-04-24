@@ -6,6 +6,7 @@ import { loadAllMenuItems } from "../../redux/menuItemReducer";
 import "./LandingPage.css";
 import { FaStar } from "react-icons/fa";
 import { SiMoneygram } from "react-icons/si";
+import { getRestaurantTypes } from "../../redux/restaurantReducer";
 
 
 
@@ -31,6 +32,10 @@ function LandingPage() {
       return null;
     }
   });
+
+  useEffect(() => {
+    dispatch(getRestaurantTypes())
+  }, [dispatch])
 
 
 
@@ -102,7 +107,7 @@ function LandingPage() {
               </p>
             </div>
             <div className="restPriceTimeInfo">
-              <p className="timeInfo">{delTimeArr[restaurant?.id - 1][0]}-{delTimeArr[restaurant?.id - 1][1]} min</p>
+              {/* <p className="timeInfo">{delTimeArr[restaurant?.id - 1][0]}-{delTimeArr[restaurant?.id - 1][1]} min</p> */}
             </div>
             {user?.id == restaurant?.owner_id && (
               <button
