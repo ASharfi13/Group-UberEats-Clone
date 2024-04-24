@@ -70,6 +70,12 @@ function CartModal({user, userWallet, restaurants}) {
               })}
             </div>
             {cartItems?.length > 0 ? (<li className="total-price">Total: $ {total.toFixed(2)}</li>) : null}
+            {cartItems?.length > 0 && (<li className='add-items'>
+              <button onClick={() => {
+                navigate(`/restaurants/${cartRestaurant}`)
+                closeModal()
+              }}>Add Items</button>
+            </li>)}
             <li>
               <button disabled={cartItems.length === 0} onClick={(e) => user ? checkOutLoggedIn(e).then(closeModal) : checkOutLoggedOut(e)}>
                 Check Out
