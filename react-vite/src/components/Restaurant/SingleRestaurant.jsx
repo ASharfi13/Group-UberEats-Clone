@@ -23,7 +23,7 @@ function SingleRestaurant() {
   const user = useSelector((state) => state.session.user);
   const wallets = useSelector((store) => store.walletState);
   const userWallet = wallets ? wallets[user?.id] : null;
-  const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } =
+  const { cartItems, setCartItems, cartRestaurant, setCartRestaurant, restaurantName, setRestaurantName } =
     useShoppingCart();
   const { setModalContent } = useModal();
   const setCartModal = useSideModal().setModalContent;
@@ -49,10 +49,10 @@ function SingleRestaurant() {
     if (cartRestaurant == 0) {
       setCartItems([...cartItems, JSON.stringify(menuItem)]);
       setCartRestaurant(menuItem.restaurant_id);
+      setRestaurantName(restaurant[restaurantId].name)
       setModalSide("right");
       setCartModal(<CartModal
         user={user}
-        restaurantName={restaurant[restaurantId].name}
         userWallet={userWallet}
         restaurants={restaurant} />)
     } else if (cartRestaurant !== menuItem.restaurant_id) {

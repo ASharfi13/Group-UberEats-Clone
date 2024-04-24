@@ -9,10 +9,11 @@ export const processCart = (cartItems) => {
 
 export function ShoppingCartProvider({ children }) {
     const [cartItems, setCartItems] = useState([]);
-    const [cartRestaurant, setCartRestaurant] = useState(0)
+    const [cartRestaurant, setCartRestaurant] = useState(0);
+    const [restaurantName, setRestaurantName] = useState("");
     return (
         <ShoppingCartContext.Provider
-            value={{ cartItems, setCartItems, cartRestaurant, setCartRestaurant }}
+            value={{ cartItems, setCartItems, cartRestaurant, setCartRestaurant, restaurantName, setRestaurantName }}
         >
             {children}
         </ShoppingCartContext.Provider>

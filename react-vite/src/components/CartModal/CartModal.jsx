@@ -13,12 +13,12 @@ import { processCart } from '../../context/CartContext';
 import CartItem from './CartItem';
 import "./CartModal.css"
 
-function CartModal({user, restaurantName, userWallet, restaurants}) {
+function CartModal({user, userWallet, restaurants}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { closeModal } = useSideModal();
     const { setModalContent } = useModal();
-    const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
+    const { cartItems, setCartItems, cartRestaurant, setCartRestaurant, restaurantName, setRestaurantName } = useShoppingCart();
     const processedCart = processCart(cartItems);
 
     console.log(cartItems)
