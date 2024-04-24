@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import CartButton from "./CartButton";
-import { FaSearch } from "react-icons/fa";
 import "./Navigation.css";
+import SearchBar from "../SearchBar";
 
 function Navigation() {
   const handleFeature = (e) => {
@@ -32,14 +32,7 @@ function Navigation() {
       </div>
 
       <div className="right-side-nav-bar">
-        <div className="search-bar" onClick={(e) => handleFeature(e)}>
-          <FaSearch />
-          <input
-            type="text"
-            name="search-bar"
-            placeholder="Search for a restaurant"
-          />
-        </div>
+        <SearchBar />
         <CartButton />
       </div>
     </ul>

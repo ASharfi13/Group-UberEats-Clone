@@ -20,6 +20,7 @@ restaurantTypes = [
     "Russian",
     "Mediterranean",
     "Middle Eastern",
+    "Hawaiian",
     "Other"
 ]
 

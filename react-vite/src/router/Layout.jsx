@@ -5,6 +5,7 @@ import { ModalProvider, Modal } from "../context/Modal";
 import { ShoppingCartProvider } from "../context/CartContext"
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
+import Footer from "../components/Footer";
 
 export default function Layout() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function Layout() {
           <Navigation />
           {isLoaded && <Outlet />}
           <Modal />
+          <Footer />
         </ShoppingCartProvider>
       </ModalProvider>
     </>
