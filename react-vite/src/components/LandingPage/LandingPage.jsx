@@ -1,22 +1,33 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllRestaurants } from "../../redux/restaurantReducer";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate, useSearchParams } from "react-router-dom";
 import { loadAllMenuItems } from "../../redux/menuItemReducer";
 import "./LandingPage.css";
 import { FaStar } from "react-icons/fa";
 import { SiMoneygram } from "react-icons/si";
 import { getRestaurantTypes } from "../../redux/restaurantReducer";
+import { FaBowlFood } from "react-icons/fa6";
+
 
 
 
 function LandingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const restaurants = useSelector((state) => state.restaurantState);
-  const restaurantArr = Object.entries(restaurants).filter(([key, restaurant]) => key != "types");
+  const restaurantTypes = restaurants?.types
+  const filter = searchParams.get("type");
+
+  const restaurantArr = Object.entries(restaurants).filter(([key, restaurant]) => key != "types").filter(([key, restaurant]) => {
+    if (filter) return restaurant?.type == filter
+    return restaurant
+  });
   const user = useSelector((state) => state.session.user);
   const [delPriceCheck, setDelPriceCheck] = useState(false);
+
 
   const avgRating = {};
 
@@ -83,11 +94,25 @@ function LandingPage() {
 
   const delTimeArr = JSON.parse(localStorage.getItem("delTimeArr"));
 
-  console.log(delTimeArr)
+  // console.log(delTimeArr)
+  console.log("sp", searchParams);
 
   return (
     <div className="landingContainer">
-      <h1 className="featured-on">Featured on Uber Eats</h1>
+      <div className="filterContainer">
+        {restaurantTypes?.map((type) => (
+          <div className={`filterButton ${filter == type && "selected"}`} onClick={() => {
+            if (filter == type) setSearchParams('')
+            else setSearchParams(`type=${type}`)
+          }}>
+            <FaBowlFood />
+            <div>{type}</div>
+          </div>
+        ))}
+      </div>
+      <h1 className="featured-on">
+        {filter ? filter : "All"} Restaurants
+      </h1>
       <hr />
       <div className="restaurantDivs">
         {restaurantArr?.map(([id, restaurant], idx) => (
