@@ -89,7 +89,7 @@ function LandingPage() {
 
   // console.log(delTimeArr)
   // console.log("sp", searchParams);
-  console.log(restaurantTypes)
+  // console.log(restaurantTypes)
 
   useEffect(() => {
     dispatch(getRestaurantTypes())

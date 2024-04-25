@@ -25,13 +25,8 @@ function CartButton() {
         buttonText={<><FaShoppingCart /><span>{cartItems?.length} items</span></>}
         modalComponent={<CartModal
           user={user}
-          restaurantName={restaurantName}
-          userWallet={userWallet}
-          cartItems={cartItems}
-          setCartItems={setCartItems}
-          cartRestaurant={cartRestaurant}
-          setCartRestaurant={setCartRestaurant}
-          restaurants={restaurants} />}
+          restaurants={restaurants}
+          userWallet={userWallet} />}
         modalSide="right"
       />
     </div>

@@ -1,9 +1,8 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { FaBowlFood } from "react-icons/fa6";
 
 export function FilterCarousel({restaurantTypes, filter, setSearchParams}) {
-    console.log(restaurantTypes)
+    // console.log(restaurantTypes)
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -19,7 +18,7 @@ export function FilterCarousel({restaurantTypes, filter, setSearchParams}) {
     return (
         <Carousel responsive={responsive}>
             {restaurantTypes.map((type) => (
-            <div className={`filterButton ${filter == type.name && "selected"}`} onClick={() => {
+            <div key={type.id} className={`filterButton ${filter == type.name && "selected"}`} onClick={() => {
               if (filter == type.name) setSearchParams('')
               else setSearchParams(`type=${type.name}`)
             }}>

@@ -9,6 +9,7 @@
   top: 0px;
   background-color: white;
   gap: 16px;
+  z-index: 1001;
 }
 
 .profile-dropdown {

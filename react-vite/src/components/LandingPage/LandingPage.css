@@ -116,6 +116,7 @@
   min-width: 76px;
   height: 87px;
   font-size: 12px;
+  transition: opacity 0.5s;
 }
 
 .filterButton:hover {
