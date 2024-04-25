@@ -12,19 +12,17 @@ export default function({item, quantity}) {
         setCartItems(temp)
     }
 
-    return (
+    if (item) return (
         <li className="cart-item">
+            <img src={item.imageUrl} width="72px" height="72px" alt={item.name}/>
             <div className="cart-item-name">
                 <h3>{item.name}</h3>
-                <p>$ {item.price}</p>
+                <p>$ {(item.price * quantity).toFixed(2)}</p>
             </div>
             <div className="cart-item-quantity">
-                <button onClick={removeItem}>-</button>
+                <button onClick={removeItem}>{"-"}</button>
                 {quantity}
                 <button onClick={addItem}>+</button>
-            <div className="cart-item-subtotal">
-                $ {(item.price * quantity).toFixed(2)}
-            </div>
             </div>
         </li>
     )

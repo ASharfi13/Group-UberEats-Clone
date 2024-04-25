@@ -57,8 +57,13 @@ function CartModal({user, userWallet, restaurants}) {
               <li>${userWallet?.toFixed(2)}</li>
             </div>
           </div>
+          {cartItems?.length > 0 ? (
+          <>
+          <div className='cart-name'>
+            <img src={restaurants[cartRestaurant]?.imageUrl} width="48px" height="48px"/>
+            {restaurantName}
+          </div>
           <div className="cart-content">
-            <h4>Cart For: {restaurantName}</h4>
             <div className="cart-items">
               Items:
               {Object.values(processedCart)?.map((items, index) => {
@@ -91,6 +96,17 @@ function CartModal({user, userWallet, restaurants}) {
               </button>
             </li>
           </div>
+          </>):
+          <div className='empty-cart'>
+            <img src='https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/a023a017672c2488.svg' />
+            <h2>Add items to start a cart</h2>
+            <p>Once you add items from a restaurant your cart will appear here.</p>
+            <button onClick={() => {
+              navigate("/");
+              closeModal();
+            }}>Start Shopping</button>
+          </div>}
+
         </ul>
     )
 }

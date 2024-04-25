@@ -6,7 +6,7 @@ export default function SearchModal({restaurantTypes}) {
     const topTypes = ["American", "Asian", "Fast Food", "Comfort Food"]
 
     return (
-        <>
+        <div>
         {results?.length > 0 && <div className="restaurant-results">
             <h2>Restaurants</h2>
         {results?.map(restaurant => (
@@ -36,6 +36,6 @@ export default function SearchModal({restaurantTypes}) {
                     </NavLink>
             ))}
             </div>}
-        </>
+        </div>
     )
 }
