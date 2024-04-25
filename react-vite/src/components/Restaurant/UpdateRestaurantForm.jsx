@@ -112,7 +112,7 @@ function UpdateRestaurant() {
                   Select Type
                 </option>
                 {restaurantTypes.map((restaurant, idx) => (
-                  <option key={idx}>{restaurant}</option>
+                  <option key={idx}>{restaurant.name}</option>
                 ))}
               </select>
               <p className="restaurant-errors">

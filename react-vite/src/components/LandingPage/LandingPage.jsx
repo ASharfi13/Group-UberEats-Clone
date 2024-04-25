@@ -7,10 +7,7 @@ import "./LandingPage.css";
 import { FaStar } from "react-icons/fa";
 import { SiMoneygram } from "react-icons/si";
 import { getRestaurantTypes } from "../../redux/restaurantReducer";
-import { FaBowlFood } from "react-icons/fa6";
-
-
-
+import { FilterCarousel } from "./FilterCarousel";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -22,7 +19,7 @@ function LandingPage() {
   const filter = searchParams.get("type");
 
   const restaurantArr = Object.entries(restaurants).filter(([key, restaurant]) => key != "types").filter(([key, restaurant]) => {
-    if (filter) return restaurant?.type == filter
+    if (filter) return restaurant?.types?.includes(filter)
     return restaurant
   });
   const user = useSelector((state) => state.session.user);
@@ -43,10 +40,6 @@ function LandingPage() {
       return null;
     }
   });
-
-  useEffect(() => {
-    dispatch(getRestaurantTypes())
-  }, [dispatch])
 
 
 
@@ -95,21 +88,16 @@ function LandingPage() {
   const delTimeArr = JSON.parse(localStorage.getItem("delTimeArr"));
 
   // console.log(delTimeArr)
-  console.log("sp", searchParams);
+  // console.log("sp", searchParams);
+  console.log(restaurantTypes)
 
-  return (
+  useEffect(() => {
+    dispatch(getRestaurantTypes())
+  }, [dispatch])
+
+  if (restaurantTypes) return (
     <div className="landingContainer">
-      <div className="filterContainer">
-        {restaurantTypes?.map((type) => (
-          <div className={`filterButton ${filter == type && "selected"}`} onClick={() => {
-            if (filter == type) setSearchParams('')
-            else setSearchParams(`type=${type}`)
-          }}>
-            <FaBowlFood />
-            <div>{type}</div>
-          </div>
-        ))}
-      </div>
+      <FilterCarousel restaurantTypes={restaurantTypes} filter={filter} setSearchParams={setSearchParams} />
       <h1 className="featured-on">
         {filter ? filter : "All"} Restaurants
       </h1>

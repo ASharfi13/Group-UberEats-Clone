@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-self: center;
+  margin: 0 40px;
 }
 
 .featured-on {
@@ -110,12 +111,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid grey;
-  border-radius: 8px;
-  width: 200px;
+  justify-content: center;
   cursor: pointer;
+  min-width: 76px;
+  height: 87px;
+  font-size: 12px;
+}
+
+.filterButton:hover {
+  opacity: 0.7;
+}
+
+
+.filterButton > div {
+  text-align: center;
 }
 
 .selected {
   color: green;
+}
+
+.react-multi-carousel-track {
+  width: 100%;
+  gap: 10px;
 }

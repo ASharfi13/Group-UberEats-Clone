@@ -34,7 +34,6 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('location', sa.String(), nullable=False),
-    sa.Column('type', sa.String(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('imageUrl', sa.String(), nullable=True),
     sa.Column('createdAt', sa.Date(), nullable=True),

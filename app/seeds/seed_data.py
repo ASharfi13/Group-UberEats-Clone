@@ -127,126 +127,108 @@ restaurants= [
     {
         "name": "Pizza Hut",
         "location": "50 Italiano Dr",
-        "type": "Italian",
         "owner_id": 2,
         "imageUrl": "https://i.postimg.cc/0yPzSVxx/pizza-hut.jpg"
     },
     {
         "name": "Panda Express",
         "location": "20 Bamboo Way",
-        "type": "Chinese",
         "owner_id": 3,
         "imageUrl": "https://i.postimg.cc/L6THc2KK/panda-express.png"
     },
     {
         "name": "Burger King",
         "location": "46 Queen Ave",
-        "type": "American",
         "owner_id": 4,
         "imageUrl": "https://i.postimg.cc/xjGYmndJ/burger-king.webp"
     },
     {
         "name": "Manila Express",
         "location": "22 Bataan St",
-        "type": "Filipino",
         "owner_id": 5,
         "imageUrl": "https://i.postimg.cc/GpD61x88/Manila-Express.jpg"
     },
     {
         "name": "Mcdonalds ",
         "location": "62 Double Dr",
-        "type": "American",
         "owner_id": 6,
         "imageUrl": "https://i.postimg.cc/66Mjgmjb/mcdonalds.png"
     },
     {
         "name": "Kevins Noodle House",
         "location": "12 Sunset Blvd",
-        "type": "Vietnamese",
         "owner_id": 7,
         "imageUrl": "https://i.postimg.cc/T119TT77/kevins-noodle-house.jpg"
     },
     {
         "name": "Naan Curry",
         "location": "89 Fandango Way",
-        "type": "Indian",
         "owner_id": 8,
         "imageUrl": "https://i.postimg.cc/QCFpR0Cv/Naan-curry.jpg"
     },
     {
         "name": "Maggie's Tacos",
         "location": "346 Cancun Ave",
-        "type": "Mexican",
         "owner_id": 9,
         "imageUrl": "https://i.postimg.cc/wMRmWMbp/maggies-tacos.jpg"
     },
     {
         "name": "White Elephant",
         "location": "67 Lady St",
-        "type": "Thai",
         "owner_id": 10,
         "imageUrl": "https://i.postimg.cc/kgqy5NpR/white-elephant.png"
     },
     {
         "name": "Pocha House",
         "location": "71 Main Blvd",
-        "type": "Korean",
         "owner_id": 1,
         "imageUrl": "https://i.postimg.cc/ZKZNPbF1/pocha-house.jpg"
     },
     {
         "name": "Yue Huang",
         "location": "20 Gateway Park Blvd",
-        "type": "Chinese",
         "owner_id": 2,
         "imageUrl": "https://i.postimg.cc/2ScKrsGZ/yue-huang.jpg"
     },
      {
         "name": "Chipotle",
         "location": "21 Del Paso Rd",
-        "type": "Mexican",
         "owner_id": 3,
         "imageUrl": "https://i.postimg.cc/VNVMd9Z7/chipotle.webp"
     },
     {
         "name": "El Aguacatero",
         "location": "22 Northgate Rd",
-        "type": "Mexican",
         "owner_id": 4,
         "imageUrl": "https://i.postimg.cc/Vs3xX3bw/aguacatero.jpg"
     },
     {
         "name": "Poke Fix",
         "location": "23 North Rd",
-        "type": "Hawaiian",
         "owner_id": 5,
         "imageUrl": "https://i.postimg.cc/CxK90Y3j/poke-fix.png"
     },
     {
         "name": "Fire Wings",
         "location": "24 Norwood Rd",
-        "type": "American",
         "owner_id": 6,
         "imageUrl": "https://i.postimg.cc/wTRWHVFj/fire-wings.jpg"
     },
     {
         "name": "Chaat Cafe",
         "location": "25 Gateway Rd",
-        "type": "Indian",
         "owner_id": 7,
         "imageUrl": "https://i.postimg.cc/mDNShXJQ/chaat-cafe.webp"
     },
     {
         "name": "Pho ABC",
         "location": "26 Greenback Ln",
-        "type": "Vietnamese",
         "owner_id": 8,
         "imageUrl": "https://i.postimg.cc/gjxQRPWC/phoabc.webp"
     },
     {
         "name": "Jollibee",
         "location": "27 Midview Ln",
-        "type": "Filipino",
         "owner_id": 9,
         "imageUrl": "https://i.postimg.cc/NFbnWfx2/jollibee.png"
     },
@@ -916,4 +898,438 @@ shopping_carts=[
         "menu_item_id":"number",
         "order_id":"number",
     }
+]
+
+restaurant_types = [
+    {
+        "name": "Breakfast",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Breakfast.png"
+    },
+    {
+        "name": "Coffee",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Coffee.png"
+    },
+    {
+        "name": "Fast Food",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/FastFood.png"
+    },
+    {
+        "name": "Smoothies",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Smoothie.png"
+    },
+    {
+        "name": "Mexican",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Mexican.png"
+    },
+    {
+        "name": "Soup",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Soup.png"
+    },
+    {
+        "name": "Burgers",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Burgers.png"
+    },
+    {
+        "name": "Chinese",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Chinese.png"
+    },
+    {
+        "name": "Healthy",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Healthy.png"
+    },
+    {
+        "name": "Sandwich",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Sandwich.png"
+    },
+    {
+        "name": "Salads",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Salad.png"
+    },
+    {
+        "name": "Bubble Tea",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/BubbleTea.png"
+    },
+    {
+        "name": "Vegan",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Vegan.png"
+    },
+    {
+        "name": "BBQ",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/BBQ.png"
+    },
+    {
+        "name": "Indian",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Indian.png"
+    },
+    {
+        "name": "Poke",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Poke.png"
+    },
+    {
+        "name": "Pizza",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Pizza.png"
+    },
+    {
+        "name": "Ice Cream",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/IceCream.png"
+    },
+    {
+        "name": "Halal",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Halal.png"
+    },
+    {
+        "name": "Seafood",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Seafood.png"
+    },
+    {
+        "name": "Vietnamese",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Vietnamese.png"
+    },
+    {
+        "name": "Korean",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Korean.png"
+    },
+    {
+        "name": "Hawaiian",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Hawaiian.png"
+    },
+    {
+        "name": "Italian",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Italian.png"
+    },
+    {
+        "name": "Wings",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Wings.png"
+    },
+    {
+        "name": "Asian",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Asian.png"
+    },
+    {
+        "name": "Comfort Food",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Comfort.png"
+    },
+    {
+        "name": "Desserts",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Dessert.png"
+    },
+    {
+        "name": "Sushi",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Sushi.png"
+    },
+    {
+        "name": "Thai",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Thai.png"
+    },
+    {
+        "name": "Bakery",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Bakery.png"
+    },
+    {
+        "name": "Taiwanese",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Taiwanese.png"
+    },
+    {
+        "name": "Japanese",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Japanese.png"
+    },
+    {
+        "name": "Greek",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Greek.png"
+    },
+    {
+        "name": "American",
+        "imageUrl": "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/American.png"
+    },
+]
+
+restaurant_type_associations = [
+    {
+        "restaurant_id": 1,
+        "type_id": 3
+    },
+    {
+        "restaurant_id": 1,
+        "type_id": 17
+    },
+    {
+        "restaurant_id": 1,
+        "type_id": 18
+    },
+    {
+        "restaurant_id": 1,
+        "type_id": 24
+    },
+    {
+        "restaurant_id": 1,
+        "type_id": 25
+    },
+    {
+        "restaurant_id": 1,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 1,
+        "type_id": 28
+    },
+    {
+        "restaurant_id": 1,
+        "type_id": 35
+    },
+    {
+        "restaurant_id": 2,
+        "type_id": 3
+    },
+    {
+        "restaurant_id": 2,
+        "type_id": 8
+    },
+    {
+        "restaurant_id": 2,
+        "type_id": 26
+    },
+    {
+        "restaurant_id": 3,
+        "type_id": 35
+    },
+    {
+        "restaurant_id": 3,
+        "type_id": 3
+    },
+    {
+        "restaurant_id": 3,
+        "type_id": 1
+    },
+    {
+        "restaurant_id": 3,
+        "type_id": 7
+    },
+    {
+        "restaurant_id": 3,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 4,
+        "type_id": 26
+    },
+    {
+        "restaurant_id": 4,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 5,
+        "type_id": 35
+    },
+    {
+        "restaurant_id": 5,
+        "type_id": 3
+    },
+    {
+        "restaurant_id": 5,
+        "type_id": 1
+    },
+    {
+        "restaurant_id": 5,
+        "type_id": 7
+    },
+    {
+        "restaurant_id": 5,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 6,
+        "type_id": 26
+    },
+    {
+        "restaurant_id": 6,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 6,
+        "type_id": 6
+    },
+    {
+        "restaurant_id": 6,
+        "type_id": 21
+    },
+    {
+        "restaurant_id": 7,
+        "type_id": 15
+    },
+    {
+        "restaurant_id": 8,
+        "type_id": 5
+    },
+    {
+        "restaurant_id": 9,
+        "type_id": 30
+    },
+    {
+        "restaurant_id": 9,
+        "type_id": 28
+    },
+    {
+        "restaurant_id": 9,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 9,
+        "type_id": 26
+    },
+    {
+        "restaurant_id": 9,
+        "type_id": 20
+    },
+    {
+        "restaurant_id": 10,
+        "type_id": 26
+    },
+    {
+        "restaurant_id": 10,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 10,
+        "type_id": 22
+    },
+    {
+        "restaurant_id": 10,
+        "type_id": 25
+    },
+    {
+        "restaurant_id": 11,
+        "type_id": 26
+    },
+    {
+        "restaurant_id": 11,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 11,
+        "type_id": 8
+    },
+    {
+        "restaurant_id": 12,
+        "type_id": 3
+    },
+    {
+        "restaurant_id": 12,
+        "type_id": 5
+    },
+    {
+        "restaurant_id": 12,
+        "type_id": 9
+    },
+    {
+        "restaurant_id": 12,
+        "type_id": 11
+    },
+    {
+        "restaurant_id": 13,
+        "type_id": 3
+    },
+    {
+        "restaurant_id": 13,
+        "type_id": 5
+    },
+    {
+        "restaurant_id": 13,
+        "type_id": 9
+    },
+    {
+        "restaurant_id": 13,
+        "type_id": 11
+    },
+    {
+        "restaurant_id": 14,
+        "type_id": 11
+    },
+    {
+        "restaurant_id": 14,
+        "type_id": 12
+    },
+    {
+        "restaurant_id": 14,
+        "type_id": 16
+    },
+    {
+        "restaurant_id": 14,
+        "type_id": 18
+    },
+    {
+        "restaurant_id": 14,
+        "type_id": 20
+    },
+    {
+        "restaurant_id": 14,
+        "type_id": 23
+    },
+    {
+        "restaurant_id": 14,
+        "type_id": 26
+    },
+    {
+        "restaurant_id": 15,
+        "type_id": 35
+    },
+    {
+        "restaurant_id": 15,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 15,
+        "type_id": 25
+    },
+    {
+        "restaurant_id": 16,
+        "type_id": 15
+    },
+    {
+        "restaurant_id": 17,
+        "type_id": 26
+    },
+    {
+        "restaurant_id": 17,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 17,
+        "type_id": 6
+    },
+    {
+        "restaurant_id": 17,
+        "type_id": 21
+    },
+    {
+        "restaurant_id": 18,
+        "type_id": 3
+    },
+    {
+        "restaurant_id": 18,
+        "type_id": 6
+    },
+    {
+        "restaurant_id": 18,
+        "type_id": 7
+    },
+    {
+        "restaurant_id": 18,
+        "type_id": 10
+    },
+    {
+        "restaurant_id": 18,
+        "type_id": 25
+    },
+    {
+        "restaurant_id": 18,
+        "type_id": 26
+    },
+    {
+        "restaurant_id": 18,
+        "type_id": 27
+    },
+    {
+        "restaurant_id": 18,
+        "type_id": 28
+    },
 ]

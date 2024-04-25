@@ -4,6 +4,7 @@ from .restaurants import seed_restaurants, undo_restaurants
 from .reviews import seed_reviews, undo_reviews
 from .menu_item import seed_menu_items, undo_menu_items
 from .shopping_cart import seed_shopping_cart, undo_shopping_cart
+from .restaurant_types import seed_types, undo_types, seed_associations
 
 from app.models.db import db, environment, SCHEMA
 
@@ -22,11 +23,14 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_users()
         undo_restaurants()
+        undo_types()
         undo_menu_items()
         undo_reviews()
         undo_shopping_cart()
     seed_users()
     seed_restaurants()
+    seed_types()
+    seed_associations()
     seed_menu_items()
     seed_reviews()
     seed_shopping_cart()
@@ -38,6 +42,7 @@ def seed():
 def undo():
     undo_users()
     undo_restaurants()
+    undo_types()
     undo_menu_items()
     undo_reviews()
     undo_shopping_cart()
