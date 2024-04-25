@@ -80,7 +80,7 @@ def getRestaurantById(id):
         "types": [type.name for type in restaurant.types],
         "avgRating": avgRating,
         "numReviews": len(reviews),
-        "Reviews": reviews,
+        "reviews": reviews,
         "MenuItems": [menu_item.to_dict() for menu_item in restaurant.menu_items],
         "imageUrl": restaurant.imageUrl
     }

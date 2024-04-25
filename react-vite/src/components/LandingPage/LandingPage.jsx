@@ -90,6 +90,7 @@ function LandingPage() {
   // console.log(delTimeArr)
   // console.log("sp", searchParams);
   // console.log(restaurantTypes)
+  console.log(avgRating)
 
   useEffect(() => {
     dispatch(getRestaurantTypes())
@@ -116,7 +117,7 @@ function LandingPage() {
             <div className="info">
               <p className="name">{restaurant?.name}</p>
               <p className="review-info">
-                {avgRating[restaurant?.id]?.toFixed(1) || "(New)"}
+                {avgRating[restaurant?.id] ? avgRating[restaurant?.id].toFixed(1) : "(New)"}
               </p>
             </div>
             <div className="restPriceTimeInfo">

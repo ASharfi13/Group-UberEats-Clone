@@ -29,7 +29,7 @@ function SingleRestaurant() {
   const setCartModal = useSideModal().setModalContent;
   const { setModalSide } = useSideModal();
 
-  const reviewsArr = restaurant[restaurantId]?.Reviews;
+  const reviewsArr = restaurant[restaurantId]?.reviews;
   const menuItemsArr = Object.values(menu_items);
 
 
