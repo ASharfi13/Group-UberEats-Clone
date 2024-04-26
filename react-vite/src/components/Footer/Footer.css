@@ -1,0 +1,15 @@
+.footer {
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #7BBE3B;
+    height: 40px;
+    align-items: center;
+    border: 2px solid green;
+    margin-top: 40px;
+}
+
+.footer>div {
+    display: flex;
+    gap: 5px;
+}

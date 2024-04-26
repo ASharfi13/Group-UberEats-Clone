@@ -1,16 +1,16 @@
 .profilebutton {
-  height: 40px;
+  height: 48px;
   color: black;
-  width: 40px;
   position: relative;
   z-index: 1;
   background-color: transparent;
-  border: none
-}
-
-.three-lines {
-  width: 20px;
-  height: 20px;
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: last baseline;
+  font-size: 36px;
+  text-align: center;
 }
 
 .burger-container {

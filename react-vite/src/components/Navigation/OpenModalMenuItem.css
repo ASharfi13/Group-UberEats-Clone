@@ -1,6 +1,3 @@
 .style-hover {
   cursor: pointer;
 }
-.style-hover:hover {
-  text-decoration: underline;
-}

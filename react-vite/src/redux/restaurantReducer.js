@@ -93,8 +93,7 @@ export const fetchOwnerRestaurants = () => async (dispatch) => {
 export const writeRestaurant = (payload) => async (dispatch) => {
   const response = await fetch("/api/restaurants/", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: payload,
   });
   const restaurant = await response.json();
   if (response.status !== 201) {
@@ -120,8 +119,7 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
 export const editRestaurant = (restaurantId, payload) => async (dispatch) => {
   const response = await fetch(`/api/restaurants/${restaurantId}`, {
     method: "PUT",
-    header: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: payload,
   });
   if (response.ok) {
     const restaurant = await response.json();
@@ -140,7 +138,7 @@ const restaurantReducer = (state = {}, action) => {
     case LOAD_RESTAURANT:
       return { ...state, [action.restaurant.id]: action.restaurant };
     case LOAD_ALL_RESTAURANTS: {
-      const restaurantState = {};
+      const restaurantState = { ...state };
       action.restaurants.restaurants.forEach((restaurant) => {
         restaurantState[restaurant.id] = restaurant;
       });

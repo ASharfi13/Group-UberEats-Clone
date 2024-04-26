@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import CartButton from "./CartButton";
-import { FaSearch } from "react-icons/fa";
+import OpenModalButton from "../OpenModalButton";
 import "./Navigation.css";
+import SearchBar from "../SearchBar";
+import { RiMapPin2Line } from "react-icons/ri";
+import { FaChevronDown } from "react-icons/fa";
 
 function Navigation() {
   const handleFeature = (e) => {
@@ -20,26 +23,23 @@ function Navigation() {
             alt="logo"
           />
         </NavLink>
+        <div className="address-bar">
+          <OpenModalButton buttonText={<><RiMapPin2Line /><p>Loc. Coming Soon</p><FaChevronDown/></>}/>
+        </div>
       </div>
 
-      <div className="delivery-pickup">
+      {/* <div className="delivery-pickup">
         <button className="button-delivery" onClick={handleFeature}>
           Delivery
         </button>
         <button className="button-pickup" onClick={handleFeature}>
           Pickup
         </button>
-      </div>
+      </div> */}
+
 
       <div className="right-side-nav-bar">
-        <div className="search-bar" onClick={(e) => handleFeature(e)}>
-          <FaSearch />
-          <input
-            type="text"
-            name="search-bar"
-            placeholder="Search for a restaurant"
-          />
-        </div>
+        <SearchBar />
         <CartButton />
       </div>
     </ul>

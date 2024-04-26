@@ -1,0 +1,49 @@
+.error-modal-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.error-modal-container > h1 {
+    color: red;
+}
+
+.error-modal-message {
+    text-align: center;
+}
+
+.exit-modal-button {
+    font-size: large;
+    width: 70%;
+    margin-bottom: 5%;
+    background-color: black;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    padding: 10px 5px;
+}
+
+.exit-modal-button-no {
+    font-size: large;
+    width: 70%;
+    margin-bottom: 5%;
+    background-color: red;
+    color: white;
+    border: 2px black solid;
+    border-radius: 5px;
+    padding: 10px 5px;
+}
+
+.exit-modal-button-yes {
+    font-size: large;
+    width: 70%;
+    margin-bottom: 5%;
+    background-color: green;
+    color: white;
+    border: 2px black solid;
+    border-radius: 5px;
+    padding: 10px 5px;
+}

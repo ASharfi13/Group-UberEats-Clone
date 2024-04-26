@@ -17,10 +17,36 @@ export default function UpdateMenuItem() {
   const [name, setName] = useState(menuItem?.name);
   const [price, setPrice] = useState(menuItem?.price);
   const [type, setType] = useState(menuItem?.type);
-  const [image, setImage] = useState(menuItem?.imageUrl);
+  const [image, setImage] = useState(null)
+  const [imageURL, setImageURL] = useState(menuItem?.imageUrl);
   const [errors, setErrors] = useState({});
 
   const menuItemTypes = useSelector((state) => state.menuItemState.types);
+
+  const handleFile = (e) => {
+    e.stopPropagation();
+    const tempFile = e.target.files[0]
+    if (tempFile.size > 5000000) {
+      setErrors({...errors, "image": "Selected Image exceeds maximum file size of 5mb"})
+      return
+    }
+    const newImageURL = URL.createObjectURL(tempFile);
+    setImageURL(newImageURL);
+    setImage(tempFile);
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const payload = new FormData();
+    payload.append("name", name);
+    payload.append("price", price);
+    payload.append("type", type);
+    payload.append("image", image);
+
+    const newItem = await dispatch(editMenuItem(menuItemId, payload));
+    if (newItem.errors) setErrors(newItem.errors);
+    else navigate(`/restaurants/${newItem.restaurant_id}`);
+  };
 
   useEffect(() => {
     dispatch(fetchMenuItem(menuItemId)).then(dispatch(getMenuItemTypes()));
@@ -36,26 +62,11 @@ export default function UpdateMenuItem() {
     menuItem?.type,
     menuItem?.imageUrl,
   ]);
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    const payload = {
-      name,
-      price,
-      type,
-      imageUrl: image,
-    };
-
-    const newItem = await dispatch(editMenuItem(menuItemId, payload));
-    if (newItem.errors) setErrors(newItem.errors);
-    else navigate(`/restaurants/${newItem.restaurant_id}`);
-  };
   return (
     <div>
       {menuItem && menuItemTypes && (
         <div className="update-menu-page">
-          <form className="update-form" onSubmit={onSubmit}>
+          <form className="update-form" onSubmit={onSubmit} encType="multipart/form-data">
             <h1 className="update-menu-title">Update Your Menu Item</h1>
             <div className="column-styles">
               <p>Name</p>
@@ -102,13 +113,12 @@ export default function UpdateMenuItem() {
               <p>Image Url</p>
               <input
                 className="input-area"
-                type="url"
-                placeholder="Enter New Image Url"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleFile(e)}
               ></input>
               <p className="errors">
-                {errors.imageUrl ? errors.imageUrl : null}
+                {errors.image ? errors.image : null}
               </p>
             </div>
             <button className="menu-submit" type="submit">
@@ -117,7 +127,7 @@ export default function UpdateMenuItem() {
           </form>
           <img
             className="res-logo"
-            src={menuItem?.imageUrl}
+            src={imageURL}
             alt="menu-logo"
           />
         </div>
