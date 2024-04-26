@@ -526,13 +526,71 @@ from app.utils.aws import get_unique_filename, upload_local_file
 # with open("./app/seeds/ai_restaurants.json", "w") as handler:
 #     handler.write(json.dumps(final_restaurants))
 
+errored_items = [{"name": "Latte", "type": "Coffee", "price": 3.99, "restaurant_id": 42, "imageUrl": "https://i.postimg.cc/Latte.jpg"},
+            {"name": "Americano", "type": "Coffee", "price": 2.49, "restaurant_id": 42, "imageUrl": "https://i.postimg.cc/Americano.jpg"},
+            {"name": "Mocha", "type": "Coffee", "price": 4.29, "restaurant_id": 42, "imageUrl": "https://i.postimg.cc/Mocha.jpg"},
+            {"name": "Flat White", "type": "Coffee", "price": 3.99, "restaurant_id": 42, "imageUrl": "https://i.postimg.cc/Flat-White.jpg"},
+            {"name": "Iced Coffee", "type": "Coffee", "price": 3.99, "restaurant_id": 42, "imageUrl": "https://i.postimg.cc/Iced-Coffee.jpg"},
+            {"name": "Scones", "type": "Pastry", "price": 2.99, "restaurant_id": 42, "imageUrl": "https://i.postimg.cc/Scones.jpg"},
+            {"name": "Banana Bread", "type": "Pastry", "price": 3.49, "restaurant_id": 42, "imageUrl": "https://i.postimg.cc/Banana-Bread.jpg"},
+            {"name": "Croissant", "type": "Pastry", "price": 2.79, "restaurant_id": 42, "imageUrl": "https://i.postimg.cc/Banana-Bread.jpg"},
+            {"name": "Tonkotsu Ramen", "type": "Ramen", "price": 12.99, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Tonkotsu-Ramen.jpg"},
+            {"name": "Shoyu Ramen", "type": "Ramen", "price": 11.99, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Shoyu-Ramen.jpg"},
+            {"name": "Miso Ramen", "type": "Ramen", "price": 12.49, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Miso-Ramen.jpg"},
+            {"name": "Spicy Ramen", "type": "Ramen", "price": 13.49, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Spicy-Ramen.jpg"},
+            {"name": "Vegetable Ramen", "type": "Vegetarian", "price": 10.99, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Vegetable-Ramen.jpg"},
+            {"name": "Chicken Ramen", "type": "Chicken", "price": 11.99, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Chicken-Ramen.jpg"},
+            {"name": "Beef Ramen", "type": "Beef", "price": 12.99, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Beef-Ramen.jpg"},
+            {"name": "Seafood Ramen", "type": "Seafood", "price": 14.49, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Seafood-Ramen.jpg"},
+            {"name": "Kimchi Ramen", "type": "Spicy", "price": 12.99, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Kimchi-Ramen.jpg"},
+            {"name": "Cold Soba Noodles", "type": "Noodles", "price": 10.99, "restaurant_id": 43, "imageUrl": "https://i.postimg.cc/Cold-Soba-Noodles.jpg"},
+            {"name": "Classic Tiramisu", "type": "Dessert", "price": 7.99, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Classic-Tiramisu.jpg"},
+            {"name": "Chocolate Tiramisu", "type": "Dessert", "price": 8.49, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Chocolate-Tiramisu.jpg"},
+            {"name": "Strawberry Tiramisu", "type": "Dessert", "price": 8.99, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Strawberry-Tiramisu.jpg"},
+            {"name": "Lemon Tiramisu", "type": "Dessert", "price": 8.49, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Lemon-Tiramisu.jpg"},
+            {"name": "Matcha Tiramisu", "type": "Dessert", "price": 9.49, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Matcha-Tiramisu.jpg"},
+            {"name": "Espresso Tiramisu", "type": "Dessert", "price": 8.99, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Espresso-Tiramisu.jpg"},
+            {"name": "Pistachio Tiramisu", "type": "Dessert", "price": 9.99, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Pistachio-Tiramisu.jpg"},
+            {"name": "Mango Tiramisu", "type": "Dessert", "price": 9.49, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Mango-Tiramisu.jpg"},
+            {"name": "Hazelnut Tiramisu", "type": "Dessert", "price": 9.99, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Hazelnut-Tiramisu.jpg"},
+            {"name": "Berry Tiramisu", "type": "Dessert", "price": 8.99, "restaurant_id": 44, "imageUrl": "https://i.postimg.cc/Berry-Tiramisu.jpg"},
+            {"name": "Classic Fondue", "type": "Fondue", "price": 18.99, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Classic-Fondue.jpg"},
+            {"name": "Raclette", "type": "Cheese", "price": 20.99, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Raclette.jpg"},
+            {"name": "Gruyere Grilled Cheese", "type": "Sandwich", "price": 9.99, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Gruyere-Grilled-Cheese.jpg"},
+            {"name": "Blue Cheese and Pear Salad", "type": "Salad", "price": 10.49, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Blue-Cheese-Pear-Salad.jpg"},
+            {"name": "Cheese Board", "type": "Appetizer", "price": 15.99, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Cheese-Board.jpg"},
+            {"name": "Camembert Baked", "type": "Cheese", "price": 12.99, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Camembert-Baked.jpg"},
+            {"name": "Mozzarella Sticks", "type": "Appetizer", "price": 8.49, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Mozzarella-Sticks.jpg"},
+            {"name": "Brie and Fig Crostini", "type": "Appetizer", "price": 10.99, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Brie-Fig-Crostini.jpg"},
+            {"name": "Parmesan Crisps", "type": "Appetizer", "price": 6.99, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Parmesan-Crisps.jpg"},
+            {"name": "Stuffed Jalapenos with Cheddar", "type": "Appetizer", "price": 8.99, "restaurant_id": 45, "imageUrl": "https://i.postimg.cc/Stuffed-Jalapenos-Cheddar.jpg"},
+            {"name": "Falafel Wrap", "type": "Wrap", "price": 6.99, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Falafel-Wrap.jpg"},
+            {"name": "Hummus Plate", "type": "Appetizer", "price": 5.99, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Hummus-Plate.jpg"},
+            {"name": "Baba Ganoush", "type": "Appetizer", "price": 6.49, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Baba-Ganoush.jpg"},
+            {"name": "Tabbouleh", "type": "Salad", "price": 5.99, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Tabbouleh.jpg"},
+            {"name": "Stuffed Grape Leaves", "type": "Appetizer", "price": 6.99, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Stuffed-Grape-Leaves.jpg"},
+            {"name": "Pita Bread Basket", "type": "Bread", "price": 3.49, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Pita-Bread-Basket.jpg"},
+            {"name": "Lentil Soup", "type": "Soup", "price": 4.99, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Lentil-Soup.jpg"},
+            {"name": "Shakshuka", "type": "Egg", "price": 8.99, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Shakshuka.jpg"},
+            {"name": "Middle Eastern Sampler Plate", "type": "Appetizer", "price": 12.99, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Middle-Eastern-Sampler-Plate.jpg"},
+            {"name": "Vegetarian Kebab", "type": "Vegetarian", "price": 7.99, "restaurant_id": 46, "imageUrl": "https://i.postimg.cc/Vegetarian-Kebab.jpg"},
+            {"name": "Apple Pie", "type": "Dessert", "price": 5.99, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Apple-Pie.jpg"},
+            {"name": "Cherry Pie", "type": "Dessert", "price": 5.99, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Cherry-Pie.jpg"},
+            {"name": "Pecan Pie", "type": "Dessert", "price": 6.49, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Pecan-Pie.jpg"},
+            {"name": "Pumpkin Pie", "type": "Dessert", "price": 5.49, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Pumpkin-Pie.jpg"},
+            {"name": "Key Lime Pie", "type": "Dessert", "price": 6.99, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Key-Lime-Pie.jpg"},
+            {"name": "Banoffee Pie", "type": "Dessert", "price": 7.49, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Banoffee-Pie.jpg"},
+            {"name": "Blueberry Pie", "type": "Dessert", "price": 5.99, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Blueberry-Pie.jpg"},
+            {"name": "Chocolate Cream Pie", "type": "Dessert", "price": 6.99, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Chocolate-Cream-Pie.jpg"},
+            {"name": "Lemon Meringue Pie", "type": "Dessert", "price": 6.49, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Lemon-Meringue-Pie.jpg"},
+            {"name": "Sweet Potato Pie", "type": "Dessert", "price": 5.99, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Sweet-Potato-Pie.jpg"}]
 final_menu_items = []
-for item in menu_items:
+for item in errored_items:
     try:
         response = client.images.generate(
-            model="dall-e-3",
+            model="dall-e-2",
             prompt=f"a photograph of {item['name']}",
-            size="1024x1024",
+            size="256x256",
             quality="standard",
         )
         url = response.data[0].url
@@ -546,9 +604,10 @@ for item in menu_items:
         print(upload)
         item["imageUrl"] = upload["url"]
         final_menu_items.append(item)
-        time.sleep(10)
-    except:
+        time.sleep(12)
+    except Exception as e:
+        print(str(e))
         continue
 
-with open("./app/seeds/ai_menu_items.json", "w") as handler:
+with open("./app/seeds/ai_extra_menu_items.json", "w") as handler:
     handler.write(json.dumps(final_menu_items))
