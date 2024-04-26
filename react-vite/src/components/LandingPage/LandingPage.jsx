@@ -48,8 +48,6 @@ function LandingPage() {
     dispatch(getRestaurantTypes())
   }, [dispatch])
 
-
-
   // useEffect(() => {
   //   dispatch(fetchAllRestaurants());
   // }, [dispatch]);
@@ -58,23 +56,23 @@ function LandingPage() {
   if (!restaurantArr) return;
 
   // ONLY IMPLEMENT IF MODEL COLUMN DOESN'T WORK OUT
-  // const generateRandomPrices = (n) => {
-  //   const prices = [];
-  //   const dollarAmount = [0, 1, 2, 3];
-  //   const centAmount = ['49', '99'];
+  const generateRandomPrices = (n) => {
+    const prices = {};
+    const dollarAmount = [0, 1, 2, 3];
+    const centAmount = ['49', '99'];
 
-  //   for (let i = 0; i < n; i++) {
-  //     const randomWholeNumber = dollarAmount[Math.floor(Math.random() * dollarAmount.length)];
-  //     const randomDecimal = centAmount[Math.floor(Math.random() * centAmount.length)];
-  //     const randomPrice = `${randomWholeNumber}.${randomDecimal}`;
-  //     prices.push(parseFloat(randomPrice));
-  //   }
+    for (let i = 0; i < n; i++) {
+      const randomWholeNumber = dollarAmount[Math.floor(Math.random() * dollarAmount.length)];
+      const randomDecimal = centAmount[Math.floor(Math.random() * centAmount.length)];
+      const randomPrice = `${randomWholeNumber}.${randomDecimal}`;
+      prices[i + 1] = parseFloat(randomPrice);
+    }
 
-  //   return prices;
-  // }
+    return prices;
+  }
 
   const generateRandomTime = (n) => {
-    const result = [];
+    const result = {};
     const min = 10;
     const max = 40;
     const step = 5;
@@ -84,69 +82,76 @@ function LandingPage() {
 
       const randomAddition = [10, 15, 20][Math.floor(Math.random() * 3)];
 
-      result.push([randomNumber, randomNumber + randomAddition]);
+      result[i + 1] = [randomNumber, randomNumber + randomAddition]
     }
     return result;
   }
 
-  const timeArr = generateRandomTime(parseInt(restaurantArr?.length));
-  if (!localStorage.getItem("delTimeArr")) localStorage.setItem("delTimeArr", JSON.stringify(timeArr))
+  const timeArr = generateRandomTime(restaurantArr?.length);
+  const priceArr = generateRandomPrices(restaurantArr?.length);
 
-  const delTimeArr = JSON.parse(localStorage.getItem("delTimeArr"));
-
-  // console.log(delTimeArr)
-  console.log("sp", searchParams);
+  console.log(restaurantArr)
 
   return (
-    <div className="landingContainer">
-      <div className="filterContainer">
-        {restaurantTypes?.map((type) => (
-          <div className={`filterButton ${filter == type && "selected"}`} onClick={() => {
-            if (filter == type) setSearchParams('')
-            else setSearchParams(`type=${type}`)
-          }}>
-            <FaBowlFood />
-            <div>{type}</div>
-          </div>
-        ))}
-      </div>
-      <h1 className="featured-on">
-        {filter ? filter : "All"} Restaurants
-      </h1>
-      <hr />
-      <div className="restaurantDivs">
-        {restaurantArr?.map(([id, restaurant], idx) => (
-          <div
-            className="restaurantCard"
-            // style={{ backgroundColor: `${user?.id == restaurant?.owner_id ? "#64B41C" : null}` }}
-            key={idx}
-            onClick={() => {
-              navigate(`/restaurants/${restaurant?.id}`);
-            }}
-          >
-            <img className="resCardImage" src={restaurant?.imageUrl} />
-            <div className="info">
-              <p className="name">{restaurant?.name}</p>
-              <p className="review-info">
-                {avgRating[restaurant?.id]?.toFixed(1) || "(New)"}
-              </p>
+    <div className="body">
+      <div className="resContainer">
+        <div className="filterContainer">
+          {restaurantTypes?.map((type) => (
+            <div className={`filterButton ${filter == type && "selected"}`} onClick={() => {
+              if (filter == type) setSearchParams('')
+              else setSearchParams(`type=${type}`)
+            }}>
+              <FaBowlFood />
+              <div>{type}</div>
             </div>
-            <div className="restPriceTimeInfo">
-              {/* <p className="timeInfo">{delTimeArr[restaurant?.id - 1][0]}-{delTimeArr[restaurant?.id - 1][1]} min</p> */}
+          ))}
+        </div>
+        <h2 className="featured-on">
+          {filter ? filter : "All"} Restaurants
+        </h2>
+        <div className="restaurantDivs">
+          {restaurantArr?.map(([id, restaurant], idx) => (
+            <div
+              className="restaurantCard"
+              // style={{ backgroundColor: `${user?.id == restaurant?.owner_id ? "#64B41C" : null}` }}
+              key={idx}
+              onClick={() => {
+                navigate(`/restaurants/${restaurant?.id}`);
+              }}
+            >
+              <img className="resCardImage" src={restaurant?.imageUrl} />
+              <div className="info">
+                <p className="name">{restaurant?.name}</p>
+                <p className="review-info">
+                  {avgRating[restaurant?.id]?.toFixed(1) || "(New)"}
+                </p>
+              </div>
+              <div className="restPriceTimeInfo">
+                <div className="pAmount">
+                  <p className="priceInfo">
+                    ${priceArr[idx + 1]}
+                  </p>
+                  <span style={{ fontWeight: "lighter" }}>Delivery Fee</span>
+                </div>
+                •
+                <p className="timeInfo">
+                  {timeArr[idx + 1][0]}-{timeArr[idx + 1][1]} min
+                </p>
+              </div>
+              {user?.id == restaurant?.owner_id && (
+                <button
+                  className="add-item edit-restaurant"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/restaurants/${restaurant?.id}/update`);
+                  }}
+                >
+                  Edit Restaurant
+                </button>
+              )}
             </div>
-            {user?.id == restaurant?.owner_id && (
-              <button
-                className="add-item edit-restaurant"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(`/restaurants/${restaurant?.id}/update`);
-                }}
-              >
-                Edit Restaurant
-              </button>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
