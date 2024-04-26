@@ -8,15 +8,15 @@ import { useShoppingCart } from "../../context/CartContext";
 function DeleteRestaurantModal({restaurantId, message}) {
     // const dispatch = useDispatch()
     const { closeModal } = useModal()
-    const { setCartItems, setCartRestaurant } = useShoppingCart();
+    const { clearCart, cartRestaurant } = useShoppingCart();
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(deleteRestaurant(restaurantId)).then(setCartItems([])).then(setCartRestaurant(0)).then(
-          navigate("/")
-        );
+        await dispatch(deleteRestaurant(restaurantId));
+        if (cartRestaurant == restaurantId) clearCart();
+        navigate("/")
         closeModal()
     }
 

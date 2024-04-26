@@ -8,7 +8,7 @@ import { useShoppingCart, removeItems } from "../../context/CartContext";
 function DeleteMenuItemModal({itemId, restaurantId, message}) {
     // const dispatch = useDispatch()
     const { closeModal } = useModal()
-    const { cartItems, setCartItems, setCartRestaurant } = useShoppingCart();
+    const { cartItems, setCartItems } = useShoppingCart();
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
