@@ -51,23 +51,23 @@ function LandingPage() {
   if (!restaurantArr) return;
 
   // ONLY IMPLEMENT IF MODEL COLUMN DOESN'T WORK OUT
-  // const generateRandomPrices = (n) => {
-  //   const prices = [];
-  //   const dollarAmount = [0, 1, 2, 3];
-  //   const centAmount = ['49', '99'];
+  const generateRandomPrices = (n) => {
+    const prices = {};
+    const dollarAmount = [0, 1, 2, 3];
+    const centAmount = ['49', '99'];
 
-  //   for (let i = 0; i < n; i++) {
-  //     const randomWholeNumber = dollarAmount[Math.floor(Math.random() * dollarAmount.length)];
-  //     const randomDecimal = centAmount[Math.floor(Math.random() * centAmount.length)];
-  //     const randomPrice = `${randomWholeNumber}.${randomDecimal}`;
-  //     prices.push(parseFloat(randomPrice));
-  //   }
+    for (let i = 0; i < n; i++) {
+      const randomWholeNumber = dollarAmount[Math.floor(Math.random() * dollarAmount.length)];
+      const randomDecimal = centAmount[Math.floor(Math.random() * centAmount.length)];
+      const randomPrice = `${randomWholeNumber}.${randomDecimal}`;
+      prices[i + 1] = parseFloat(randomPrice);
+    }
 
-  //   return prices;
-  // }
+    return prices;
+  }
 
   const generateRandomTime = (n) => {
-    const result = [];
+    const result = {};
     const min = 10;
     const max = 40;
     const step = 5;
@@ -77,13 +77,13 @@ function LandingPage() {
 
       const randomAddition = [10, 15, 20][Math.floor(Math.random() * 3)];
 
-      result.push([randomNumber, randomNumber + randomAddition]);
+      result[i + 1] = [randomNumber, randomNumber + randomAddition]
     }
     return result;
   }
 
-  const timeArr = generateRandomTime(parseInt(restaurantArr?.length));
-  if (!localStorage.getItem("delTimeArr")) localStorage.setItem("delTimeArr", JSON.stringify(timeArr))
+  const timeArr = generateRandomTime(restaurantArr?.length);
+  const priceArr = generateRandomPrices(restaurantArr?.length);
 
   const delTimeArr = JSON.parse(localStorage.getItem("delTimeArr"));
 
