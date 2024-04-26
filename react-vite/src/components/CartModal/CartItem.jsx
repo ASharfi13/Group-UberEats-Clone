@@ -1,6 +1,6 @@
 import { useShoppingCart } from "../../context/CartContext";
 export default function({item, quantity}) {
-    const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
+    const { cartItems, setCartItems, clearCart } = useShoppingCart();
     const addItem = () => {
         setCartItems([...cartItems, JSON.stringify(item)])
     }
@@ -9,7 +9,8 @@ export default function({item, quantity}) {
         const temp = [...cartItems]
         const targetItem = cartItems.findIndex(element => element.includes(`{"id":${item.id},`))
         temp.splice(targetItem, 1)
-        setCartItems(temp)
+        setCartItems(temp);
+        if (temp.length == 0) clearCart();
     }
 
     if (item) return (

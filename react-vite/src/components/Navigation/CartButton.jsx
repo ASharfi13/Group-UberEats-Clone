@@ -12,8 +12,7 @@ function CartButton() {
   const wallets = useSelector((store) => store.walletState);
   const userWallet = wallets ? wallets[user?.id] : null;
   const restaurants = useSelector((store) => store.restaurantState)
-  const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
-  const restaurantName = cartItems?.length > 0 ? JSON.parse(cartItems[0]).restaurant : ""
+  const { cartItems } = useShoppingCart();
 
   useEffect(() => {
     dispatch(loadFunds(user?.id))
