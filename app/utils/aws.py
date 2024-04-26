@@ -18,6 +18,23 @@ def get_unique_filename(filename):
     unique_filename = uuid.uuid4().hex
     return f"{unique_filename}.{ext}"
 
+def upload_local_file(file, fileName, acl="public-read"):
+    try:
+        s3.upload_file(
+            file,
+            BUCKET_NAME,
+            fileName,
+            ExtraArgs={
+                "ACL": acl,
+                "ContentType": "image/png"
+            }
+        )
+    except Exception as e:
+        # in case the your s3 upload fails
+        return {"errors": str(e)}
+
+    return {"url": f"{S3_LOCATION}{fileName}"}
+
 def upload_file_to_s3(file, acl="public-read"):
     try:
         s3.upload_fileobj(
