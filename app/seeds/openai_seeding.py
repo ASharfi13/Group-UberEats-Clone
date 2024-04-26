@@ -584,30 +584,128 @@ errored_items = [{"name": "Latte", "type": "Coffee", "price": 3.99, "restaurant_
             {"name": "Chocolate Cream Pie", "type": "Dessert", "price": 6.99, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Chocolate-Cream-Pie.jpg"},
             {"name": "Lemon Meringue Pie", "type": "Dessert", "price": 6.49, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Lemon-Meringue-Pie.jpg"},
             {"name": "Sweet Potato Pie", "type": "Dessert", "price": 5.99, "restaurant_id": 48, "imageUrl": "https://i.postimg.cc/Sweet-Potato-Pie.jpg"}]
-final_menu_items = []
-for item in errored_items:
-    try:
-        response = client.images.generate(
-            model="dall-e-2",
-            prompt=f"a photograph of {item['name']}",
-            size="256x256",
-            quality="standard",
-        )
-        url = response.data[0].url
-        img_data = requests.get(url).content
-        filename = f"{item['name'].lower().replace(' ', '_')}.png"
-        with open(f"./app/seeds/images/{filename}", 'wb') as handler:
-            handler.write(img_data)
-        unique_filename = get_unique_filename(filename)
-        img_loc = f"./app/seeds/images/{filename}"
-        upload = upload_local_file(img_loc, unique_filename)
-        print(upload)
-        item["imageUrl"] = upload["url"]
-        final_menu_items.append(item)
-        time.sleep(12)
-    except Exception as e:
-        print(str(e))
-        continue
+# final_menu_items = []
+# for item in errored_items:
+#     try:
+#         response = client.images.generate(
+#             model="dall-e-2",
+#             prompt=f"a photograph of {item['name']}",
+#             size="256x256",
+#             quality="standard",
+#         )
+#         url = response.data[0].url
+#         img_data = requests.get(url).content
+#         filename = f"{item['name'].lower().replace(' ', '_')}.png"
+#         with open(f"./app/seeds/images/{filename}", 'wb') as handler:
+#             handler.write(img_data)
+#         unique_filename = get_unique_filename(filename)
+#         img_loc = f"./app/seeds/images/{filename}"
+#         upload = upload_local_file(img_loc, unique_filename)
+#         print(upload)
+#         item["imageUrl"] = upload["url"]
+#         final_menu_items.append(item)
+#         time.sleep(12)
+#     except Exception as e:
+#         print(str(e))
+#         continue
 
-with open("./app/seeds/ai_extra_menu_items.json", "w") as handler:
-    handler.write(json.dumps(final_menu_items))
+# with open("./app/seeds/ai_extra_menu_items.json", "w") as handler:
+#     handler.write(json.dumps(final_menu_items))
+new_reviews = [
+    {"stars": 5, "description": "Absolutely loved the Chicken Tikka Masala! Best I've had in town.", "restaurant_id": 19, "user_id": 101},
+    {"stars": 4, "description": "The ambiance is perfect for dining out. The Lamb Vindaloo was a bit spicy but delicious.", "restaurant_id": 19, "user_id": 102},
+    {"stars": 3, "description": "Service was a bit slow, but the food was worth the wait. Enjoyed the Naan Bread.", "restaurant_id": 19, "user_id": 103},
+    {"stars": 4, "description": "Kung Pao Chicken was fantastic! Will definitely return!", "restaurant_id": 20, "user_id": 104},
+    {"stars": 5, "description": "Great service and the Beef and Broccoli was cooked to perfection.", "restaurant_id": 20, "user_id": 105},
+    {"stars": 3, "description": "Decent food but the Sweet and Sour Pork was too sweet for my taste.", "restaurant_id": 20, "user_id": 106},
+    {"stars": 4, "description": "Loved the Classic Cheeseburger, juicy and flavorful!", "restaurant_id": 21, "user_id": 107},
+    {"stars": 4, "description": "Great atmosphere and delicious Bacon Burger. A must-try!", "restaurant_id": 21, "user_id": 108},
+    {"stars": 5, "description": "Veggie Burger was the best I've had! Great options for vegetarians.", "restaurant_id": 21, "user_id": 109},
+    {"stars": 5, "description": "Shrimp Tacos are amazing! Fresh ingredients and packed with flavor.", "restaurant_id": 22, "user_id": 110},
+    {"stars": 4, "description": "A lively place with an authentic Mexican vibe. Loved the Chorizo Quesadilla.", "restaurant_id": 22, "user_id": 111},
+    {"stars": 3, "description": "The food is good, but the service could be faster. Fish Tacos were worth the wait though.", "restaurant_id": 22, "user_id": 112},
+    {"stars": 5, "description": "The Chicken Korma is out of this world! Highly recommended.", "restaurant_id": 23, "user_id": 113},
+    {"stars": 4, "description": "Cozy atmosphere and the Lamb Rogan Josh is a must-try dish here.", "restaurant_id": 23, "user_id": 114},
+    {"stars": 4, "description": "I love their vegetarian options. Dal Tadka was delightful.", "restaurant_id": 23, "user_id": 115},
+    {"stars": 5, "description": "The Pho Bo was absolutely delicious, full of flavor!", "restaurant_id": 24, "user_id": 116},
+    {"stars": 4, "description": "Loved the variety of noodles they offer. Dan Dan Noodles were spicy and tasty.", "restaurant_id": 24, "user_id": 117},
+    {"stars": 4, "description": "Udon was cooked perfectly. A great find for noodle lovers.", "restaurant_id": 24, "user_id": 118},
+    {"stars": 5, "description": "The Ribeye Steak was cooked to perfection. Highly recommend this place!", "restaurant_id": 25, "user_id": 119},
+    {"stars": 4, "description": "Great ambiance and top-notch service. The Porterhouse Steak is a must-try.", "restaurant_id": 25, "user_id": 120},
+    {"stars": 3, "description": "Decent steaks but a bit pricey. The Caesar Salad was fresh though.", "restaurant_id": 25, "user_id": 121},
+    {"stars": 5, "description": "The Lobster Roll is the best I've had! Fresh and full of flavor.", "restaurant_id": 26, "user_id": 122},
+    {"stars": 4, "description": "Loved the Seafood Linguine, and the service was excellent.", "restaurant_id": 26, "user_id": 123},
+    {"stars": 4, "description": "The Grilled Sea Bass was a delight. Will come back to try more dishes.", "restaurant_id": 26, "user_id": 124},
+    {"stars": 5, "description": "Every dish is a piece of art here, especially the Duck Confit. Simply sublime!", "restaurant_id": 27, "user_id": 125},
+    {"stars": 4, "description": "Had a wonderful dinner. The Coq au Vin was memorable.", "restaurant_id": 27, "user_id": 126},
+    {"stars": 3, "description": "Nice French cuisine, but the service was slower than expected. Ratatouille was good though.", "restaurant_id": 27, "user_id": 127},
+    {"stars": 5, "description": "Best pizza in town! The Meat Lover's Pizza is incredible.", "restaurant_id": 28, "user_id": 128},
+    {"stars": 4, "description": "Really enjoyed the Margherita Pizza. Fresh ingredients and a perfect crust.", "restaurant_id": 28, "user_id": 129},
+    {"stars": 3, "description": "Decent pizza but I expected more from the BBQ Chicken Pizza. Good service, though.", "restaurant_id": 28, "user_id": 130},
+    {"stars": 5, "description": "The Pork Dumplings are a must-try! So juicy and flavorful.", "restaurant_id": 29, "user_id": 131},
+    {"stars": 4, "description": "Loved the variety of dumplings, especially the Shrimp Dumplings. Great taste and nice atmosphere.", "restaurant_id": 29, "user_id": 132},
+    {"stars": 4, "description": "Really good vegetarian options like the Vegetable Dumplings. Fresh and delicious.", "restaurant_id": 29, "user_id": 133},
+    {"stars": 5, "description": "The Smoked Brisket melts in your mouth! Fantastic BBQ place.", "restaurant_id": 30, "user_id": 134},
+    {"stars": 4, "description": "Great BBQ Ribs and the side of Mac & Cheese was perfect. Definitely coming back.", "restaurant_id": 30, "user_id": 135},
+    {"stars": 3, "description": "Good food but service could be improved. The Pulled Pork Sandwich was tasty though.", "restaurant_id": 30, "user_id": 136},
+    {"stars": 5, "description": "The Pistachio Gelato is out of this world! So creamy and full of flavor.", "restaurant_id": 31, "user_id": 137},
+    {"stars": 4, "description": "Love the selection of gelato. Lemon Sorbet was refreshing and perfectly tart.", "restaurant_id": 31, "user_id": 138},
+    {"stars": 4, "description": "Really nice place to get authentic Italian gelato. Tiramisu flavor was a treat!", "restaurant_id": 31, "user_id": 139},
+    {"stars": 5, "description": "The Vegan Burger is the best I've had! Can't believe it's not meat.", "restaurant_id": 32, "user_id": 140},
+    {"stars": 4, "description": "Delicious and healthy! The Chickpea Curry had just the right amount of spice.", "restaurant_id": 32, "user_id": 141},
+    {"stars": 4, "description": "Great vegan options, and the Vegan Chocolate Cake is a must-try.", "restaurant_id": 32, "user_id": 142},
+    {"stars": 5, "description": "The Sushi Spot never disappoints. The Salmon Nigiri is my favorite.", "restaurant_id": 33, "user_id": 143},
+    {"stars": 4, "description": "Good variety and quality sushi. The Dragon Roll was fantastic!", "restaurant_id": 33, "user_id": 144},
+    {"stars": 4, "description": "Nice ambiance and quality food. Spicy Tuna Roll was delicious and had a great kick!", "restaurant_id": 33, "user_id": 145},
+    {"stars": 5, "description": "The croissants here are heavenly! Perfectly flaky and buttery.", "restaurant_id": 34, "user_id": 146},
+    {"stars": 2, "description": "Was excited to try the macarons but they were too sweet and a bit stale.", "restaurant_id": 34, "user_id": 147},
+    {"stars": 3, "description": "The apple pie had a good flavor, but the crust was not as crispy as I like.", "restaurant_id": 34, "user_id": 148},
+    {"stars": 4, "description": "The Doner Kebab is full of flavor and very satisfying.", "restaurant_id": 35, "user_id": 149},
+    {"stars": 1, "description": "The Lamb Shish Kebab was undercooked and chewy. Very disappointing.", "restaurant_id": 35, "user_id": 150},
+    {"stars": 5, "description": "Loved the Mixed Grill Platter. A great selection of meats and all cooked to perfection.", "restaurant_id": 35, "user_id": 151},
+    {"stars": 5, "description": "The Beef Carpaccio is a must-try! Delicious and well-prepared.", "restaurant_id": 36, "user_id": 152},
+    {"stars": 2, "description": "The service was slow, and the Mushroom Risotto was overly salty.", "restaurant_id": 36, "user_id": 153},
+    {"stars": 3, "description": "The ambiance is nice, but the Seafood Linguine was lackluster in flavor.", "restaurant_id": 36, "user_id": 154},
+    {"stars": 5, "description": "The Chicken Momo is incredible here! Full of spices and perfectly steamed.", "restaurant_id": 37, "user_id": 155},
+    {"stars": 1, "description": "Had high hopes for the Beef Momo but they were greasy and the meat was tough.", "restaurant_id": 37, "user_id": 156},
+    {"stars": 4, "description": "The Paneer Momo is a delightful vegetarian option, well-seasoned and fresh.", "restaurant_id": 37, "user_id": 157},
+    {"stars": 4, "description": "Spaghetti Carbonara had a rich and creamy sauce, just how I like it.", "restaurant_id": 38, "user_id": 158},
+    {"stars": 2, "description": "Penne Arrabbiata was overly spicy and unbalanced. Not what I expected.", "restaurant_id": 38, "user_id": 159},
+    {"stars": 3, "description": "Lasagna was okay, but lacked the depth of flavor I was hoping for.", "restaurant_id": 38, "user_id": 160},
+    {"stars": 5, "description": "The Eggs Benedict here are the best I've ever had! Perfectly poached eggs.", "restaurant_id": 39, "user_id": 161},
+    {"stars": 2, "description": "The Pancakes were disappointing, too dry and lacked flavor.", "restaurant_id": 39, "user_id": 162},
+    {"stars": 3, "description": "The French Toast is okay, but not as fluffy as I expected. Service was slow.", "restaurant_id": 39, "user_id": 163},
+    {"stars": 4, "description": "The Greek Salad is fresh and vibrant, perfect for a light lunch.", "restaurant_id": 40, "user_id": 164},
+    {"stars": 1, "description": "Very disappointed with the Cobb Salad, it was soggy and the dressing was bland.", "restaurant_id": 40, "user_id": 165},
+    {"stars": 3, "description": "Caprese Salad had fresh tomatoes, but not enough basil or balsamic. Could be better.", "restaurant_id": 40, "user_id": 166},
+    {"stars": 5, "description": "Loved the Beef Empanadas! They were juicy and well-seasoned.", "restaurant_id": 41, "user_id": 167},
+    {"stars": 2, "description": "The Cheese Empanadas were too greasy and lacked flavor.", "restaurant_id": 41, "user_id": 168},
+    {"stars": 4, "description": "The Chicken Empanadas are a great snack, tasty and filling.", "restaurant_id": 41, "user_id": 169},
+    {"stars": 4, "description": "The Espresso is strong and flavorful, just how I like it.", "restaurant_id": 42, "user_id": 170},
+    {"stars": 1, "description": "The Latte was lukewarm and the foam was not creamy at all. Very disappointed.", "restaurant_id": 42, "user_id": 171},
+    {"stars": 3, "description": "The Cappuccino is decent, but the atmosphere of the place doesn't feel cozy.", "restaurant_id": 42, "user_id": 172},
+    {"stars": 5, "description": "The Tonkotsu Ramen is amazing! Rich broth and tender pork.", "restaurant_id": 43, "user_id": 173},
+    {"stars": 2, "description": "Miso Ramen was too salty, and the noodles were overcooked.", "restaurant_id": 43, "user_id": 174},
+    {"stars": 3, "description": "Spicy Ramen has a good kick, but the broth lacked depth.", "restaurant_id": 43, "user_id": 175},
+    {"stars": 5, "description": "The Classic Tiramisu is to die for! Perfectly creamy and just the right amount of coffee flavor.", "restaurant_id": 44, "user_id": 176},
+    {"stars": 2, "description": "Was not impressed with the Mango Tiramisu; it was too sweet and lacked traditional flavors.", "restaurant_id": 44, "user_id": 177},
+    {"stars": 3, "description": "The Chocolate Tiramisu looked promising but was too dense and not as flavorful as expected.", "restaurant_id": 44, "user_id": 178},
+    {"stars": 4, "description": "The Raclette was a delightful experience, with perfectly melted cheese and a great selection of sides.", "restaurant_id": 45, "user_id": 179},
+    {"stars": 1, "description": "Extremely disappointed with the Gruyere Grilled Cheese, it was burnt and very greasy.", "restaurant_id": 45, "user_id": 180},
+    {"stars": 5, "description": "Loved the Classic Fondue! It was a hit with the entire family, and the dippers were fresh and tasty.", "restaurant_id": 45, "user_id": 181},
+    {"stars": 5, "description": "The Falafel Wrap is fantastic here—crispy on the outside and soft on the inside, with delicious sauces.", "restaurant_id": 46, "user_id": 182},
+    {"stars": 2, "description": "The Baba Ganoush was too smoky and had an overpowering garlic taste, not my favorite.", "restaurant_id": 46, "user_id": 183},
+    {"stars": 4, "description": "Hummus Plate was creamy and well-seasoned. Great appetizer for the table!", "restaurant_id": 46, "user_id": 184},
+    {"stars": 5, "description": "Chicken and Sausage Gumbo was a bowl of comfort—perfect spice, rich flavors.", "restaurant_id": 47, "user_id": 185},
+    {"stars": 3, "description": "Seafood Gumbo was okay; the seafood tasted fresh but the gumbo base lacked the depth I hoped for.", "restaurant_id": 47, "user_id": 186},
+    {"stars": 1, "description": "Jambalaya was dry and not at all what I expected. Very disappointing meal.", "restaurant_id": 47, "user_id": 187},
+    {"stars": 5, "description": "The Apple Pie is just like homemade—flaky crust and perfectly sweet filling.", "restaurant_id": 48, "user_id": 188},
+    {"stars": 3, "description": "Pecan Pie was too sweet for my taste, but my friend loved it.", "restaurant_id": 48, "user_id": 189},
+    {"stars": 2, "description": "Cherry Pie had a soggy crust and the cherries were not tart enough, quite bland overall.", "restaurant_id": 48, "user_id": 190}
+]
+final_reviews = []
+for review in new_reviews:
+    review["user_id"] = randint(1, 20)
+    final_reviews.append(review)
+with open("./app/seeds/ai_reviews.json", "w") as handler:
+    handler.write(json.dumps(final_reviews))
