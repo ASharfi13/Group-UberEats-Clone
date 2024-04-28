@@ -14,10 +14,11 @@
 
 .sign-up-form {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   gap: 10px;
-  width: 70%;
+  width: 100%;
+  padding: 0px 20px;
 }
 
 .email-label {

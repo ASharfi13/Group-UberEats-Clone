@@ -14,10 +14,10 @@
 
 .log-in-form {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   gap: 10px;
-  width: 60%;
+  width: 80%;
 }
 
 .email-area {
