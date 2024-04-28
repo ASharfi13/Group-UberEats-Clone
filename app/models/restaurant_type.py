@@ -28,8 +28,8 @@ class RestaurantTypeAssociation(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"), primary_key=True)
-    type_id = db.Column(db.Integer, db.ForeignKey("restaurant_types.id"), primary_key=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), primary_key=True)
+    type_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurant_types.id")), primary_key=True)
 
 class RestaurantType(db.Model):
     __tablename__ = "restaurant_types"
