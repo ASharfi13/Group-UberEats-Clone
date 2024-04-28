@@ -121,7 +121,7 @@ function LandingPage() {
               </p>
             </div>
             <div className="restPriceTimeInfo">
-              {/* <p className="timeInfo">{delTimeArr[restaurant?.id - 1][0]}-{delTimeArr[restaurant?.id - 1][1]} min</p> */}
+              <h4>${priceArr[idx + 1]} Delivery Fee • {timeArr[idx + 1][0]}-{timeArr[idx + 1][1]} min</h4>
             </div>
             {user?.id == restaurant?.owner_id && (
               <button
