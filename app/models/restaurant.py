@@ -39,7 +39,7 @@ class Restaurant(db.Model):
 
     reviews = db.relationship("Review", back_populates="restaurant", cascade='all, delete-orphan')
     menu_items = db.relationship("MenuItem", back_populates="restaurant", cascade='all, delete-orphan')
-    types = db.relationship("RestaurantType",secondary="restaurant_type_associations",back_populates="restaurant")
+    types = db.relationship("RestaurantType",secondary="restaurant_type_associations", back_populates="restaurant")
 
     def to_dict(self):
         return {
