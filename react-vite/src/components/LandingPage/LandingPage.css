@@ -152,7 +152,9 @@
 .selected {
   color: green;
 }
-
+.react-multi-carousel-list {
+  margin: 0 40px;
+}
 .react-multi-carousel-track {
   width: 100%;
   gap: 10px;

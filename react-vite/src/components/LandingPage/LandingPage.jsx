@@ -90,7 +90,7 @@ function LandingPage() {
   // console.log(delTimeArr)
   // console.log("sp", searchParams);
   // console.log(restaurantTypes)
-  console.log(avgRating)
+  // console.log(avgRating)
 
   useEffect(() => {
     dispatch(getRestaurantTypes())
