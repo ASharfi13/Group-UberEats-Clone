@@ -79,12 +79,14 @@ function SingleRestaurant() {
     ? (cartRestaurantId = cartItems[0].restaurant_id)
     : (cartRestaurantId = null);
 
+  document.title = `Order ${restaurant[restaurantId].name}`
   return (
     <>
       {restaurant && (
         <div className="restaurant-details-container">
           <div className="banner-image=container">
-            <img className="banner-image" src="https://wifiuploads.s3.amazonaws.com/uploads/lines/picture/image/52/ubereats-banner.jpg"></img>
+          {/* src="https://wifiuploads.s3.amazonaws.com/uploads/lines/picture/image/52/ubereats-banner.jpg" */}
+            <img className="banner-image" src={restaurant[restaurantId]?.imageUrl}></img>
           </div>
           <div className="restaurant-image-container">
             <img className="restaurant-image" src={restaurant[restaurantId]?.imageUrl}></img>
@@ -164,12 +166,12 @@ function SingleRestaurant() {
                       >
                         Add to Cart
                       </button> */}
-                      {
+                      {/* {
                         cartItems.findIndex((element) => element.includes(`{"id":${item.id},`)) !== -1 &&
                         (<button onClick={(e) => setCartItems(removeItems(cartItems, item.id))}>
                           Remove Item From Cart
                         </button>)
-                      }
+                      } */}
 
                       <div className="ManageMenuItem">
                         {restaurant[restaurantId]?.owner_id === user?.id && (
