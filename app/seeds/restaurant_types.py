@@ -1,4 +1,4 @@
-from app.models import db, RestaurantType, SCHEMA, environment, Restaurant, RestaurantTypeAssociation
+from app.models import db, RestaurantType, SCHEMA, environment, Restaurant
 from sqlalchemy.sql import text
 from .seed_data import restaurant_types, restaurant_type_associations
 
@@ -19,10 +19,10 @@ def undo_types():
 
 def seed_associations():
     for association in restaurant_type_associations:
-        # restaurant = Restaurant.query.get(association["restaurant_id"])
-        # rType = RestaurantType.query.get(association["type_id"])
-        newAss = RestaurantTypeAssociation(**association)
-        db.session.add(newAss)
+        restaurant = Restaurant.query.get(association["restaurant_id"])
+        rType = RestaurantType.query.get(association["type_id"])
+        # newAss = RestaurantTypeAssociation(**association)
+        restaurant.types.append(rType)
     db.session.commit()
 
 def undo_associations():

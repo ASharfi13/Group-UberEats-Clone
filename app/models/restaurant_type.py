@@ -23,13 +23,22 @@ restaurantTypes = [
     "Hawaiian",
     "Other"
 ]
-class RestaurantTypeAssociation(db.Model):
-    __tablename__ = "restaurant_type_associations"
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+# class RestaurantTypeAssociation(db.Model):
+#     __tablename__ = "restaurant_type_associations"
+#     if environment == "production":
+#         __table_args__ = {'schema': SCHEMA}
 
-    restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), primary_key=True)
-    type_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurant_types.id")), primary_key=True)
+#     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), primary_key=True)
+#     type_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurant_types.id")), primary_key=True)
+
+restaurant_type_associations = db.Table(
+    "restaurant_type_associations",
+    db.Model.metadata,
+    db.Column('restaurant_id',db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), primary_key=True),
+    db.Column('type_id',db.Integer, db.ForeignKey(add_prefix_for_prod("restaurant_types.id")), primary_key=True)
+)
+if environment == "production":
+    restaurant_type_associations.schema = SCHEMA
 
 class RestaurantType(db.Model):
     __tablename__ = "restaurant_types"
