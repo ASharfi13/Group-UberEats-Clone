@@ -31,6 +31,11 @@ function SingleRestaurant() {
 
   const reviewsArr = restaurant[restaurantId]?.Reviews;
   const menuItemsArr = Object.values(menu_items);
+  // const menuItemTypes = [];
+  // let filteredItems = [];
+  // for (let item of menuItemsArr) {
+  //   menuItemTypes.push(item.type)
+  // }
 
 
   const avgReviews =
@@ -85,43 +90,67 @@ function SingleRestaurant() {
     <>
       {restaurant && (
         <div className="restaurant-details-container">
+          <div className="banner-image=container">
+            <img className="banner-image" src="https://wifiuploads.s3.amazonaws.com/uploads/lines/picture/image/52/ubereats-banner.jpg"></img>
+          </div>
           <div className="restaurant-image-container">
             <img className="restaurant-image" src={restaurant[restaurantId]?.imageUrl}></img>
           </div>
           <div className="restaurant-details-header-container">
             <h1 className="restaurant-name">{restaurant[restaurantId]?.name} </h1>
             <h3 className="restaurantRating">
-              {avgReviews.toFixed(1)} <FaStar /> ({reviewsArr?.length}) reviews
+              {avgReviews.toFixed(1)} <FaStar /> <span style={{color: 'gray'}}>({reviewsArr?.length}) reviews</span>
             </h3>
           </div>
           <div className="reviews-header-container">
-            <h1>Top Reviews</h1>
-            <h4>From customers who've ordered here</h4>
+            <h2>Rating and reviews</h2>
 
           </div>
           <div className="restaurantDetails">
             <div className="reviews-Container">
+              {/* <div className="review-total">
+                <h1>{avgReviews.toFixed(1)}</h1>
+                <h2>stars</h2>
+                <h3>{reviewsArr?.length} Ratings</h3>
+              </div> */}
               {reviewsArr?.map((review) => (
                 <div
                   className="review-Card"
                   key={review.id}
                 >
-                  <p className="name-review">{review.name}</p>
-                  <div className="rating">
-                    <p>{review.stars}</p>
-                    <img
-                      className="star"
-                      src="https://i.postimg.cc/QxSC3byV/stars-removebg-preview.png"
-                      alt="star"
-                    />
-                  </div>
                   <p className="description-review">"{review.description}"</p>
+                  <div className="review-details-footer">
+
+                    {/* <div className="rating"> */}
+                      <p className="review-text">{review.stars} ★</p>
+                      {/* <img
+                        className="star"
+                        src="https://i.postimg.cc/QxSC3byV/stars-removebg-preview.png"
+                        alt="star"
+                      /> */}
+
+                    {/* </div> */}
+                    <p className="name-review review-text">• {review.name} •</p>
+                    <p className="name-review review-text">{review.createdAt}</p>
+                  </div>
                 </div>
               ))}
             </div>
             <h1>Featured Items</h1>
-
             <div className="menuItemsContainer">
+              {/* {menuItemTypes?.map((type, idx) => (
+                return (
+                  <h1 key={idx}>{type}</h1>
+
+
+
+                {menuItemsArr.filter((menu_item) => {
+                  menu_item === type
+                }).map(test, idxz) => (
+                  <h1>test</h1>
+                )})
+              ))} */}
+
               {menuItemsArr?.map((item, index) => (
                 <div className="menuItemCard" key={index}>
                   <div className="menu-item-card-left">
@@ -131,7 +160,7 @@ function SingleRestaurant() {
                     </div>
 
                     <div className="menu-item-buttons-container">
-                      <button
+                      {/* <button
                         className="add-to-cart"
                         onClick={(e) =>
                           addToCart(e, {
@@ -141,7 +170,7 @@ function SingleRestaurant() {
                         }
                       >
                         Add to Cart
-                      </button>
+                      </button> */}
                       {
                         cartItems.findIndex((element) => element.includes(`{"id":${item.id},`)) !== -1 &&
                         (<button onClick={(e) => removeFromCart(e, item)}>
@@ -171,7 +200,20 @@ function SingleRestaurant() {
                   </div>
 
                   <div className="menu-item-image-container">
-                    <img className="itemImage" src={item.imageUrl} />
+                    <img className="itemImage" src={item.imageUrl}
+                    onClick={(e) =>
+                          addToCart(e, {
+                            ...item,
+                            restaurant: restaurant[restaurantId].name,
+                          })
+                        }/>
+                    <div className="add-button"
+                    onClick={(e) =>
+                      addToCart(e, {
+                        ...item,
+                        restaurant: restaurant[restaurantId].name,
+                      })
+                    }> <span>+</span> </div>
                   </div>
 
                 </div>

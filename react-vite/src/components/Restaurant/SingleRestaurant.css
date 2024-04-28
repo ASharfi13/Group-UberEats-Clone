@@ -6,17 +6,17 @@
   font-weight: 600;
 }
 
-.restaurant-image-container {
-  display: flex;
-  justify-content: center;
-  height: 12vw;
-  width: 70vw;
-}
 
 .restaurant-image {
-  width: 50%;
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  left: 360px;
+  top: 270px;
+  border: 2px white solid;
   /* height: auto; */
-  object-fit: contain;
+  object-fit: fill;
 }
 
 /* .restaurant-details {
@@ -26,14 +26,36 @@
   align-items: center;
 } */
 
+.restaurant-details-header-container {
+  margin-top: 15px;
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 15px;
+}
+
+.banner-image-container {
+  height: 250px;
+  width: 1200px;
+  border-radius: 12px;
+}
+.banner-image {
+  height: 250px;
+  width: 1200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
 .restaurant-name {
-  font-size: 45px;
+  font-size: 35px;
   display: flex;
   justify-content: center;
   margin-bottom: 0;
 }
 
 .restaurantRating {
+  font-size: medium;
+  /* color: gray; */
   display: flex;
   justify-content: center;
   gap: 5px;
@@ -41,7 +63,7 @@
 }
 
 .reviews-header-container {
-  width: 50vw;
+  width: 1200px;
 }
 
 .reviews-header-container h1 {
@@ -49,7 +71,7 @@
 }
 
 .restaurantDetails {
-  width: 50vw;
+  width: 1200px;
 }
 
 .reviews-Container {
@@ -64,6 +86,15 @@
   padding-top: 10px;
 }
 
+.review-details-footer {
+  padding: 0px;
+  display: flex;
+  gap: 5px;
+}
+.review-text {
+  font-size: smaller;
+}
+
 h4 {
   font-weight: 400;
   color: darkslategray;
@@ -73,13 +104,25 @@ h4 {
 .review-Card {
   display: flex;
   background-color: lightgreen;
-  justify-content: space-between;
+  justify-content: start;
   flex-direction: row;
   flex-wrap: wrap;
   border: 1px solid grey;
+  border-radius: 10px;
+  width: 250px;
+  height: 120px;
+  gap: 20px;
+  padding: 5px;
+}
+
+.review-total {
+  display: flex;
+  background-color: lightgreen;
+  /* justify-content: space-between;? */
+  flex-direction: column;
+  border: 1px solid grey;
   border-radius: 5px;
   width: 200px;
-  gap: 10px;
   padding: 15px;
 }
 
@@ -91,6 +134,7 @@ h4 {
 
 .rating {
   display: flex;
+  gap: 1px;
 }
 
 .name-review {
@@ -103,7 +147,7 @@ h4 {
 
 .menuItemsContainer {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   /* flex-wrap: wrap; */
   gap: 30px;
   /* margin-left: 20px; */
@@ -123,12 +167,13 @@ h4 {
   padding: 15px;
 } */
 .menuItemCard {
-  width: 50vw;
+  width: 20vw;
   margin-left: 0px;
   display: flex;
+  height: 150px;
   justify-content: space-between;
   flex-direction: row;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   border-radius: 20px;
   border: 1px lightgray solid;
   padding: 15px;
@@ -166,10 +211,33 @@ h4 {
 }
 
 .itemImage {
-  width: 250px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 20px;
   border: 1px lightgray solid;
+}
+
+.itemImage:hover {
+  cursor: pointer;
+}
+
+.add-button {
+  position: relative;
+  right: -110px;
+  top: -45px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: black 1px solid;
+}
+
+.add-button:hover {
+  cursor: pointer;
+  background-color: lightgray;
 }
 
 .restaurant-details-container button {
@@ -199,6 +267,17 @@ button {
 }
 
 .edit-button {
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: rgb(211, 209, 209);
+  color: black;
+  font-size: 12px;
+  height: 40px;
+  width: 80px;
+}
+
+.delete-button {
   border: 1px black solid;
   border-radius: 5px;
   padding: 5px;
