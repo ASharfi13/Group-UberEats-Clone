@@ -10,8 +10,8 @@
 }
 
 .restaurant-form {
-  display: inline-flex;
-  justify-content: flex-start;
+  display: flex;
+  justify-content: space-between;
   flex-direction: column;
   border: 2px black solid;
   border-radius: 20px;
@@ -40,14 +40,29 @@
 }
 
 .column-styles {
+  width: 100%;
   display: flex;
   text-align: start;
   justify-content: flex-start;
   flex-direction: row;
   gap: 10px;
 }
+.column-styles > p {
+  width: 25%;
+}
 
+.column-styles > input {
+  width: 50%;
+  align-self: center;
+}
+.column-styles > select {
+  width: 50%;
+}
 .restaurant-submit {
   width: 80px;
   border-radius: 20px;
+}
+.column-styles > label {
+  width: 50%;
+  align-self: center;
 }

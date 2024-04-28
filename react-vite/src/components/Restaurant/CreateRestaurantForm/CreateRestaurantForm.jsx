@@ -105,11 +105,13 @@ function RestaurantForm() {
               </div>
               <div className="column-styles">
                 <p>Image</p>
+                <label className="file-input">
                 <input
                   type="file"
                   accept="image/*"
                   onChange={(e) => handleFile(e)}
                 />
+                </label>
                 <p className="restaurant-errors">
                   {errors.image ? errors.image : null}
                 </p>
