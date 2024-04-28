@@ -1,21 +1,21 @@
 import { FaSearch } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllRestaurants } from "../../redux/restaurantReducer";
+import { fetchAllRestaurants, getRestaurantTypes } from "../../redux/restaurantReducer";
 import { useEffect, useState } from "react";
 import "./SearchBar.css"
-import { NavLink } from "react-router-dom";
+import { useSearch } from "../../context/SearchContext"
+import { useTopModal } from "../../context/TopModal";
+import SearchModal from "./SearchModal";
 
 function SearchBar() {
     const dispatch = useDispatch();
+    const { setModalContent } = useTopModal();
     const restaurants = useSelector((state) => state.restaurantState);
+    const restaurantTypes = restaurants?.types
     const restaurantArr = Object.values(restaurants);
-    const [input, setInput] = useState("");
-    const [results, setResults] = useState([]);
+    const { input, setInput, results, setResults, types, setTypes, handleExit } = useSearch();
 
-    const handleExit = () => {
-        setInput("")
-        setResults([])
-    }
+
 
     const findResults = () => {
         if (input) {
@@ -25,35 +25,39 @@ function SearchBar() {
         }
     }
 
+    const findTypes = () => {
+        if (input) {
+            setTypes([])
+            const res = restaurantTypes.filter(type => type?.name?.toLowerCase().startsWith(input?.toLowerCase()))
+            setTypes(res)
+        }
+    }
+
     useEffect(() => {
         setResults([])
+        setTypes([])
         findResults()
+        findTypes()
     }, [input])
 
     useEffect(() => {
         dispatch(fetchAllRestaurants());
+        dispatch(getRestaurantTypes());
       }, [dispatch]);
 
     return (
         <div className="search-container">
-        <div className="search-bar">
-            <FaSearch />
-            <input
-            type="text"
-            name="search-bar"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Search for a restaurant"
-            />
-        </div>
-        {input && results?.length > 0 && <div className="search-results">
-            {results?.map(restaurant => (
-                <NavLink onClick={handleExit} to={`/restaurants/${restaurant?.id}`}>
-                    <img src={restaurant.imageUrl} width="40px"></img>
-                    <div>{restaurant.name}</div>
-                </NavLink>
-            ))}
-        </div>}
+            <div className="search-bar">
+                <FaSearch />
+                <input
+                type="text"
+                name="search-bar"
+                value={input}
+                onFocus={(e) => setModalContent(<SearchModal restaurantTypes={restaurantTypes}/>)}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Search for a restaurant"
+                />
+            </div>
         </div>
       )
 }

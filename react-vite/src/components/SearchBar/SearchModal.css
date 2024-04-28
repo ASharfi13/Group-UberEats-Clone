@@ -1,0 +1,52 @@
+.restaurant-results {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+}
+
+.restaurant-result {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 5px 0px;
+    width: 50%;
+    border-bottom: 2px solid lightgray;
+    text-decoration: none;
+    color: black;
+}
+
+.restaurant-result:hover {
+    opacity: 0.7;
+}
+
+.restaurant-result > img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.type-results {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+}
+
+#top-modal-content > div{
+    padding-left: calc(max(20vw, 350px) + 40px + 16px);
+}
+
+.type-result {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 5px 0px;
+    width: 50%;
+    border-bottom: 2px solid lightgray;
+    text-decoration: none;
+    color: black;
+}
+.type-result:hover {
+    opacity: 0.7;
+}

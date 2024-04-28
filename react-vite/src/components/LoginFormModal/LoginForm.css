@@ -14,23 +14,32 @@
 
 .log-in-form {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   gap: 10px;
-  width: 60%;
+  width: 80%;
 }
 
 .email-area {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.loginTextInput {
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 30px;
+  width: 180px;
 }
 
 .passtime {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.log-in-form > button {
+.log-in-form>button {
   align-self: center;
   display: flex;
   align-items: center;
@@ -45,6 +54,7 @@
   border: none;
   background-color: black;
 }
+
 .demo-user {
   display: flex;
   justify-content: center;
@@ -59,10 +69,18 @@
   background-color: black;
 }
 
+.demo-user:hover {
+  background-color: #282828;
+}
+
 .login-errors {
   display: flex;
   margin: 0;
   font-weight: normal;
   justify-content: center;
   color: red;
+}
+
+.modalButton:hover {
+  background-color: #282828;
 }

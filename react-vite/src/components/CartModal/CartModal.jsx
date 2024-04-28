@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaWallet } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
 import { useSideModal } from '../../context/SideModal';
@@ -13,52 +13,56 @@ import { processCart } from '../../context/CartContext';
 import CartItem from './CartItem';
 import "./CartModal.css"
 
-function CartModal({user, userWallet, restaurants}) {
+function CartModal({restaurants}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector(state => state.session.user);
+    const wallets = useSelector((store) => store.walletState);
+    const userWallet = wallets ? wallets[user?.id] : null;
     const { closeModal } = useSideModal();
     const { setModalContent } = useModal();
-    const { cartItems, setCartItems, cartRestaurant, setCartRestaurant, restaurantName, setRestaurantName } = useShoppingCart();
+    const { cartItems, cartRestaurant, restaurantName, clearCart } = useShoppingCart();
     const processedCart = processCart(cartItems);
 
-    console.log(cartItems)
-    console.log(processedCart)
+    // console.log(cartItems)
+    // console.log(processedCart)
 
     let total = 0
 
     const checkOutLoggedIn = async (e) => {
       e.preventDefault()
       if (userWallet >= total) {
-        const newOrder = await dispatch(checkOutCart(user.id, cartItems))
-        const newUserBalance = await dispatch(decreaseFunds(-total, user.id))
-        const newRestaurantBalance = await dispatch(increaseFunds(total * 0.95, restaurants[cartRestaurant].owner_id))
-        setCartItems([])
-        setCartRestaurant(0)
+        await dispatch(checkOutCart(user.id, cartItems))
+        await dispatch(decreaseFunds(-total, user.id))
+        await dispatch(increaseFunds(total * 0.95, restaurants[cartRestaurant].owner_id))
+        clearCart()
         navigate("/orders")
       } else {
-
         setModalContent(<ErrorModal message={"Insufficient Funds, Please Add Funds in your profile"}/>)
-        // alert("Insufficient Funds, Please Add Funds in your profile")
       }
     }
 
     const checkOutLoggedOut = async (e) => {
       e.preventDefault()
-      // alert("Redirecting to Login Page")
       setModalContent(<LoginFormModal/>)
-      // navigate("/")
     }
+
     return (
         <ul className={"cart-modal"}>
           <div className="cart-header">
             <IoMdClose className="close-cart" onClick={closeModal}/>
-            <div className="wallet-info">
+            {user && <div className="wallet-info">
               <FaWallet />
               <li>${userWallet?.toFixed(2)}</li>
-            </div>
+            </div>}
+          </div>
+          {cartItems?.length > 0 ? (
+          <>
+          <div className='cart-name'>
+            <img src={restaurants[cartRestaurant]?.imageUrl} width="48px" height="48px"/>
+            {restaurantName}
           </div>
           <div className="cart-content">
-            <h4>Cart For: {restaurantName}</h4>
             <div className="cart-items">
               Items:
               {Object.values(processedCart)?.map((items, index) => {
@@ -77,20 +81,30 @@ function CartModal({user, userWallet, restaurants}) {
               }}>Add Items</button>
             </li>)}
             <li>
-              <button disabled={cartItems.length === 0} onClick={(e) => user ? checkOutLoggedIn(e).then(closeModal) : checkOutLoggedOut(e)}>
+              <button onClick={(e) => user ? checkOutLoggedIn(e).then(closeModal) : checkOutLoggedOut(e)}>
                 Check Out
               </button>
             </li>
             <li>
               <button onClick={() => {
-                setCartItems([])
-                setCartRestaurant(0)
+                clearCart()
                 closeModal()
               }}>
                 Clear Cart
               </button>
             </li>
           </div>
+          </>):
+          <div className='empty-cart'>
+            <img src='https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/a023a017672c2488.svg' />
+            <h2>Add items to start a cart</h2>
+            <p>Once you add items from a restaurant your cart will appear here.</p>
+            <button onClick={() => {
+              navigate("/");
+              closeModal();
+            }}>Start Shopping</button>
+          </div>}
+
         </ul>
     )
 }

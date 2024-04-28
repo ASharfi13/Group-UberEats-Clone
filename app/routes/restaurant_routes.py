@@ -1,5 +1,4 @@
-from app.models import db, Restaurant, MenuItem, Review, User
-from app.models.restaurant import restaurantTypes
+from app.models import db, Restaurant, MenuItem, Review, User, RestaurantType
 from app.forms import RestaurantForm, MenuItemForm, ReviewForm, EditRestaurantForm
 from flask import Blueprint, request
 from flask_login import login_required
@@ -18,7 +17,8 @@ def allRestaurants():
 #GET ALL RESTAURANT TYPES at ["/api/restaurants/types"]
 @restaurant_routes.route("/types")
 def allRestaurantTypes():
-    return json.dumps(restaurantTypes)
+    types = RestaurantType.query.all()
+    return json.dumps([type.to_dict() for type in types])
 
 #CREATE A NEW RESTAURANT at ["/api/restaurants"]
 @restaurant_routes.route("/", methods=["POST"])
@@ -77,10 +77,10 @@ def getRestaurantById(id):
         "owner_id": restaurant.owner_id,
         "location": restaurant.location,
         "name": restaurant.name,
-        "type": restaurant.type,
+        "types": [type.name for type in restaurant.types],
         "avgRating": avgRating,
         "numReviews": len(reviews),
-        "Reviews": reviews,
+        "reviews": reviews,
         "MenuItems": [menu_item.to_dict() for menu_item in restaurant.menu_items],
         "imageUrl": restaurant.imageUrl
     }

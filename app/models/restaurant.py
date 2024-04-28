@@ -32,7 +32,6 @@ class Restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False)
-    type = db.Column(db.String, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     imageUrl = db.Column(db.String)
     createdAt = db.Column(db.Date, default=dt.datetime.now())
@@ -40,6 +39,7 @@ class Restaurant(db.Model):
 
     reviews = db.relationship("Review", back_populates="restaurant", cascade='all, delete-orphan')
     menu_items = db.relationship("MenuItem", back_populates="restaurant", cascade='all, delete-orphan')
+    types = db.relationship("RestaurantType",secondary="restaurant_type_associations",back_populates="restaurant")
 
     def to_dict(self):
         return {
@@ -47,7 +47,7 @@ class Restaurant(db.Model):
             "name": self.name,
             'owner_id': self.owner_id,
             'location': self.location,
-            'type': self.type,
+            'types': [type.name for type in self.types],
             'reviews': [review.to_dict() for review in self.reviews],
             'imageUrl': self.imageUrl
         }

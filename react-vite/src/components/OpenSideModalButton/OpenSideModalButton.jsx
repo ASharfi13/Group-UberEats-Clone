@@ -1,4 +1,5 @@
 import { useSideModal } from '../../context/SideModal';
+import { useTopModal } from '../../context/TopModal';
 
 function OpenModalButton({
   modalComponent, // component to render inside the modal
@@ -9,8 +10,10 @@ function OpenModalButton({
   className
 }) {
   const { setModalContent, setOnModalClose, setModalSide } = useSideModal();
+  const closeTopModal = useTopModal().closeModal
 
   const onClick = () => {
+    closeTopModal();
     setModalSide(modalSide);
     if (onModalClose) setOnModalClose(onModalClose);
     setModalContent(modalComponent);

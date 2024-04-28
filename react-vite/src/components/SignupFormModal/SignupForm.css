@@ -14,33 +14,45 @@
 
 .sign-up-form {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   gap: 10px;
-  width: 60%;
+  width: 100%;
+  padding: 0px 20px;
 }
 
 .email-label {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.signUpTextInput {
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 30px;
+  width: 180px;
 }
 
 .name-label {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .password-label {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .confirm-password-label {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.sign-up-form > button {
+.sign-up-form>button {
   align-self: center;
   display: flex;
   align-items: center;
@@ -62,4 +74,8 @@
   font-weight: 500;
   justify-content: center;
   color: red;
+}
+
+.modalButton:hover {
+  background-color: #282828;
 }

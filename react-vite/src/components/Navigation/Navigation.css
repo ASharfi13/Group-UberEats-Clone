@@ -9,6 +9,7 @@
   top: 0px;
   background-color: white;
   gap: 16px;
+  z-index: 1001;
 }
 
 .profile-dropdown {
@@ -61,43 +62,6 @@
   font-weight: bold;
 }
 
-.cart-dropdown {
-  position: absolute;
-  width: 250px;
-  top: 50px;
-  right: 2%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  background-color: lightgreen;
-  gap: 10px;
-  padding: 0;
-  font-size: large;
-}
-
-.cart-header {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.close-cart {
-  border-radius: 50%;
-  padding: 5%;
-}
-
-.close-cart:hover {
-  cursor: pointer;
-  background-color: aquamarine;
-}
-
-.cart-content>h4 {
-  margin: 0;
-  font-size: large;
-}
-
 .wallet-info {
   display: flex;
   align-self: center;
@@ -105,48 +69,9 @@
   margin-right: 10px;
 }
 
-.cart-content {
-  margin: 0 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
 
-.cart-items {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  font-weight: bold;
-  margin-top: 5%;
-  gap: 5px;
-}
 
-.cart-item {
-  font-size: large;
-  font-weight: normal;
-}
 
-.total-price {
-  margin: 10% 0;
-  text-align: right;
-  font-weight: bold;
-}
-
-.cart-content>li {
-  width: 100%;
-}
-
-.cart-content>li>button {
-  font-size: large;
-  width: 100%;
-  margin-bottom: 5%;
-  background-color: black;
-  color: white;
-  border: 0px;
-  border-radius: 5px;
-  padding: 10px 5px;
-}
 
 .landing-logo {
   height: 22px;
@@ -196,6 +121,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.cart-button:hover {
+  opacity: 0.7;
 }
 
 /* @media only screen and (max-width: 1110px) {

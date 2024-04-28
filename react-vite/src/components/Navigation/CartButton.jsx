@@ -12,8 +12,7 @@ function CartButton() {
   const wallets = useSelector((store) => store.walletState);
   const userWallet = wallets ? wallets[user?.id] : null;
   const restaurants = useSelector((store) => store.restaurantState)
-  const { cartItems, setCartItems, cartRestaurant, setCartRestaurant } = useShoppingCart();
-  const restaurantName = cartItems?.length > 0 ? JSON.parse(cartItems[0]).restaurant : ""
+  const { cartItems } = useShoppingCart();
 
   useEffect(() => {
     dispatch(loadFunds(user?.id))
@@ -25,13 +24,8 @@ function CartButton() {
         buttonText={<><FaShoppingCart /><span>{cartItems?.length} items</span></>}
         modalComponent={<CartModal
           user={user}
-          restaurantName={restaurantName}
-          userWallet={userWallet}
-          cartItems={cartItems}
-          setCartItems={setCartItems}
-          cartRestaurant={cartRestaurant}
-          setCartRestaurant={setCartRestaurant}
-          restaurants={restaurants} />}
+          restaurants={restaurants}
+          userWallet={userWallet} />}
         modalSide="right"
       />
     </div>

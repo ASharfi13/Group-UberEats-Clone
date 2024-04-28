@@ -7,6 +7,8 @@ import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
 import Footer from "../components/Footer";
 import { SideModal, SideModalProvider } from "../context/SideModal";
+import { TopModal, TopModalProvider } from "../context/TopModal";
+import { SearchProvider } from "../context/SearchContext";
 
 export default function Layout() {
   const dispatch = useDispatch();
@@ -19,13 +21,18 @@ export default function Layout() {
     <>
       <ModalProvider>
         <SideModalProvider>
-          <ShoppingCartProvider>
-            <Navigation />
-            <SideModal />
-            {isLoaded && <Outlet />}
-            <Modal />
-            <Footer />
-          </ShoppingCartProvider>
+          <TopModalProvider>
+            <ShoppingCartProvider>
+              <SearchProvider>
+                <Navigation />
+                <TopModal />
+                <SideModal />
+                {isLoaded && <Outlet />}
+                <Modal />
+                <Footer />
+              </SearchProvider>
+            </ShoppingCartProvider>
+          </TopModalProvider>
         </SideModalProvider>
       </ModalProvider>
     </>

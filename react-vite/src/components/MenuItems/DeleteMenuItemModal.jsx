@@ -3,18 +3,20 @@ import { deleteMenuItem } from "../../redux/menuItemReducer";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import "../ErrorModal/ErrorModal.css"
-import { useShoppingCart } from "../../context/CartContext";
+import { useShoppingCart, removeItems } from "../../context/CartContext";
 
 function DeleteMenuItemModal({itemId, restaurantId, message}) {
     // const dispatch = useDispatch()
     const { closeModal } = useModal()
-    const { setCartItems, setCartRestaurant } = useShoppingCart();
+    const { cartItems, setCartItems } = useShoppingCart();
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(deleteMenuItem(itemId)).then(setCartItems([])).then(setCartRestaurant(0)).then(navigate(`/restaurants/${restaurantId}`));
+        await dispatch(deleteMenuItem(itemId));
+        setCartItems(removeItems(cartItems, itemId));
+        navigate(`/restaurants/${restaurantId}`);
         closeModal()
     }
 

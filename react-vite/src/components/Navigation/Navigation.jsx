@@ -6,17 +6,19 @@ import "./Navigation.css";
 import SearchBar from "../SearchBar";
 import { RiMapPin2Line } from "react-icons/ri";
 import { FaChevronDown } from "react-icons/fa";
+import { useSearch } from "../../context/SearchContext";
 
 function Navigation() {
   const handleFeature = (e) => {
     alert("Feature Coming Soon");
   };
+  const { handleExit } = useSearch();
 
   return (
     <ul className="nav-bar">
       <div className="left-side-nav-bar">
         <ProfileButton />
-        <NavLink to="/" className="main-logo">
+        <NavLink to="/" onClick={handleExit} className="main-logo">
           <img
             className="landing-logo"
             src="https://i.postimg.cc/zBFrwRpH/logo-landing-page-removebg-preview.png"
