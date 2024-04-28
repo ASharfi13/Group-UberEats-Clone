@@ -24,3 +24,11 @@ def seed_associations():
         newAss = RestaurantTypeAssociation(**association)
         db.session.add(newAss)
     db.session.commit()
+
+def undo_associations():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.restaurant_type_associations RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM restaurant_type_associations"))
+
+    db.session.commit()

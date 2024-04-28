@@ -27,7 +27,7 @@ function OrdersPage() {
 
   const orderKeys = Object.keys(orders).map((item) => Number(item)).sort().reverse()
 
-  console.log(orders[0]);
+  // console.log(orders[0]);
 
   return (
     <div className="orderBody">

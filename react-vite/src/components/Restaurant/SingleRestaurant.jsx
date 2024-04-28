@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchRestaurant, getRestaurantTypes } from "../../redux/restaurantReducer";
 import { useNavigate, useParams } from "react-router-dom";
 import "./SingleRestaurant.css";
-import { useShoppingCart } from "../../context/CartContext";
+import { useShoppingCart, removeItems } from "../../context/CartContext";
 import { fetchOwnerMenuItems } from "../../redux/menuItemReducer";
 import { FaStar } from "react-icons/fa";
 import { useModal } from "../../context/Modal";
@@ -74,13 +74,6 @@ function SingleRestaurant() {
     ? (cartRestaurantId = cartItems[0].restaurant_id)
     : (cartRestaurantId = null);
 
-  const removeFromCart = async (e, menuItem) => {
-    const tempCartItems = [...cartItems]
-    const targetItem = cartItems.findIndex((element) => element.includes(`{"id":${menuItem.id},`))
-    tempCartItems.splice(targetItem, 1)
-    setCartItems(tempCartItems)
-  }
-
   return (
     <>
       {restaurant && (
@@ -144,7 +137,7 @@ function SingleRestaurant() {
                       </button>
                       {
                         cartItems.findIndex((element) => element.includes(`{"id":${item.id},`)) !== -1 &&
-                        (<button onClick={(e) => removeFromCart(e, item)}>
+                        (<button onClick={(e) => setCartItems(removeItems(cartItems, item.id))}>
                           Remove Item From Cart
                         </button>)
                       }
@@ -191,10 +184,6 @@ function SingleRestaurant() {
                     buttonText={"Delete Restaurant"}
                     modalComponent={<DeleteRestaurantModal restaurantId={restaurantId} message={"Are you sure you want to delete this restaurant? It will erase this Restaurant from Order History."}/>}
                   />
-                  {/* <DeleteRestaurantButton
-                    className="delete-button"
-                    id={restaurantId}
-                  /> */}
                   <button
                     className="add-item"
                     onClick={() =>

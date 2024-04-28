@@ -14,14 +14,14 @@ import { useShoppingCart } from "../../context/CartContext";
 function ProfileModal({user}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { cartItems, setCartItems } = useShoppingCart();
+  const { clearCart } = useShoppingCart();
   const { closeModal } = useSideModal();
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
     closeModal();
-    setCartItems([]);
+    clearCart();
     navigate("/");
   };
 
