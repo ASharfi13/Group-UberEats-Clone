@@ -3,11 +3,11 @@ import {useMapsLibrary, APIProvider, Map} from '@vis.gl/react-google-maps';
 export default function UserAddress() {
     const geocoderLibrary = useMapsLibrary('geocoding');
 
-    console.log(geocoderLibrary)
+    // console.log(geocoderLibrary)
 
     const request = geocoderLibrary?.Geocoder
 
-    console.log(request)
+    // console.log(request)
 
     return (
         <APIProvider>

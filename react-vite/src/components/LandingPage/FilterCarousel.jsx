@@ -5,7 +5,7 @@ export function FilterCarousel({restaurantTypes, filter, setSearchParams}) {
     // console.log(restaurantTypes)
     const responsive = {
         desktop: {
-            breakpoint: { max: 3000, min: 1024 },
+            breakpoint: { max: 3500, min: 1024 },
             items: 13,
             slidesToSlide: 12 // optional, default to 1.
         },
@@ -16,7 +16,7 @@ export function FilterCarousel({restaurantTypes, filter, setSearchParams}) {
         },
     }
     return (
-        <Carousel responsive={responsive}>
+        <Carousel responsive={responsive} containerClass='filter-carousel' itemClass='filter-item'>
             {restaurantTypes.map((type) => (
             <div key={type.id} className={`filterButton ${filter == type.name && "selected"}`} onClick={() => {
               if (filter == type.name) setSearchParams('')

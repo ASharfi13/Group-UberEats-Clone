@@ -54,7 +54,7 @@ function SingleRestaurant() {
     if (cartRestaurant == 0) {
       setCartItems([...cartItems, JSON.stringify(menuItem)]);
       setCartRestaurant(menuItem.restaurant_id);
-      setRestaurantName(restaurant[restaurantId].name)
+      setRestaurantName(restaurant[restaurantId]?.name)
       setModalSide("right");
       setCartModal(<CartModal
         user={user}
@@ -67,7 +67,7 @@ function SingleRestaurant() {
       setModalSide("right");
       setCartModal(<CartModal
         user={user}
-        restaurantName={restaurant[restaurantId].name}
+        restaurantName={restaurant[restaurantId]?.name}
         userWallet={userWallet}
         restaurants={restaurant} />)
     }
@@ -76,19 +76,17 @@ function SingleRestaurant() {
   let cartRestaurantId;
 
   cartItems?.length > 0
-    ? (cartRestaurantId = cartItems[0].restaurant_id)
+    ? (cartRestaurantId = cartItems[0]?.restaurant_id)
     : (cartRestaurantId = null);
 
-  document.title = `Order ${restaurant[restaurantId].name}`
+  document.title = `Order ${restaurant[restaurantId]?.name}`
   return (
     <>
       {restaurant && (
         <div className="restaurant-details-container">
-          <div className="banner-image=container">
+          <div className="banner-image-container">
           {/* src="https://wifiuploads.s3.amazonaws.com/uploads/lines/picture/image/52/ubereats-banner.jpg" */}
             <img className="banner-image" src={restaurant[restaurantId]?.imageUrl}></img>
-          </div>
-          <div className="restaurant-image-container">
             <img className="restaurant-image" src={restaurant[restaurantId]?.imageUrl}></img>
           </div>
           <div className="restaurant-details-header-container">
@@ -111,13 +109,13 @@ function SingleRestaurant() {
               {reviewsArr?.map((review) => (
                 <div
                   className="review-Card"
-                  key={review.id}
+                  key={review?.id}
                 >
-                  <p className="description-review">"{review.description}"</p>
+                  <p className="description-review">"{review?.description}"</p>
                   <div className="review-details-footer">
 
                     {/* <div className="rating"> */}
-                      <p className="review-text">{review.stars} ★</p>
+                      <p className="review-text">{review?.stars} ★</p>
                       {/* <img
                         className="star"
                         src="https://i.postimg.cc/QxSC3byV/stars-removebg-preview.png"
@@ -125,8 +123,8 @@ function SingleRestaurant() {
                       /> */}
 
                     {/* </div> */}
-                    <p className="name-review review-text">• {review.name} •</p>
-                    <p className="name-review review-text">{review.createdAt}</p>
+                    <p className="name-review review-text">• {review?.name} •</p>
+                    <p className="name-review review-text">{review?.createdAt}</p>
                   </div>
                 </div>
               ))}
@@ -150,8 +148,8 @@ function SingleRestaurant() {
                 <div className="menuItemCard" key={index}>
                   <div className="menu-item-card-left">
                     <div className="menu-item-card-header">
-                      <p className="name-item">{item.name}</p>
-                      <p className="price-item">${item.price}</p>
+                      <p className="name-item">{item?.name}</p>
+                      <p className="price-item">${item?.price}</p>
                     </div>
 
                     <div className="menu-item-buttons-container">
@@ -179,14 +177,14 @@ function SingleRestaurant() {
                             <button
                               className="edit-button"
                               onClick={() =>
-                                navigate(`/menu-items/${item.id}/update`)
+                                navigate(`/menu-items/${item?.id}/update`)
                               }
                             >
                               Edit
                             </button>
                             <OpenModalButton
                               buttonText={"Delete"}
-                              modalComponent={<DeleteMenuItemModal itemId={item.id} restaurantId={restaurantId} message={"Are you sure you want to delete this menu item? It will erase this Menu Item from Order History"}/>}
+                              modalComponent={<DeleteMenuItemModal itemId={item?.id} restaurantId={restaurantId} message={"Are you sure you want to delete this menu item? It will erase this Menu Item from Order History"}/>}
                               />
                           </>
                         )}
@@ -195,18 +193,18 @@ function SingleRestaurant() {
                   </div>
 
                   <div className="menu-item-image-container">
-                    <img className="itemImage" src={item.imageUrl}
+                    <img className="itemImage" src={item?.imageUrl}
                     onClick={(e) =>
                           addToCart(e, {
                             ...item,
-                            restaurant: restaurant[restaurantId].name,
+                            restaurant: restaurant[restaurantId]?.name,
                           })
                         }/>
                     <div className="add-button"
                     onClick={(e) =>
                       addToCart(e, {
                         ...item,
-                        restaurant: restaurant[restaurantId].name,
+                        restaurant: restaurant[restaurantId]?.name,
                       })
                     }> <span>+</span> </div>
                   </div>

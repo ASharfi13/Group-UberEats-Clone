@@ -24,7 +24,7 @@ function OwnerReviews() {
 
 
     return (
-        <>
+        <div className="orderBody">
             <h1>My Reviews</h1>
             {reviewsArr.map((review) => {
                 return (
@@ -49,7 +49,7 @@ function OwnerReviews() {
                     </div>
                 )
             })}
-        </>
+        </div>
     )
 }
 

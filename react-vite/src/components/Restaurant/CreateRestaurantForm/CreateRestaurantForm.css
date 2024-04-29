@@ -15,7 +15,7 @@
   flex-direction: column;
   border: 2px black solid;
   border-radius: 20px;
-  background-color: rgb(5, 162, 5);
+  background-color: #7BBE3B;
   padding: 40px;
   gap: 10px;
 }
@@ -37,6 +37,7 @@
 
 .res-logo {
   width: 700px;
+  min-width: 700px;
 }
 
 .column-styles {

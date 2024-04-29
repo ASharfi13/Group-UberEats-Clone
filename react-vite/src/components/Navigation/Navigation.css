@@ -10,6 +10,7 @@
   background-color: white;
   gap: 16px;
   z-index: 1001;
+  max-width: 1840px;
 }
 
 .profile-dropdown {
@@ -20,7 +21,7 @@
   align-items: flex-start;
   top: 50px;
   padding-top: 1%;
-  background-color: lightgreen;
+  background-color: #7BBE3B;
   gap: 10px;
   padding-left: 2%;
   padding-right: 2%;

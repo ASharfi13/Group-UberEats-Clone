@@ -25,9 +25,9 @@ function ReviewsPage() {
   };
 
   return (
-    <>
-      <h1>Reviews Page</h1>
+    <div className="restaurant-page-create">
       <form onSubmit={handleSubmit} className="restaurant-form">
+      <h1>Reviews Page</h1>
         <textarea
           name="description"
           value={description}
@@ -50,7 +50,8 @@ function ReviewsPage() {
         <p className="errors">{errors ? errors.stars : null}</p>
         <button className="order-button">Submit Review</button>
       </form>
-    </>
+      <div className="res-logo"></div>
+    </div>
   );
 }
 

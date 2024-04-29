@@ -12,8 +12,8 @@
   width: 76px;
   height: 76px;
   border-radius: 50%;
-  left: 360px;
-  top: 270px;
+  left: 0;
+  bottom: -38px;
   border: 2px white solid;
   /* height: auto; */
   object-fit: fill;
@@ -27,7 +27,7 @@
 } */
 
 .restaurant-details-header-container {
-  margin-top: 15px;
+  margin-top: 20px;
   width: 1200px;
   display: flex;
   flex-direction: column;
@@ -36,6 +36,7 @@
 }
 
 .banner-image-container {
+  position: relative;
   height: 250px;
   width: 1200px;
   border-radius: 12px;
@@ -81,7 +82,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
-
   /* margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 10px; */
@@ -94,6 +94,9 @@
   gap: 5px;
   max-height: 50px;
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .review-text {
   font-size: smaller;
@@ -108,11 +111,10 @@ h4 {
 
 .review-Card {
   display: flex;
-  background-color: lightgreen;
+  flex-direction: column;
+  background-color: #7BBE3B;
   justify-content: space-between;
   align-items: start;
-  flex-direction: column;
-  flex-wrap: wrap;
   border: 1px solid grey;
   border-radius: 10px;
   width: 250px;
@@ -123,7 +125,7 @@ h4 {
 
 .review-total {
   display: flex;
-  background-color: lightgreen;
+  background-color: #7BBE3B;
   /* justify-content: space-between;? */
   flex-direction: column;
   border: 1px solid grey;
