@@ -26,7 +26,7 @@ function Navigation() {
           />
         </NavLink>
         <div className="address-bar">
-          <OpenModalButton buttonText={<><RiMapPin2Line /><p>Loc. Coming Soon</p><FaChevronDown/></>}/>
+          {/* <OpenModalButton buttonText={<><RiMapPin2Line /><p>Loc. Coming Soon</p><FaChevronDown/></>}/> */}
         </div>
       </div>
 
