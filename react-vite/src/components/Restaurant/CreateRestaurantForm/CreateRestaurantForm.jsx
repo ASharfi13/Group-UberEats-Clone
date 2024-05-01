@@ -13,7 +13,9 @@ function RestaurantForm() {
 
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const [type, setType] = useState("");
+  let initialTypes = {}
+  restaurantTypes.forEach((rType) => initialTypes[rType.name] = false)
+  const [types, setTypes] = useState(initialTypes);
   const [image, setImage] = useState(null);
   const [imageURL, setImageURL] = useState(null)
   const [imageLoading, setImageLoading] = useState(false)
@@ -35,12 +37,19 @@ function RestaurantForm() {
     setImage(tempFile);
   };
 
+  const handleCheck = (typeName) => {
+    const newTypes = {...types};
+    newTypes[typeName] = !newTypes[typeName];
+    setTypes(newTypes)
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    const finalTypes = Object.entries(types).filter(([name, selected]) => selected).map(([name, selected]) => name)
     const formData = new FormData();
     formData.append("name", name);
     formData.append("location", location);
-    formData.append("type", type);
+    formData.append("types", JSON.stringify(finalTypes));
     formData.append("image", image);
     setImageLoading(true);
 
@@ -86,8 +95,22 @@ function RestaurantForm() {
                 </p>
               </div>
               <div className="column-styles">
-                <p>Type</p>
-                <select
+                <p>Categories: </p>
+                <div className="type-selector">
+                {restaurantTypes?.map((rType) => (
+                  <label key={rType.id}>
+                    {rType?.name}
+                    <input
+                      type="checkbox"
+                      id={rType.id}
+                      name={rType.name}
+                      value={rType.value}
+                      checked={types[rType.name]}
+                      onChange={() => handleCheck(rType.name)} />
+                  </label>
+                ))}
+                </div>
+                {/* <select
                   className="input-area"
                   value={type}
                   onChange={(e) => setType(e.target.value)}
@@ -98,7 +121,7 @@ function RestaurantForm() {
                   {restaurantTypes.map((restaurant, idx) => (
                     <option key={idx}>{restaurant.name}</option>
                   ))}
-                </select>
+                </select> */}
                 <p className="restaurant-errors">
                   {errors.type ? errors.type : null}
                 </p>

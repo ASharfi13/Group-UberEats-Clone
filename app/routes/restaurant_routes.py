@@ -36,10 +36,12 @@ def newRestaurant():
         newRestaurant = Restaurant(
             name=form.data['name'],
             location=form.data['location'],
-            type=form.data['type'],
             imageUrl=upload["url"],
             owner_id=get_current_user()
         )
+        for typeId in json.loads(form.data['types']):
+            rType = RestaurantType.query.filter_by(name=typeId).first()
+            newRestaurant.types.append(rType)
         db.session.add(newRestaurant)
         db.session.commit()
         return json.dumps(newRestaurant.to_dict()), 201
@@ -111,7 +113,10 @@ def updateRestaurant(restaurantId):
             upload = {"url": restaurant.imageUrl}
         restaurant.name=form.data['name']
         restaurant.location=form.data['location']
-        restaurant.type=form.data['type']
+        restaurant.types = []
+        for typeId in json.loads(form.data['types']):
+            rType = RestaurantType.query.filter_by(name=typeId).first()
+            restaurant.types.append(rType)
         restaurant.imageUrl=upload["url"]
         db.session.commit()
         return json.dumps(restaurant.to_dict())

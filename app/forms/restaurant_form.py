@@ -1,13 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, FieldList
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import DataRequired, ValidationError
-from app.models.restaurant import restaurantTypes
 from app.utils.aws import ALLOWED_EXTENSIONS
+from app.seeds.seed_data import restaurant_types
 import re
-
+import json
 def valid_type(form, field):
-    if field.data not in restaurantTypes:
+    try:
+        types = json.loads(field.data)
+        for rtype in types:
+            if rtype not in [rType["name"] for rType in restaurant_types]:
+                raise ValidationError("Invalid Type")
+    except:
         raise ValidationError("Invalid Type")
 
 def no_special_char(form, field):
@@ -36,11 +41,11 @@ def editImage(form, field):
 class RestaurantForm(FlaskForm):
     name = StringField('name', validators=[DataRequired("Name is required"), no_special_char])
     location = StringField('location', validators=[DataRequired("Location is required"), no_special_char])
-    type = StringField('type', validators=[DataRequired("Type is required"), valid_type])
+    types = StringField('types', validators=[DataRequired("Types are Required"), valid_type])
     image = FileField('image_file', validators=[FileRequired("Image File is Required"), FileAllowed(list(ALLOWED_EXTENSIONS))])
 
 class EditRestaurantForm(FlaskForm):
     name = StringField('name', validators=[DataRequired("Name is required"), no_special_char])
     location = StringField('location', validators=[DataRequired("Location is required"), no_special_char])
-    type = StringField('type', validators=[DataRequired("Type is required"), valid_type])
+    types = StringField('types', validators=[DataRequired("Type is required"), valid_type])
     image = FileField("image_file", validators=[editImage])

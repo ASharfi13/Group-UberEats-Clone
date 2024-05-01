@@ -16,10 +16,11 @@ function UpdateRestaurant() {
     (state) => state.restaurantState[restaurantId]
   );
   const restaurantTypes = useSelector((state) => state.restaurantState.types);
-
   const [name, setName] = useState(restaurant?.name);
   const [location, setLocation] = useState(restaurant?.location);
-  const [type, setType] = useState(restaurant?.type);
+  const initialTypes = {}
+  if (restaurant?.types) restaurantTypes?.forEach((rType) => initialTypes[rType?.name] = restaurant?.types.includes(rType?.name) ? true : false)
+  const [types, setTypes] = useState(initialTypes);
   const [image, setImage] = useState(null);
   const [imageURL, setImageURL] = useState(restaurant?.imageUrl)
   const [errors, setErrors] = useState({});
@@ -36,12 +37,19 @@ function UpdateRestaurant() {
     setImage(tempFile);
   };
 
+  const handleCheck = (typeName) => {
+    const newTypes = {...types};
+    newTypes[typeName] = !newTypes[typeName];
+    setTypes(newTypes)
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    const finalTypes = Object.entries(types).filter(([name, selected]) => selected).map(([name, selected]) => name)
     const formData = new FormData();
     formData.append("name", name);
     formData.append("location", location);
-    formData.append("type", type);
+    formData.append("types", JSON.stringify(finalTypes));
     formData.append("image", image);
 
     const response = await dispatch(editRestaurant(restaurantId, formData));
@@ -55,15 +63,16 @@ function UpdateRestaurant() {
     );
     setName(restaurant?.name);
     setLocation(restaurant?.location);
-    setType(restaurant?.type);
     setImage(restaurant?.imageUrl);
+    setTypes(initialTypes);
   }, [
     dispatch,
     restaurantId,
     restaurant?.name,
     restaurant?.location,
-    restaurant?.type,
     restaurant?.imageUrl,
+    restaurant?.types?.length,
+    initialTypes.length
   ]);
 
   return (
@@ -102,8 +111,22 @@ function UpdateRestaurant() {
               </p>
             </div>
             <div className="column-styles">
-              <p>Type</p>
-              <select
+              <p>Categories: </p>
+              <div className="type-selector">
+                {restaurantTypes?.map((rType) => (
+                  <label key={rType.id}>
+                    {rType?.name}
+                    <input
+                      type="checkbox"
+                      id={rType.id}
+                      name={rType.name}
+                      value={rType.value}
+                      checked={types[rType.name]}
+                      onChange={() => handleCheck(rType.name)} />
+                  </label>
+                ))}
+              </div>
+              {/* <select
                 className="input-area"
                 value={type}
                 onChange={(e) => setType(e.target.value)}
@@ -114,7 +137,7 @@ function UpdateRestaurant() {
                 {restaurantTypes.map((restaurant, idx) => (
                   <option key={idx}>{restaurant.name}</option>
                 ))}
-              </select>
+              </select> */}
               <p className="restaurant-errors">
                 {errors.type ? errors.type : null}
               </p>

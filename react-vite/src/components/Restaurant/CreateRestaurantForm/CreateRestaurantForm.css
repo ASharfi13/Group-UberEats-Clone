@@ -38,6 +38,7 @@
 .res-logo {
   width: 700px;
   min-width: 700px;
+  object-fit: contain;
 }
 
 .column-styles {
@@ -66,4 +67,27 @@
 .column-styles > label {
   width: 50%;
   align-self: center;
+}
+
+.type-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.type-selector > label {
+  height: 40px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: small;
+  cursor: pointer;
+}
+.type-selector > label:hover {
+  text-decoration: underline;
 }
