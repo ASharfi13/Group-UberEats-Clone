@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllRestaurants } from "../../redux/restaurantReducer";
-import { NavLink, Link, useNavigate, useSearchParams } from "react-router-dom";
-import { loadAllMenuItems } from "../../redux/menuItemReducer";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./LandingPage.css";
-import { FaStar } from "react-icons/fa";
-import { SiMoneygram } from "react-icons/si";
 import { getRestaurantTypes } from "../../redux/restaurantReducer";
 import { FilterCarousel } from "./FilterCarousel";
 import { RestaurantCarousel } from "./RestaurantCarousel";
@@ -25,7 +22,6 @@ function LandingPage() {
     return restaurant
   });
   const user = useSelector((state) => state.session.user);
-  const [delPriceCheck, setDelPriceCheck] = useState(false);
 
 
   const avgRating = {};

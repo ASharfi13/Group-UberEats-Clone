@@ -123,7 +123,7 @@ export const editRestaurant = (restaurantId, payload) => async (dispatch) => {
   });
   if (response.ok) {
     const restaurant = await response.json();
-    dispatch(updateRestaurant(payload));
+    dispatch(updateRestaurant(restaurant));
     return restaurant;
   }
 };
